@@ -242,9 +242,14 @@ function scrollingDetection(result) {
   console.log('Current Pos: ');
   console.log(currentPosY + '\n');
 
-  if(initPosY > currentPosY){
+  if((initPosY - 0.03) > currentPosY){
     console.log('Scrolling Up')
-    window.scrollTo(0, window.scrollY + 5)
+    window.scrollTo(0, window.scrollY + 10)
+  }
+
+  if((initPosY + 0.04) < currentPosY){
+    console.log('Scrolling Up')
+    window.scrollTo(0, window.scrollY - 10)
   }
 
 }
