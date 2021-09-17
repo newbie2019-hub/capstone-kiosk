@@ -11,10 +11,15 @@
     "@mediapipe/camera_utils": "^0.3.1631210127",
     "@mediapipe/drawing_utils": "^0.3.1620248257",
     "@mediapipe/hands": "^0.3.1630010197",
+    "axios": "^0.21.4",
+    "bootstrap": "^5.1.1",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "gsap": "^3.7.1",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vue-toastification": "^1.7.11",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
