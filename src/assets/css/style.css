@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5, h6, p {
   color: white;
   display: none;
   max-width: 350px;
-  transition: all 350ms;
+  transition: all 750ms;
 }
 
 .notif-message {
@@ -101,6 +101,11 @@ nav a {
   text-decoration: none;
   padding: 0rem 1rem;
   letter-spacing: 1px;
+}
+
+nav a:visited {
+  border: 0 none;
+  outline: none;
 }
 
 nav a:hover {
@@ -220,7 +225,6 @@ nav a:hover {
   color: white;
   justify-content: center;
   align-items: center;
-  filter: contrast(20);
   z-index: 999;
   transition: all 450ms;
 }
@@ -228,30 +232,35 @@ nav a:hover {
 .loader .dot {
   width: 16px;
   height: 16px;
-  filter: blur(4px);
   background: rgb(255, 255, 255);
   border-radius: 50%;
   animation: dot 2.8s infinite;
 }
 
 .loader .dots {
+  position: absolute;
   transform: translateX(0);
   animation: dots 2.8s infinite;
+  margin-top: -2.95rem;
 }
 .loader .dots span {
-  display: block;
   float: left;
   width: 16px;
   height: 16px;
   margin-left: 5px;
-  filter: blur(4px);
   background: rgb(255, 255, 255);
   border-radius: 50%
 }
       
 @keyframes dot {
+  0% {
+    transform: translateX(-40px);
+  }
   50% {
-    transform: translateX(60px)
+    transform: translateX(20px)
+  }
+  100% {
+    transform: translateX(-40px);
   }
 }
 
