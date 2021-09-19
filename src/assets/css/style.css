@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Poppins', sans-serif !important;
+  user-select: none;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -288,4 +289,52 @@ nav a:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #1b79d8d0
+}
+
+/** SCROLL INDICATOR */
+.scroll {
+	width: 60px;
+	height: 60px;
+	position: fixed;
+  bottom: 30px;
+  left: 50%;
+  color: white;
+	animation: down 1.5s infinite;
+	-webkit-animation: down 1.5s infinite;
+}
+
+.scroll::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  width: 18px;
+  height: 18px;
+  border-left: 2px solid rgb(252, 252, 252);
+  border-bottom: 2px solid rgb(245, 245, 245);
+  transform: rotate(-45deg);
+}
+
+@keyframes down {
+	0% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(25px);
+	}
+	60% {
+		transform: translateY(0);
+	}
+}
+
+@-webkit-keyframes down {
+	0% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(25px);
+	}
+	60% {
+		transform: translateY(0);
+	}
 }

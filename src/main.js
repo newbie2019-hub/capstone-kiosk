@@ -4,6 +4,7 @@ import router from './router'
 import Toast from "vue-toastification";
 import { BootstrapVue } from 'bootstrap-vue'
 
+import './assets/js/elements'
 import './assets/js/hands'
 import './assets/css/style.css'
 import 'bootstrap/dist/css/bootstrap.css'
