@@ -13,16 +13,18 @@
          </div>
        </div>
        <div class="col-md-6 col-lg-3">
-         <div class="card">
-           <div class="card-small">
-            <img src="@/assets/images/feedback.jpg" alt="">
-            <div class="card-content">
-              <h5>Feedback</h5>
-              <p>To help us improve our system please leave a some review.</p>
+         <router-link to="/feedback" class="text-decoration-none">
+          <div class="card">
+            <div class="card-small">
+              <img src="@/assets/images/feedback.jpg" alt="">
+              <div class="card-content">
+                <h5>Feedback</h5>
+                <p>To help us improve our system please leave a some review.</p>
+              </div>
             </div>
-           </div>
-           <div class="card-border card-border-feedback "></div>
-         </div>
+            <div class="card-border card-border-feedback "></div>
+          </div>
+         </router-link>
        </div>
        <div class="col-md-6 col-lg-3">
          <div class="card">

@@ -6,7 +6,6 @@ import { gsap } from "gsap"
 window.onload = function () {
   
   let mouse_pointer = document.getElementsByClassName('pointer')[0]
-  const select = (e) => document.querySelector(e);
 
   const videoElement = document.getElementsByClassName('input_video')[0];
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -27,13 +26,20 @@ window.onload = function () {
 
     // LOADING INDICATOR - REMOVE
     if (!loaded) {
+      console.clear()
       setTimeout(() => {
         document.getElementsByClassName('loader')[0].remove()
       }, 1500)
       loaded = true
     }
-    notifNoHandsDetected(results.multiHandedness)
 
+    notifNoHandsDetected(results.multiHandedness)
+    
+    //SLIDE NAVIGATION - 
+    //IF NO FINGERS ARE UP EMIT SCROLL 
+    //(e.g. left or right hand - left or right scroll)
+    slideNavigation()
+   
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
@@ -44,10 +50,15 @@ window.onload = function () {
       scrollingFunctionality(results.multiHandedness)
       notifScrolling()
 
+      if(hasSwiper){
+        monitorSwiperNavigation(results)
+      }
+
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
         const classification = results.multiHandedness[index];
         const isRightHand = classification.label === 'Right';
 
+        //SCROLLING - PASS RIGHT HAND INDEX
         if (scroll_count > 3) {
           if (isRightHand) {
             scrollingDetection(results.multiHandLandmarks[index])
@@ -57,7 +68,7 @@ window.onload = function () {
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
 
-            //Check distance of the tip of the index and thumb
+            //Check distance of the tip index and thumb
             //https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
             let x = landmarks[4].x, y = landmarks[4].y;
 
@@ -74,6 +85,7 @@ window.onload = function () {
             isClicked(lineDistance(click[0], click[1]), x, y)
 
             // fingersUp(landmarks)
+            //IF HAS SWIPER - PASS IN THE RESULT TO EMIT SCROLLING
 
             //DRAW LANDMARKS - SKELETON
             // drawConnectors(canvasCtx, click, HAND_CONNECTIONS,
@@ -129,6 +141,8 @@ window.onload = function () {
         }
       }
     }
+
+    return fingersUp
   }
 
   //ELEMENT FROM POINT
@@ -360,6 +374,78 @@ window.onload = function () {
 
   }
 
+  //SWIPER NAVIGATION
+  //CHECK IF ROUTE HAS SWIPER 
+  let swiper
+  let hasSwiper = false
+  function slideNavigation(){
+    const swiper_el = document.querySelector('.swiper');
+
+    if(!swiper_el) {
+      swiper = ''
+      hasSwiper = false
+      return
+    }
+    
+    swiper = swiper_el.swiper
+    
+    if(swiper && hasSwiper) return
+
+    if(swiper && !hasSwiper) {
+      hasSwiper = true
+    }
+  }
+
+  //CHECK NAVIGATION IF LEFT OR RIGHT
+  let navigate = false
+  let emitNavigation = false, isRight = false
+  let prevCounter = 0
+  function monitorSwiperNavigation(results){
+    for (let index = 0; index < results.multiHandLandmarks.length; index++) {
+      const classification = results.multiHandedness[index];
+      const isRightHand = classification.label === 'Right';
+
+      let counter = 0
+      //RIGHT HAND SCROLL
+      isRight = isRightHand ? true : false
+
+      // console.log(fingersUp(results.multiHandLandmarks[index]))
+
+      fingersUp(results.multiHandLandmarks[index]).forEach(value => {
+        if(value == 0) {
+          counter++
+        }
+      });
+
+      if(counter == 5){
+        navigate = true
+        if(prevCounter == 0){
+          prevCounter = counter
+        }
+      }
+      else {
+        navigate = false
+      }
+
+      if(prevCounter != 0 && counter == 0){
+        if(!emitNavigation){
+          emitNavigation = true
+        }
+      }
+ 
+    }
+
+    if(emitNavigation) {
+      if(isRight){
+        swiper.slideNext()
+      }
+      else {
+        swiper.slidePrev()
+      }
+      prevCounter = 0
+      emitNavigation = false
+    }
+  }
 
   //Ripple Event Handler
   var drawRipple = function (x_axis, y_axis) {

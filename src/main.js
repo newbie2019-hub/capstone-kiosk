@@ -3,7 +3,10 @@ import App from './App.vue'
 import router from './router'
 import Toast from "vue-toastification";
 import { BootstrapVue } from 'bootstrap-vue'
-
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+ 
+// import styles
+import 'swiper/css/swiper.css'
 import './assets/js/elements'
 import './assets/js/hands'
 import './assets/css/style.css'
@@ -13,7 +16,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
-
+Vue.use(VueAwesomeSwiper)
 Vue.use(Toast, {
   position: "top-right",
   timeout: 3500,
