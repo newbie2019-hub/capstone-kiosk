@@ -4,11 +4,11 @@
    <div class="row justify-content-center">
     <div class="example-3d">
       <swiper ref="swiper" class="swiper" :options="swiperOption">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
+        <swiper-slide><i class="far fa-thumbs-up feedback-emoji"></i></swiper-slide>
+        <swiper-slide><i class="far fa-thumbs-down feedback-emoji"></i></swiper-slide>
+        <swiper-slide><i class="far fa-grin-hearts feedback-emoji"></i></swiper-slide>
+        <swiper-slide><i class="far fa-surprise feedback-emoji"></i></swiper-slide>
+        <swiper-slide><i class="fas fa-fire feedback-emoji"></i></swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
@@ -18,6 +18,9 @@
 </template>
 <script>
 export default {
+  mounted() {
+    document.getElementsByClassName('scroll')[0].style.display = 'none'
+  },
   data() {
     return {
       swiperOption: {
@@ -26,9 +29,9 @@ export default {
         centeredSlides: true,
         slidesPerView: 'auto',
         coverflowEffect: {
-          rotate: 50,
+          rotate: 40,
           stretch: 0,
-          depth: 100,
+          depth: 50,
           modifier: 1,
           slideShadows : true
         },
@@ -48,16 +51,20 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .example-3d {
   width: 100%;
   height: 400px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.swiper-container {
+  overflow: visible !important;
 }
 
 .swiper {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   overflow: hidden;
 }
@@ -66,8 +73,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   text-align: center;
   font-weight: bold;
   background-color: #2C8DFB;
@@ -76,8 +83,21 @@ export default {
   color: white;
 }
 
-.swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: white;
+.swiper-pagination-bullet-active {
+  background-color: white !important;
 }
+
+.swiper-pagination-bullet {
+  background: #9b9b9b !important;
+}
+
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: -10% !important;
+}
+
+.feedback-emoji {
+  font-size: 8.5rem !important;
+}
+
 
 </style>

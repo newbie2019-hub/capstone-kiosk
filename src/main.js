@@ -13,6 +13,8 @@ import './assets/css/style.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import "vue-toastification/dist/index.css";
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)

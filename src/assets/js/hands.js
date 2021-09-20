@@ -149,6 +149,7 @@ window.onload = function () {
   let elem, prevEl = ''
   function hoverElement(x, y) {
 
+
     if (scroll_count > 3) {
       if (prevEl) {
         prevEl.classList.remove('border-hover')
@@ -180,6 +181,8 @@ window.onload = function () {
 
   //Check if hover element has a card
   function checkHover(input) {
+    if(window.location.pathname == '/feedback') return
+    
     if (input.includes('card-content')) {
       return false
     }
@@ -216,6 +219,7 @@ window.onload = function () {
 
     if (clicked && click_counter == 0) {
       console.log('clicked')
+      drawRipple()
       const $el = document.elementFromPoint(x + 20, y + 20)
       if ($el) {
         $el.dispatchEvent(
@@ -301,7 +305,9 @@ window.onload = function () {
   function scrollingFunctionality(result) {
 
     if (result.length != 2) {
-      document.getElementsByClassName('scroll')[0].style.display = 'block'
+      if(window.location.pathname != '/feedback'){
+        document.getElementsByClassName('scroll')[0].style.display = 'block'
+      }
       scroll_count = 0
       initPosY = 0
       return
@@ -448,14 +454,10 @@ window.onload = function () {
   }
 
   //Ripple Event Handler
-  var drawRipple = function (x_axis, y_axis) {
-    var x = x_axis;
-    var y = y_axis;
+  var drawRipple = function () {
     var node = document.querySelector(".ripple");
     var newNode = node.cloneNode(true);
     newNode.classList.add("animate");
-    newNode.style.left = x + "px";
-    newNode.style.top = y + 16 + "px";
     node.parentNode.replaceChild(newNode, node);
   };
 

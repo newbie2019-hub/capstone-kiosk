@@ -19,11 +19,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .pointer {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   color: rgba(255, 255, 255, 0);
-  border: 1px solid rgb(255, 255, 255);
+  border: 1.5px solid rgb(255, 255, 255);
   position: fixed;
   top: 0;
   left: 0;
@@ -81,9 +81,11 @@ h1, h2, h3, h4, h5, h6, p {
   height: 10px;
   opacity: 0;
   transform: scale(0);
-  background: rgba(197, 197, 197, 0.5);
+  background: rgb(226, 226, 226);
   border-radius: 50%;
   position: fixed;
+  z-index: 9999;
+  mix-blend-mode: exclusion;
 }
 
 .animate {
@@ -124,7 +126,7 @@ nav a:hover {
     opacity: 1;
   }
   100% {
-    transform: scale(10);
+    transform: scale(15);
     opacity: 0;
   }
 }
@@ -274,7 +276,7 @@ nav a:hover {
 /** SCROLLBAR */
 ::-webkit-scrollbar {
   width: 4px;
-  height: 4px;
+  height: 0px;
 }
 
 ::-webkit-scrollbar-track {

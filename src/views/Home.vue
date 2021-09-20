@@ -4,7 +4,7 @@
      <div class="row justify-content-center">
        <div class="col-md-6 col-lg-6">
          <div class="card">
-           <img src="@/assets/images/university.jpg" alt="">
+           <img src="@/assets/images/university.jpg" alt="" loading=lazy>
            <div class="card-content">
              <h5>University</h5>
              <p>A leading university of education and diverse disciplines attuned to local and global development needs</p>
@@ -16,7 +16,7 @@
          <router-link to="/feedback" class="text-decoration-none">
           <div class="card">
             <div class="card-small">
-              <img src="@/assets/images/feedback.jpg" alt="">
+              <img src="@/assets/images/feedback.jpg" alt="" loading=lazy>
               <div class="card-content">
                 <h5>Feedback</h5>
                 <p>To help us improve our system please leave a some review.</p>
@@ -28,7 +28,7 @@
        </div>
        <div class="col-md-6 col-lg-3">
          <div class="card">
-            <img src="@/assets/images/university.jpg" alt="">
+            <img src="@/assets/images/university.jpg" alt="" loading=lazy>
             <div class="card-content">
               <h5>PROGRAMS</h5>
               <p>See what programs are offered by the university.</p>
@@ -41,7 +41,7 @@
        <div class="col-md-6 col-lg-6">
          <div class="card">
            <div class="card-small">
-            <img src="@/assets/images/announcement.jpg" alt="">
+            <img src="@/assets/images/announcement.jpg" alt="" loading=lazy>
             <div class="card-content">
               <h5>Announcement</h5>
               <p>Stay updated with the University’s current events, announcements and news.</p>
@@ -53,7 +53,7 @@
        <div class="col-md-6 col-lg-6">
          <div class="card">
            <div class="card-small">
-            <img src="@/assets/images/entertainment.jpg" alt="">
+            <img src="@/assets/images/entertainment.jpg" alt="" loading=lazy>
             <div class="card-content">
               <h5>Entertainment</h5>
               <p>Have some fun and learn other possibilities with touchless technology.</p>

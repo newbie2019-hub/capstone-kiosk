@@ -19,11 +19,6 @@ function createNotif(){
 function createElements(){
  //CREATE NOTIF ELEMENT
  createNotif()
-
- //CREATE RIPPLE ON CLICK ELEMENT
- let ripple = document.createElement('div');
- ripple.classList.add('ripple')
- document.body.appendChild(ripple)
  
  //CREATE LOADING ELEMENT
  let parent_div = document.createElement('div');
@@ -63,6 +58,12 @@ function createElements(){
  let pointer = document.createElement('div');
  pointer.classList.add('pointer')
  document.body.appendChild(pointer)
+
+ 
+ //CREATE RIPPLE ON CLICK ELEMENT
+ let ripple = document.createElement('div');
+ ripple.classList.add('ripple')
+ pointer.appendChild(ripple)
 
  //SCROLLING INDICATOR
  let scroll = document.createElement('div')
