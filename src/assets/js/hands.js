@@ -373,12 +373,12 @@ window.onload = function () {
 
     if ((initPosY - 0.04) > currentPosY) {
       // console.log('Scrolling Up')
-      window.scrollTo(0, window.scrollY + 12)
+      window.scrollTo(0, window.scrollY + 20)
     }
 
     if ((initPosY + 0.04) < currentPosY) {
       // console.log('Scrolling Down')
-      window.scrollTo(0, window.scrollY - 12)
+      window.scrollTo(0, window.scrollY - 20)
     }
 
   }
