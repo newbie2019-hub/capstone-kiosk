@@ -195,6 +195,9 @@ window.onload = function () {
   let clicked = false
   async function isClicked(distance, x, y) {
 
+    //If scrolling, return immediately
+    if(scroll_count > 3) return 
+
     if (distance < 0.05) {
       click_counter++
     }

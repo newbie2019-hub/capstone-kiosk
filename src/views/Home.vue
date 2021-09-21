@@ -67,7 +67,89 @@
 
    <section class="container mb-5 pt-5">
      <div class="row justify-content-center text-white">
-       <h4 class="text-uppercase">Latest Announcements</h4>
+       <h4 class="text-uppercase">Announcements</h4>
+       <hr class="mt-2"/>
+     </div>
+     <div class="row justify-content-center text-white">
+       <div class="col-lg-8 col-xl-8 mt-3">
+          <h5 class="mb-4 text-sub">Latest Annoucements</h5>
+         <div class="card-announcement mt-2">
+           <div class="d-flex align-items-center">
+             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
+              <p>Genreve Fernandez</p>
+              <p>DIGITS, President</p>
+             </div>
+             <div class="me-4">
+              <p class="mb-4">September 23, 2021</p>
+             </div>
+           </div>
+           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
+             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
+             <p class="mt-4 text-sub">Views: 300</p>
+           </div>
+         </div>
+         <div class="card-announcement mt-2">
+           <div class="d-flex align-items-center">
+             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
+              <p>Genreve Fernandez</p>
+              <p>DIGITS, President</p>
+             </div>
+             <div class="me-4">
+              <p class="mb-4">September 23, 2021</p>
+             </div>
+           </div>
+           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
+             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
+             <p class="mt-4 text-sub">Views: 300</p>
+           </div>
+         </div>
+         <div class="card-announcement mt-2">
+           <div class="d-flex align-items-center">
+             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
+              <p>Genreve Fernandez</p>
+              <p>DIGITS, President</p>
+             </div>
+             <div class="me-4">
+              <p class="mb-4">September 23, 2021</p>
+             </div>
+           </div>
+           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
+             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
+             <p class="mt-4 text-sub">Views: 300</p>
+           </div>
+         </div>
+         <div class="d-grid mt-3">
+           <button class="btn btn-primary">SHOW ALL</button>
+         </div>
+       </div>
+       <div class="col-lg-4 col-xl-4 mt-3">
+         <h5 class="mb-4 text-sub">Organizations</h5>
+         <div class="card-announcement mt-2">
+           <div class="d-flex align-items-center">
+             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
+              <p>Developmental Integrated Group of Information Students (DIGITS)</p>
+             </div>
+           </div>
+         </div>
+         <div class="card-announcement mt-2">
+           <div class="d-flex align-items-center">
+             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
+              <p>Developmental Integrated Group of Information Students (DIGITS)</p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <section class="container mb-5 pt-5">
+     <div class="row justify-content-center text-white">
+       <h4 class="text-uppercase">Frequently Asked Questions (FAQs)</h4>
        <hr class="mt-2"/>
      </div>
    </section>
