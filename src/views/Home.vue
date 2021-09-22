@@ -3,14 +3,16 @@
    <section class="container mb-5">
      <div class="row justify-content-center">
        <div class="col-md-6 col-lg-6">
-         <div class="card">
-           <img src="@/assets/images/university.jpg" alt="" loading=lazy>
-           <div class="card-content">
-             <h5>University</h5>
-             <p>A leading university of education and diverse disciplines attuned to local and global development needs</p>
-           </div>
-           <div class="card-border card-border-university"></div>
-         </div>
+         <router-link to="/university" class="text-decoration-none">
+          <div class="card">
+            <img src="@/assets/images/university.jpg" alt="" loading=lazy>
+            <div class="card-content">
+              <h5>University</h5>
+              <p>A leading university of education and diverse disciplines attuned to local and global development needs</p>
+            </div>
+            <div class="card-border card-border-university"></div>
+          </div>
+         </router-link>
        </div>
        <div class="col-md-6 col-lg-3">
          <router-link to="/feedback" class="text-decoration-none">
@@ -39,16 +41,18 @@
      </div>
      <div class="row justify-content-center mt-2">
        <div class="col-md-6 col-lg-6">
-         <div class="card">
-           <div class="card-small">
-            <img src="@/assets/images/announcement.jpg" alt="" loading=lazy>
-            <div class="card-content">
-              <h5>Announcement</h5>
-              <p>Stay updated with the University’s current events, announcements and news.</p>
+         <router-link to="/university" class="text-decoration-none">
+          <div class="card">
+            <div class="card-small">
+              <img src="@/assets/images/announcement.jpg" alt="" loading=lazy>
+              <div class="card-content">
+                <h5>Announcement</h5>
+                <p>Stay updated with the University’s current events, announcements and news.</p>
+              </div>
             </div>
-           </div>
-           <div class="card-border card-border-announcement"></div>
-         </div>
+            <div class="card-border card-border-announcement"></div>
+          </div>
+         </router-link>
        </div>
        <div class="col-md-6 col-lg-6">
          <div class="card">

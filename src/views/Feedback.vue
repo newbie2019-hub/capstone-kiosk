@@ -1,5 +1,9 @@
 <template>
  <div>
+   <div class="rate-success">
+     <i class="fas fa-check feedback-emoji emoji-check"></i>
+     <h5 class="rate-feedback-text">Thank you for your feedback!</h5>
+   </div>
   <div class="container">
    <div class="row justify-content-center">
     <div class="example-3d">
@@ -17,9 +21,11 @@
  </div>
 </template>
 <script>
+import { gsap } from "gsap"
 export default {
   mounted() {
     document.getElementsByClassName('scroll')[0].style.display = 'none'
+    this.clicked()
   },
   data() {
     return {
@@ -45,6 +51,32 @@ export default {
    next() {
      const swiper = document.querySelector('.swiper').swiper;
      swiper.slideNext();
+   },
+   clicked(){
+     let swiper_cards = document.getElementsByClassName('swiper-slide')
+     swiper_cards.forEach((card, i) => {
+      card.addEventListener('click', () => {    
+        gsap.from('.rate-success', 1.4, {
+          display: 'flex',
+        })
+        gsap.from('.emoji-check', .45, {
+          x: -20,
+          opacity: 0,
+        })
+        gsap.from('.rate-feedback-text', .45, {
+          x: -20,
+          opacity: 0,
+          delay: .45
+        })
+        
+
+        // TweenMax.staggerTo(".loading", 0.8, {
+        //   opacity: 1,
+        //   ease: Power3.easeInOut,
+        // }, 1)
+
+      })
+     });
    }
   }
   
@@ -99,5 +131,23 @@ export default {
   font-size: 8.5rem !important;
 }
 
+.rate-success {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  z-index: 999;
+  color: white;
+  will-change: transform;
+}
 
+.rate-success i {
+  font-size: 2rem !important;
+}
 </style>

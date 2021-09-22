@@ -241,10 +241,9 @@ nav a:hover {
 }
 
 .loader .dots {
-  position: absolute;
   transform: translateX(0);
   animation: dots 2.8s infinite;
-  margin-top: -2.95rem;
+  margin-top: -1rem;
 }
 .loader .dots span {
   float: left;

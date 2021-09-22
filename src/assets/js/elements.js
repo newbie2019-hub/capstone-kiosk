@@ -38,8 +38,8 @@ function createElements(){
  }
 
  let loading_text = document.createElement('p')
- loading_text.innerText = 'Loading resources . .'
- loading_text.classList.add('mt-4')
+ loading_text.innerText = '\nLoading resources . .\n\n Loading the model for the first time might take a while \n but it will be cached by your browser after then.'
+ loading_text.classList.add('mt-1')
  parent_div.appendChild(loading_text)
 
  document.body.appendChild(parent_div)
