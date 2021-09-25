@@ -4,7 +4,7 @@
      <div class="row justify-content-center">
        <div class="col-md-6 col-lg-6">
          <router-link to="/university" class="text-decoration-none">
-          <div class="card">
+          <div v-once class="card">
             <img src="@/assets/images/university.jpg" alt="" loading=lazy>
             <div class="card-content">
               <h5>University</h5>
@@ -16,7 +16,7 @@
        </div>
        <div class="col-md-6 col-lg-3">
          <router-link to="/feedback" class="text-decoration-none">
-          <div class="card">
+          <div v-once class="card">
             <div class="card-small">
               <img src="@/assets/images/feedback.jpg" alt="" loading=lazy>
               <div class="card-content">
@@ -29,7 +29,7 @@
          </router-link>
        </div>
        <div class="col-md-6 col-lg-3">
-         <div class="card">
+         <div v-once class="card">
             <img src="@/assets/images/university.jpg" alt="" loading=lazy>
             <div class="card-content">
               <h5>PROGRAMS</h5>
@@ -42,7 +42,7 @@
      <div class="row justify-content-center mt-2">
        <div class="col-md-6 col-lg-6">
          <router-link to="/university" class="text-decoration-none">
-          <div class="card">
+          <div v-once class="card">
             <div class="card-small">
               <img src="@/assets/images/announcement.jpg" alt="" loading=lazy>
               <div class="card-content">
@@ -55,7 +55,7 @@
          </router-link>
        </div>
        <div class="col-md-6 col-lg-6">
-         <div class="card">
+         <div v-once class="card">
            <div class="card-small">
             <img src="@/assets/images/entertainment.jpg" alt="" loading=lazy>
             <div class="card-content">
@@ -77,7 +77,7 @@
      <div class="row justify-content-center text-white">
        <div class="col-lg-8 col-xl-8 mt-3">
           <h5 class="mb-4 text-sub">Latest Annoucements</h5>
-         <div class="card-announcement mt-2">
+         <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
              <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
@@ -93,7 +93,7 @@
              <p class="mt-4 text-sub">Views: 300</p>
            </div>
          </div>
-         <div class="card-announcement mt-2">
+         <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
              <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
@@ -109,7 +109,7 @@
              <p class="mt-4 text-sub">Views: 300</p>
            </div>
          </div>
-         <div class="card-announcement mt-2">
+         <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
              <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
@@ -131,7 +131,7 @@
        </div>
        <div class="col-lg-4 col-xl-4 mt-3">
          <h5 class="mb-4 text-sub">Organizations</h5>
-         <div class="card-announcement mt-2">
+         <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
              <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
