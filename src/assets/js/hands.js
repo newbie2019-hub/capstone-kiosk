@@ -2,7 +2,7 @@ import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
-
+import store from '../../store'
 window.onload = function () {
   
   let mouse_pointer = document.getElementsByClassName('pointer')[0]
@@ -26,10 +26,9 @@ window.onload = function () {
 
     // LOADING INDICATOR - REMOVE
     if (!loaded) {
-      console.clear()
       setTimeout(() => {
         document.getElementsByClassName('loader')[0].remove()
-      }, 1500)
+      }, 1800)
       loaded = true
     }
 
@@ -215,13 +214,12 @@ window.onload = function () {
     else if (click_counter > 0 && click_counter <= 1) {
       click_status = 'start'
     }
-    else if (click_counter > 3) {
+    else if (click_counter > 2) {
       click_status = 'held'
     }
 
 
     if (clicked && click_counter == 0) {
-      console.log('clicked')
       drawRipple()
       const $el = document.elementFromPoint(x + 20, y + 20)
       if ($el) {
@@ -308,7 +306,7 @@ window.onload = function () {
   function scrollingFunctionality(result) {
 
     if (result.length != 2) {
-      if(window.location.pathname != '/feedback'){
+      if(window.location.pathname != '/feedback' || window.location.pathname == '/mission' || window.location.pathname == '/vision' || window.location.pathname == '/hymn'){
         document.getElementsByClassName('scroll')[0].style.display = 'block'
       }
       scroll_count = 0
@@ -373,12 +371,12 @@ window.onload = function () {
 
     if ((initPosY - 0.04) > currentPosY) {
       // console.log('Scrolling Up')
-      window.scrollTo(0, window.scrollY + 20)
+      window.scrollTo(0, window.scrollY + 25)
     }
 
     if ((initPosY + 0.04) < currentPosY) {
       // console.log('Scrolling Down')
-      window.scrollTo(0, window.scrollY - 20)
+      window.scrollTo(0, window.scrollY - 25)
     }
 
   }
@@ -491,5 +489,16 @@ window.onload = function () {
     camera.start();
   }
 
-  mediaPipeHandsSetup()
+  async function loadData(){
+    await store.dispatch('info/getMissionVision')
+    await store.dispatch('info/getCoreValues')
+    await store.dispatch('info/getOrganizations')
+    await store.dispatch('info/getSchoolOfficials')
+    await store.dispatch('info/getDepartments')
+    await store.dispatch('info/getTelDirectories')
+  }
+
+  loadData()
+  // mediaPipeHandsSetup()
+
 }

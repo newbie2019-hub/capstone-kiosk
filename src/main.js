@@ -15,6 +15,7 @@ import "vue-toastification/dist/index.css";
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
@@ -32,7 +33,7 @@ Vue.use(Toast, {
   closeButton: false,
   icon: true,
   rtl: false,
-  maxToasts: 2,
+  maxToasts: 3,
   transition: "Vue-Toastification__fade",
   newestOnTop: true,
   filterBeforeCreate: (toast, toasts) => {
@@ -45,6 +46,6 @@ Vue.use(Toast, {
 }});
 
 new Vue({
-  router,
+  router, store,
   render: h => h(App)
 }).$mount('#app')

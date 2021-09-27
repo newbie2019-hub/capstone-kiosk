@@ -48,10 +48,6 @@ export default {
     }
   },
   methods: {
-   next() {
-     const swiper = document.querySelector('.swiper').swiper;
-     swiper.slideNext();
-   },
    clicked(){
      let swiper_cards = document.getElementsByClassName('swiper-slide')
      swiper_cards.forEach((card, i) => {
@@ -83,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .example-3d {
   width: 100%;
   height: 400px;

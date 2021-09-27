@@ -1,85 +1,89 @@
 <template>
  <div>
-   <section class="container mb-5">
-     <div class="row justify-content-center">
+   <section v-once class="container mb-5">
+     <div v-once class="row justify-content-center">
        <div class="col-md-6 col-lg-6">
-         <router-link to="/university" class="text-decoration-none">
+         <router-link v-once to="/university" class="text-decoration-none">
           <div v-once class="card">
-            <img src="@/assets/images/university.jpg" alt="" loading=lazy>
+            <img v-once src="@/assets/images/university.jpg" alt="">
             <div class="card-content">
-              <h5>University</h5>
-              <p>A leading university of education and diverse disciplines attuned to local and global development needs</p>
+              <h5 v-once>University</h5>
+              <p v-once>A leading university of education and diverse disciplines attuned to local and global development needs</p>
             </div>
-            <div class="card-border card-border-university"></div>
+            <div v-once class="card-border card-border-university"></div>
           </div>
          </router-link>
        </div>
-       <div class="col-md-6 col-lg-3">
-         <router-link to="/feedback" class="text-decoration-none">
+       <div v-once class="col-md-6 col-lg-3">
+         <router-link v-once to="/feedback" class="text-decoration-none">
           <div v-once class="card">
             <div class="card-small">
-              <img src="@/assets/images/feedback.jpg" alt="" loading=lazy>
-              <div class="card-content">
-                <h5>Feedback</h5>
-                <p>To help us improve our system please leave a some review.</p>
+              <img v-once src="@/assets/images/feedback.jpg" alt="">
+              <div v-once class="card-content">
+                <h5 v-once>Feedback</h5>
+                <p v-once>To help us improve our system please leave a some review.</p>
               </div>
             </div>
-            <div class="card-border card-border-feedback "></div>
+            <div v-once class="card-border card-border-feedback "></div>
           </div>
          </router-link>
        </div>
-       <div class="col-md-6 col-lg-3">
-         <div v-once class="card">
-            <img src="@/assets/images/university.jpg" alt="" loading=lazy>
-            <div class="card-content">
-              <h5>PROGRAMS</h5>
-              <p>See what programs are offered by the university.</p>
-            </div>
-           <div class="card-border card-border-university "></div>
-         </div>
+       <div v-once class="col-md-6 col-lg-3">
+         <router-link v-once to="/programs" class="text-decoration-none">
+          <div v-once class="card">
+              <img v-once src="@/assets/images/university.jpg" alt="">
+              <div v-once class="card-content">
+                <h5 v-once>PROGRAMS</h5>
+                <p v-once>See what programs are offered by the university.</p>
+              </div>
+            <div v-once class="card-border card-border-university "></div>
+          </div>
+         </router-link>
        </div>
      </div>
-     <div class="row justify-content-center mt-2">
-       <div class="col-md-6 col-lg-6">
-         <router-link to="/university" class="text-decoration-none">
+     <div v-once class="row justify-content-center mt-2">
+       <div v-once class="col-md-6 col-lg-6">
+         <router-link v-once to="/announcement" class="text-decoration-none">
           <div v-once class="card">
             <div class="card-small">
-              <img src="@/assets/images/announcement.jpg" alt="" loading=lazy>
-              <div class="card-content">
-                <h5>Announcement</h5>
-                <p>Stay updated with the University’s current events, announcements and news.</p>
+              <img v-once src="@/assets/images/announcement.jpg" alt="">
+              <div v-once class="card-content">
+                <h5 v-once>Announcement</h5>
+                <p v-once>Stay updated with the University’s current events, announcements and news.</p>
               </div>
             </div>
-            <div class="card-border card-border-announcement"></div>
+            <div v-once class="card-border card-border-announcement"></div>
           </div>
          </router-link>
        </div>
-       <div class="col-md-6 col-lg-6">
-         <div v-once class="card">
-           <div class="card-small">
-            <img src="@/assets/images/entertainment.jpg" alt="" loading=lazy>
-            <div class="card-content">
-              <h5>Entertainment</h5>
-              <p>Have some fun and learn other possibilities with touchless technology.</p>
+       <div v-once class="col-md-6 col-lg-6">
+         <router-link v-once to="/entertainment" class="text-decoration-none">
+          <div v-once class="card">
+            <div class="card-small">
+              <img v-once src="@/assets/images/entertainment.jpg" alt="">
+              <div v-once class="card-content">
+                <h5 v-once>Entertainment</h5>
+                <p v-once>Have some fun and learn other possibilities with touchless technology.</p>
+              </div>
             </div>
-           </div>
-           <div class="card-border card-border-entertainment"></div>
-         </div>
+            <div v-once class="card-border card-border-entertainment"></div>
+          </div>
+         </router-link>
        </div>
      </div>
    </section>
 
-   <section class="container mb-5 pt-5">
-     <div class="row justify-content-center text-white">
-       <h4 class="text-uppercase">Announcements</h4>
-       <hr class="mt-2"/>
+   <section v-once class="container mb-5 pt-5">
+     <div v-once class="row justify-content-center text-white">
+       <h4 v-once class="text-uppercase">Announcements</h4>
+       <hr v-once class="mt-2"/>
      </div>
-     <div class="row justify-content-center text-white">
+     <div v-once class="row justify-content-center text-white">
        <div class="col-lg-8 col-xl-8 mt-3">
           <h5 class="mb-4 text-sub">Latest Annoucements</h5>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -95,7 +99,7 @@
          </div>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -111,7 +115,7 @@
          </div>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -133,7 +137,7 @@
          <h5 class="mb-4 text-sub">Organizations</h5>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Developmental Integrated Group of Information Students (DIGITS)</p>
              </div>
@@ -141,7 +145,7 @@
          </div>
          <div class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Developmental Integrated Group of Information Students (DIGITS)</p>
              </div>
