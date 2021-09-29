@@ -9,11 +9,15 @@ export default {
    organizations: '',
    schoolofficials: '',
    teldirectories: [],
+   colleges: [],
   },
   getters: {
 
   },
   mutations: {
+   SET_COURSES(state, data){
+    state.colleges = data
+   },
    SET_TEL_DIRECTORIES(state, data){
     state.teldirectories = data
    },
@@ -88,6 +92,16 @@ export default {
     async getSchoolOfficials({commit}){
       const res = await API.get(`/schoolofficials`).then(res => {
         commit('SET_SCHOOL_OFFICIALS', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
+    async getCourses({commit}){
+      const res = await API.get(`/courses`).then(res => {
+        commit('SET_COURSES', res.data)
         return res;
       }).catch(err => {
        return err.response;

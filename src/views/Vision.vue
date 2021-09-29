@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div class="pe-5 ps-5">
   <div v-once class="text-white text-center font-hymn p-5 mt-4 mb-5" >{{missionvision[0].lnu_vision}}</div>
  </div>
 </template>

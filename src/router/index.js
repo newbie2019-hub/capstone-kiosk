@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import Feedback from '../views/Feedback.vue'
+const Feedback = () => import('../views/Feedback.vue')
 
-import University from '../views/University/University.vue'
-import TelDirectory from '../views/University/TelDirectory.vue'
+const University = () => import('../views/University/University.vue')
+const TelDirectory = () => import('../views/University/TelDirectory.vue')
 
-import Announcement from '../views/Announcement/Announcement.vue'
+const Announcement = () => import('../views/Announcement/Announcement.vue')
 
-import Entertainment from '../views/Entertainment/Entertainment.vue'
+const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
 
-import Hymn from '../views/Hymn.vue'
-import Mission from '../views/Mission.vue'
-import CoreValues from '../views/CoreValues.vue'
-import Programs from '../views/Programs.vue'
-import Vision from '../views/Vision.vue'
+const Hymn = () => import('../views/Hymn.vue')
+const Mission = () => import('../views/Mission.vue')
+const CoreValues = () => import('../views/CoreValues.vue')
+const Programs = () => import('../views/Programs.vue')
+const Vision = () => import('../views/Vision.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,12 +23,6 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/about',
-    name: 'About',
-
-    component: About
-  }, 
   {
     path: '/feedback',
     name: 'Feedback',

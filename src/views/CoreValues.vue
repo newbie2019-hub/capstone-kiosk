@@ -19,6 +19,7 @@
 <script>
 import {mapState} from 'vuex'
 export default {
+
   mounted() {
     document.getElementsByClassName('scroll')[0].style.display = 'none'
   },

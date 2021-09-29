@@ -306,7 +306,7 @@ window.onload = function () {
   function scrollingFunctionality(result) {
 
     if (result.length != 2) {
-      if(window.location.pathname != '/feedback' || window.location.pathname == '/mission' || window.location.pathname == '/vision' || window.location.pathname == '/hymn'){
+      if(window.location.pathname != '/feedback' || window.location.pathname != '/mission' || window.location.pathname != '/vision' || window.location.pathname != '/hymn'){
         document.getElementsByClassName('scroll')[0].style.display = 'block'
       }
       scroll_count = 0
@@ -496,6 +496,7 @@ window.onload = function () {
     await store.dispatch('info/getSchoolOfficials')
     await store.dispatch('info/getDepartments')
     await store.dispatch('info/getTelDirectories')
+    await store.dispatch('info/getCourses')
   }
 
   loadData()
