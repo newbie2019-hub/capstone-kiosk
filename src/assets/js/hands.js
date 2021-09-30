@@ -102,17 +102,7 @@ window.onload = function () {
 
   //Distance Computation between two points
   function lineDistance(point1, point2) {
-    var xs = 0;
-    var ys = 0;
-
-    xs = point2.x - point1.x;
-    xs = xs * xs;
-
-    ys = point2.y - point1.y;
-    ys = ys * ys;
-
-
-    var distance = Math.sqrt(xs + ys);
+    var distance = Math.hypot(point2.x - point1.x, point2.y - point1.y);
     return distance;
   }
 
@@ -244,6 +234,7 @@ window.onload = function () {
   }
 
   function clearReturn(){
+    if(countdown == 4 && flagReturn == false) return
     clearInterval(iv)
     countdown = 4
     countdown_timer.innerHTML = '•'
