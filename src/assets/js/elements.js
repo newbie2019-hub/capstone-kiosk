@@ -37,7 +37,7 @@ function createElements(){
    span_dots.appendChild(span)
  }
 
- let loading_text = document.createElement('p')
+ const loading_text = document.createElement('p')
  loading_text.innerText = '\nLoading resources . .\n\n Setting up the model and data \n Loading the model for the first time might take a while \n but it will be cached by your browser after then.'
  loading_text.classList.add('mt-1')
  parent_div.appendChild(loading_text)
@@ -45,28 +45,32 @@ function createElements(){
  document.body.appendChild(parent_div)
 
  //CANVAS
- let body_canvas = document.createElement('canvas');
+ const body_canvas = document.createElement('canvas');
  body_canvas.classList.add('output_canvas')
  document.body.appendChild(body_canvas)
  
  //VIDEO ELEMENT
- let body_video = document.createElement('video');
+ const body_video = document.createElement('video');
  body_video.classList.add('input_video')
  document.body.appendChild(body_video)
  
  //POINTER ELEMENT
- let pointer = document.createElement('div');
+ const pointer = document.createElement('div');
  pointer.classList.add('pointer')
  document.body.appendChild(pointer)
 
- 
+ const countdownTimer = document.createElement('p')
+ countdownTimer.classList.add('timer');
+ countdownTimer.innerHTML = '•'
+ pointer.appendChild(countdownTimer);
+
  //CREATE RIPPLE ON CLICK ELEMENT
- let ripple = document.createElement('div');
+ const ripple = document.createElement('div');
  ripple.classList.add('ripple')
  pointer.appendChild(ripple)
 
  //SCROLLING INDICATOR
- let scroll = document.createElement('div')
+ const scroll = document.createElement('div')
  scroll.classList.add('scroll')
  document.body.appendChild(scroll)
  

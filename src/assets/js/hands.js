@@ -5,7 +5,8 @@ import { gsap } from "gsap"
 import store from '../../store'
 window.onload = function () {
   
-  let mouse_pointer = document.getElementsByClassName('pointer')[0]
+  const mouse_pointer = document.getElementsByClassName('pointer')[0]
+  const countdown_timer = document.getElementsByClassName('timer')[0]
 
   const videoElement = document.getElementsByClassName('input_video')[0];
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -193,7 +194,10 @@ window.onload = function () {
   let flagReturn = false;
 
   function returnGestureRecog(res){
-    if (window.location.pathname == '/') return
+    if (window.location.pathname == '/') {
+      clearReturn()
+      return
+    }
 
     const { multiHandLandmarks, multiHandedness } = res
     for (let index = 0; index < multiHandLandmarks.length; index++) {
@@ -224,9 +228,14 @@ window.onload = function () {
   function returnPrevRoute(){
     if(flagReturn) return
     countdown = 3;
-  
+
     iv = window.setInterval(() => {
+      countdown_timer.innerHTML = `${countdown}`
       countdown--
+      if(countdown < 0){
+        clearReturn()
+      }
+      sleep(1500)
     }, 1000)
   
     return_timer = window.setTimeout(()=>{
@@ -235,9 +244,11 @@ window.onload = function () {
   }
 
   function clearReturn(){
-    if(countdown >= 3) return
-    clearTimeout(return_timer)
+    // if(countdown >= 3) return
     clearInterval(iv)
+    countdown = 3
+    countdown_timer.innerHTML = '•'
+    clearTimeout(return_timer)
     flagReturn = false
   }
 
