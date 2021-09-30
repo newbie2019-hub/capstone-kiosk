@@ -39,15 +39,16 @@ window.onload = function () {
     //(e.g. left or right hand - left or right scroll)
     slideNavigation()
    
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.save(); 
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height); 
 
     if (results.multiHandLandmarks && results.multiHandedness) {
 
       updatePointerVisibility(results)
       scrollingFunctionality(results.multiHandedness)
       notifScrolling()
+      returnGestureRecog(results)
 
       if(hasSwiper){
         monitorSwiperNavigation(results)
@@ -80,15 +81,13 @@ window.onload = function () {
             hoverElement(x, y)
 
             let click = [landmarks[4], landmarks[8]]
-            // console.log('Current scroll from the top: ' + window.pageYOffset)
             isClicked(lineDistance(click[0], click[1]), x, y)
 
             // fingersUp(landmarks)
-            //IF HAS SWIPER - PASS IN THE RESULT TO EMIT SCROLLING
 
             //DRAW LANDMARKS - SKELETON
             // drawConnectors(canvasCtx, click, HAND_CONNECTIONS,
-            //                {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 1});
+            //                {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 3});
             // drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
             //                {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 1});
             // drawLandmarks(canvasCtx, landmarks, {color: '#17c0eb', lineWidth: 1});
@@ -174,8 +173,6 @@ window.onload = function () {
       }
     }
 
-    // console.log(parentEl.className)
-    // parentEl.style.border = '5px solid #fff'
   }
 
   //Check if hover element has a card
@@ -186,6 +183,62 @@ window.onload = function () {
       return false
     }
     return input.includes('card') || input.includes('card-small')
+  }
+
+  // //RETURN GESTURE 
+  // //COMPARE X VALUE OF INDEX 4 AND 17
+  let iv = null //interval
+  let return_timer = null;
+  let countdown = 3;
+  let flagReturn = false;
+
+  function returnGestureRecog(res){
+    if (window.location.pathname == '/') return
+
+    const { multiHandLandmarks, multiHandedness } = res
+    for (let index = 0; index < multiHandLandmarks.length; index++) {
+      const classification = multiHandedness[index];
+      const isRight = classification.label === 'Right';
+      if(isRight){
+        if(multiHandLandmarks[index][4].x > multiHandLandmarks[index][17].x){
+          returnPrevRoute()
+          flagReturn = true
+        }
+        else {
+          clearReturn()
+        }
+      }
+      else {
+        if(multiHandLandmarks[index][4].x < multiHandLandmarks[index][17].x){
+          returnPrevRoute()
+          flagReturn = true
+        }
+        else {
+          clearReturn()
+        }
+      }
+    }
+
+  }
+
+  function returnPrevRoute(){
+    if(flagReturn) return
+    countdown = 3;
+  
+    iv = window.setInterval(() => {
+      countdown--
+    }, 1000)
+  
+    return_timer = window.setTimeout(()=>{
+      history.back()
+    }, 3000)
+  }
+
+  function clearReturn(){
+    if(countdown >= 3) return
+    clearTimeout(return_timer)
+    clearInterval(iv)
+    flagReturn = false
   }
 
   //Check if distance between landmark[4] and landmark[8]
@@ -410,13 +463,10 @@ window.onload = function () {
   function monitorSwiperNavigation(results){
     for (let index = 0; index < results.multiHandLandmarks.length; index++) {
       const classification = results.multiHandedness[index];
-      const isRightHand = classification.label === 'Right';
+      isRight = classification.label === 'Right';
 
       let counter = 0
       //RIGHT HAND SCROLL
-      isRight = isRightHand ? true : false
-
-      // console.log(fingersUp(results.multiHandLandmarks[index]))
 
       fingersUp(results.multiHandLandmarks[index]).forEach(value => {
         if(value == 0) {
@@ -500,6 +550,6 @@ window.onload = function () {
   }
 
   loadData()
-  // mediaPipeHandsSetup()
+  mediaPipeHandsSetup()
 
 }

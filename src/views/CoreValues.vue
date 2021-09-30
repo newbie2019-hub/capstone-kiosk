@@ -5,10 +5,12 @@
    <div class="row justify-content-center">
       <swiper ref="swiper" class="swiper">
         <swiper-slide v-for="(core, i) in core_values" :key="i">
-         <div class="corevalue">
-          <h5 class="font-title">{{core.core_value}}</h5>
-          <h5 class="font-description mt-2">{{core.description}}</h5>
-         </div>
+          <blockquote>
+            <div class="corevalue">
+              <h5 class="font-title">{{core.core_value}}</h5>
+              <h5 class="font-description mt-4">{{core.description}}</h5>
+            </div>
+          </blockquote>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
@@ -40,7 +42,7 @@ export default {
 <style >
 .corevalue {
  color: white !important;
- padding: 2rem 4.5rem;
+ padding: 2rem 9rem;
  text-align: center;
 }
 
