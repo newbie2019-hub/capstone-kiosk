@@ -227,26 +227,25 @@ window.onload = function () {
 
   function returnPrevRoute(){
     if(flagReturn) return
-    countdown = 3;
+    countdown = 4;
 
     iv = window.setInterval(() => {
-      countdown_timer.innerHTML = `${countdown}`
       countdown--
+      countdown_timer.innerHTML = `${countdown}`
       if(countdown < 0){
         clearReturn()
       }
-      sleep(1500)
+      sleep(2000)
     }, 1000)
   
     return_timer = window.setTimeout(()=>{
       history.back()
-    }, 3000)
+    }, 4000)
   }
 
   function clearReturn(){
-    // if(countdown >= 3) return
     clearInterval(iv)
-    countdown = 3
+    countdown = 4
     countdown_timer.innerHTML = '•'
     clearTimeout(return_timer)
     flagReturn = false
