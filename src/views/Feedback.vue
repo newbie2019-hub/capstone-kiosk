@@ -22,10 +22,16 @@
 </template>
 <script>
 import { gsap } from "gsap"
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+
 export default {
   mounted() {
     document.getElementsByClassName('scroll')[0].style.display = 'none'
     this.clicked()
+  },
+  components: {
+      Swiper,
+      SwiperSlide,
   },
   data() {
     return {

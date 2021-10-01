@@ -217,11 +217,11 @@ window.onload = function () {
 
   function returnPrevRoute(){
     if(flagReturn) return
-    countdown = 4;
+    countdown = 3;
 
     iv = window.setInterval(() => {
-      countdown--
       countdown_timer.innerHTML = `${countdown}`
+      countdown--
       if(countdown < 0){
         clearReturn()
       }
@@ -230,13 +230,13 @@ window.onload = function () {
   
     return_timer = window.setTimeout(()=>{
       history.back()
-    }, 4000)
+    }, 3700)
   }
 
   function clearReturn(){
-    if(countdown == 4 && flagReturn == false) return
+    if(countdown == 3 && flagReturn == false) return
     clearInterval(iv)
-    countdown = 4
+    countdown = 3
     countdown_timer.innerHTML = '•'
     clearTimeout(return_timer)
     flagReturn = false
@@ -249,7 +249,8 @@ window.onload = function () {
   async function isClicked(distance, x, y) {
 
     //If scrolling, return immediately
-    if(scroll_count > 3) return 
+    if(prevCounter != 0) return
+    if(scroll_count > 3 ) return
 
     if (distance < 0.05) {
       click_counter++
@@ -500,18 +501,18 @@ window.onload = function () {
       else {
         swiper.slidePrev()
       }
-      prevCounter = 0
       emitNavigation = false
+      prevCounter = 0
     }
   }
 
   //Ripple Event Handler
-  var drawRipple = function () {
-    var node = document.querySelector(".ripple");
-    var newNode = node.cloneNode(true);
+  function drawRipple() {
+    const node = document.querySelector(".ripple");
+    const newNode = node.cloneNode(true);
     newNode.classList.add("animate");
     node.parentNode.replaceChild(newNode, node);
-  };
+  }
 
 
   function mediaPipeHandsSetup() {

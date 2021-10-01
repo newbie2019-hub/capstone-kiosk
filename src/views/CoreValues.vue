@@ -3,7 +3,7 @@
  
   <div class="container">
    <div class="row justify-content-center">
-      <swiper ref="swiper" class="swiper">
+      <swiper class="swiper">
         <swiper-slide v-for="(core, i) in core_values" :key="i">
           <blockquote>
             <div class="corevalue">
@@ -20,10 +20,15 @@
 </template>
 <script>
 import {mapState} from 'vuex'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 export default {
 
   mounted() {
     document.getElementsByClassName('scroll')[0].style.display = 'none'
+  },
+  components: {
+      Swiper,
+      SwiperSlide,
   },
   data() {
     return {
