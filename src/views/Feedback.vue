@@ -6,6 +6,8 @@
    </div>
   <div class="container">
    <div class="row justify-content-center">
+     <h3 class="text-center text-white mt-3">FEEDBACK</h3>
+     <p class="text-center mb-4 text-white">Pinch your finger on any of the cards</p>
     <div class="example-3d">
       <swiper ref="swiper" class="swiper" :options="swiperOption">
         <swiper-slide><i class="far fa-thumbs-up feedback-emoji"></i></swiper-slide>

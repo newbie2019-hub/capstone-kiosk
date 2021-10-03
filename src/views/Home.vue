@@ -2,6 +2,8 @@
  <div>
    <section v-once class="container mb-5">
      <div v-once class="row justify-content-center">
+        <h3 class="text-center text-white mt-3">MAIN MENU</h3>
+       <p class="text-center mb-5 text-white">Pinch your finger on any of the cards or scroll down</p>
        <div class="col-md-6 col-lg-6">
          <router-link v-once to="/university" class="text-decoration-none">
           <div v-once class="card">
@@ -71,6 +73,18 @@
          </router-link>
        </div>
      </div>
+   </section>
+
+   <section v-once class="container mb-5 pt-5">
+     <div v-once class="row justify-content-center text-white">
+       <h4 v-once class="text-uppercase">QUICK LINKS</h4>
+     </div>
+     <nav>
+      <router-link to="/corevalues">Core Values</router-link>
+      <router-link to="/mission">Mission</router-link>
+      <router-link to="/vision">Vision</router-link>
+      <router-link to="/hymn">Hymn</router-link>
+    </nav>
    </section>
 
    <section v-once class="container mb-5 pt-5">

@@ -3,7 +3,7 @@
 body {
   font-family: 'Poppins', sans-serif !important;
   user-select: none;
-  /* background-color: black !important; */
+  background-color: black !important;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -105,18 +105,26 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* NAVIGATION */
 nav {
-  padding: 9rem 0rem 3rem 0rem;
+  padding: 1.8rem 0rem 0rem 0rem;
   position: relative;
-  text-align: center;
 }
 
 nav a {
   color: rgb(212, 212, 212);
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0rem 1rem;
   letter-spacing: 1px;
 }
+
+nav a:nth-child(1){
+  padding-right: 1.5rem;
+}
+
+nav a:not(:first-child) {
+  padding: 0rem 1.5rem;
+  
+}
+
 
 nav a:visited, nav a:focus-visible {
   border: 0 none;

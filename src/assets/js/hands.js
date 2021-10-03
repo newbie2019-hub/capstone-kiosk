@@ -25,8 +25,8 @@ window.onload = function () {
 
   function onResults(results) {
 
-    // LOADING INDICATOR - REMOVE
-    if (!loaded) {
+     // LOADING INDICATOR - REMOVE
+     if (!loaded) {
       setTimeout(() => {
         document.getElementsByClassName('loader')[0].remove()
       }, 1800)
@@ -34,6 +34,7 @@ window.onload = function () {
     }
 
     notifNoHandsDetected(results.multiHandedness)
+    updatePointerVisibility(results)
     
     //SLIDE NAVIGATION - 
     //IF NO FINGERS ARE UP EMIT SCROLL 
@@ -44,9 +45,14 @@ window.onload = function () {
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height); 
 
-    if (results.multiHandLandmarks && results.multiHandedness) {
+    if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
+      // const { multiHandLandmarks } = results
 
-      updatePointerVisibility(results)
+      // console.log(multiHandLandmarks[0])
+      // if(multiHandLandmarks[0][1].z > -0.019) {
+      //   console.log('\nYou\'re too far from the camera')
+      // }
+
       scrollingFunctionality(results.multiHandedness)
       notifScrolling()
       returnGestureRecog(results)

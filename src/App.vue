@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="title">
+    <!-- <div class="title">
       <h5>TOUCH-LESS INFO KIOSK</h5>
     </div>
     <nav>
@@ -9,21 +9,23 @@
       <router-link to="/mission">Mission</router-link>
       <router-link to="/vision">Vision</router-link>
       <router-link to="/hymn">Hymn</router-link>
-    </nav>
-    <transition name="fade" mode="out-in">
-      <router-view/>
-    </transition>
+    </nav> -->
+    <div class="pt-5">
+      <transition name="fade" mode="out-in">
+          <router-view/>
+      </transition>
+    </div>
   </div>
 </template>
 
 <style>
 .fade-enter, .fade-leave-to {
   opacity: 0;
-  transform: translateX(2rem);
+  transition: all .3s ease-out;
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: all .25s ease-in;
+  transition: all .5s ease-in;
 }
 
 .title {

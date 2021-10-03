@@ -1,6 +1,7 @@
 <template>
  <div>
-  <h3 class="text-center text-white">COURSES OFFERED</h3>
+   <h3 class="text-center text-white mt-3">PROGRAMS</h3>
+   <p class="text-center mb-3 text-white">Listed below are the programs offered by the university.</p>
   <div class="text-center col text-white mb-5">
    <div v-once v-for="(college, i) in colleges" :key="i" class="mt-5">
     <h5 class="font-2x">{{college.name}} ({{college.abbreviation}})</h5>
