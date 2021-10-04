@@ -12,6 +12,7 @@ const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
 const Mission = () => import('../views/Mission.vue')
+const FAQS = () => import('../views/University/FAQs.vue')
 const CoreValues = () => import('../views/CoreValues.vue')
 const Programs = () => import('../views/Programs.vue')
 const Vision = () => import('../views/Vision.vue')
@@ -44,6 +45,11 @@ const routes = [
     component: TelDirectory
   },
   {
+    path: '/university/faqs',
+    name: 'faqs',
+    component: FAQS
+  },
+  {
     path: '/announcement',
     name: 'Announcement',
     component: Announcement
@@ -73,6 +79,7 @@ const routes = [
     name: 'Entertainment',
     component: Entertainment
   },
+  
 ]
 
 const router = new VueRouter({

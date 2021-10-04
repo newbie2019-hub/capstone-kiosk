@@ -33,7 +33,7 @@
        <div v-once class="col-md-6 col-lg-3">
          <router-link v-once to="/programs" class="text-decoration-none">
           <div v-once class="card">
-              <img v-once src="@/assets/images/university.jpg" alt="">
+              <img v-once src="@/assets/images/university-logo.png" alt="">
               <div v-once class="card-content">
                 <h5 v-once>PROGRAMS</h5>
                 <p v-once>See what programs are offered by the university.</p>
@@ -97,7 +97,7 @@
           <h5 class="mb-4 text-sub">Latest Annoucements</h5>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/university-logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -113,7 +113,7 @@
          </div>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/university-logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -129,7 +129,7 @@
          </div>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/university-logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Genreve Fernandez</p>
               <p>DIGITS, President</p>
@@ -151,7 +151,7 @@
          <h5 class="mb-4 text-sub">Organizations</h5>
          <div v-once class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/university-logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Developmental Integrated Group of Information Students (DIGITS)</p>
              </div>
@@ -159,7 +159,7 @@
          </div>
          <div class="card-announcement mt-2">
            <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/announcement.jpg" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+             <img v-once src="@/assets/images/university-logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
              <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
               <p>Developmental Integrated Group of Information Students (DIGITS)</p>
              </div>
