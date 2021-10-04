@@ -7,7 +7,7 @@
   <div class="container">
    <div class="row justify-content-center">
      <h3 class="text-center text-white mt-3">FEEDBACK</h3>
-     <p class="text-center mb-4 text-white">Pinch your finger on any of the cards</p>
+     <p class="text-center mb-5 text-white">Pinch your finger on any of the cards</p>
     <div class="example-3d">
       <swiper ref="swiper" class="swiper" :options="swiperOption">
         <swiper-slide><i class="far fa-thumbs-up feedback-emoji"></i></swiper-slide>
@@ -28,7 +28,6 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
   mounted() {
-    document.getElementsByClassName('scroll')[0].style.display = 'none'
     this.clicked()
   },
   components: {
@@ -43,7 +42,7 @@ export default {
         centeredSlides: true,
         slidesPerView: 'auto',
         coverflowEffect: {
-          rotate: 40,
+          rotate: 50,
           stretch: 0,
           depth: 50,
           modifier: 1,
@@ -109,22 +108,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   text-align: center;
   font-weight: bold;
   background-color: #2C8DFB;
   background-position: center;
   background-size: cover;
   color: white;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: white !important;
-}
-
-.swiper-pagination-bullet {
-  background: #9b9b9b !important;
 }
 
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {

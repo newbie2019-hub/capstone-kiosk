@@ -69,11 +69,7 @@ function createElements(){
  ripple.classList.add('ripple')
  pointer.appendChild(ripple)
 
- //SCROLLING INDICATOR
- const scroll = document.createElement('div')
- scroll.classList.add('scroll')
- document.body.appendChild(scroll)
- 
+
 }
 
 

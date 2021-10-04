@@ -12,7 +12,11 @@ const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
 const Mission = () => import('../views/Mission.vue')
+
 const FAQS = () => import('../views/University/FAQs.vue')
+const Organization = () => import('../views/University/Organization.vue')
+const SchoolOfficials = () => import('../views/University/SchoolOfficials.vue')
+
 const CoreValues = () => import('../views/CoreValues.vue')
 const Programs = () => import('../views/Programs.vue')
 const Vision = () => import('../views/Vision.vue')
@@ -48,6 +52,16 @@ const routes = [
     path: '/university/faqs',
     name: 'faqs',
     component: FAQS
+  },
+  {
+    path: '/university/organization',
+    name: 'organization',
+    component: Organization
+  },
+  {
+    path: '/university/schoolofficials',
+    name: 'schoolofficials',
+    component: SchoolOfficials
   },
   {
     path: '/announcement',

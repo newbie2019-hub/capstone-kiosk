@@ -280,7 +280,13 @@ window.onload = function () {
     }
 
 
-    if (clicked && click_counter == 0) {
+    if(hasNavigated){
+      setTimeout(() => {
+        hasNavigated = false
+      }, 500)
+    }
+
+    if (clicked && click_counter == 0 && !hasNavigated) {
       drawRipple()
       const $el = document.elementFromPoint(x + 20, y + 20)
       if ($el) {
@@ -367,9 +373,7 @@ window.onload = function () {
   function scrollingFunctionality(result) {
 
     if (result.length != 2) {
-      if(window.location.pathname != '/feedback' || window.location.pathname != '/mission' || window.location.pathname != '/vision' || window.location.pathname != '/hymn'){
-        document.getElementsByClassName('scroll')[0].style.display = 'block'
-      }
+     
       scroll_count = 0
       initPosY = 0
       return
@@ -377,7 +381,6 @@ window.onload = function () {
 
     if ((result[0].label == 'Right' && result[1].label == 'Left') || (result[0].label == 'Left' && result[1].label == 'Right')) {
       scroll_count++
-      document.getElementsByClassName('scroll')[0].style.display = 'none'
     }
   }
 
@@ -468,6 +471,7 @@ window.onload = function () {
   let navigate = false
   let emitNavigation = false, isRight = false
   let prevCounter = 0
+  let hasNavigated = false //THRESHOLD FOR NAVIGATION TO PREVENT UNINTENTIONAL CLICKS
   function monitorSwiperNavigation(results){
     for (let index = 0; index < results.multiHandLandmarks.length; index++) {
       const classification = results.multiHandedness[index];
@@ -501,6 +505,7 @@ window.onload = function () {
     }
 
     if(emitNavigation) {
+      hasNavigated = true
       if(isRight){
         swiper.slideNext()
       }

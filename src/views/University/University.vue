@@ -17,7 +17,7 @@
          </router-link>
        </div>
        <div class="col-md-6 col-lg-3">
-         <router-link to="/feedback" class="text-decoration-none">
+         <router-link to="/university/organization" class="text-decoration-none">
           <div v-once class="card">
             <div class="card-small">
               <img v-once src="@/assets/images/university-logo.png" alt="" loading=lazy>
@@ -69,6 +69,7 @@
          </router-link>
        </div>
        <div class="col-md-6 col-lg-6">
+        <router-link to="/university/schoolofficials" class="text-decoration-none">
          <div v-once class="card">
            <div class="card-small">
             <img v-once src="@/assets/images/entertainment.jpg" alt="" loading=lazy>
@@ -79,6 +80,7 @@
            </div>
            <div class="card-border card-border-entertainment"></div>
          </div>
+        </router-link>
        </div>
      </div>
    </section>
@@ -86,8 +88,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'Home',
   components: {
@@ -95,7 +95,6 @@ export default {
   },
   mounted() {
     document.title = 'Touchless Information Kiosk - Main Menu'
-    document.getElementsByClassName('scroll')[0].style.display = 'none'
   }
 }
 </script>

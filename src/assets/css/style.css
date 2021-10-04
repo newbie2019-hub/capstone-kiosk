@@ -199,7 +199,7 @@ nav a:hover {
 }
 
 .card-border-department {
-  background-color: #1fb638
+  background-color: #10973d
 }
 
 .card-border-university {
@@ -280,6 +280,14 @@ nav a:hover {
   margin-left: 5px;
   background: rgb(255, 255, 255);
   border-radius: 50%
+}
+
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+}
+
+.swiper-pagination-bullet {
+  background: #e7e7e7 !important;
 }
       
 @keyframes dot {
