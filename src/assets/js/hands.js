@@ -558,6 +558,6 @@ window.onload = function () {
   }
 
   loadData()
-  // mediaPipeHandsSetup()
+  mediaPipeHandsSetup()
 
 }
