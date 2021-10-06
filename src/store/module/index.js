@@ -3,13 +3,14 @@ import API from '../base/'
 export default {
   namespaced: true,
   state: {
-   missionvision: '',
-   core_values: '',
-   departments: '',
-   organizations: '',
-   schoolofficials: '',
+   missionvision: [],
+   core_values: [],
+   departments: [],
+   organizations: [],
+   schoolofficials: [],
    teldirectories: [],
    colleges: [],
+   faqs: [],
   },
   getters: {
 
@@ -17,6 +18,9 @@ export default {
   mutations: {
    SET_COURSES(state, data){
     state.colleges = data
+   },
+   SET_FAQS(state, data){
+    state.faqs = data
    },
    SET_TEL_DIRECTORIES(state, data){
     state.teldirectories = data
@@ -39,6 +43,16 @@ export default {
   
   },
   actions: {
+    async getFAQs({commit}){
+      const res = await API.get(`/faqs`).then(res => {
+        commit('SET_FAQS', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
     async getTelDirectories({commit}){
       const res = await API.get(`/teldirectories`).then(res => {
         commit('SET_TEL_DIRECTORIES', res.data)

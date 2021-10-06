@@ -560,9 +560,10 @@ window.onload = function () {
     await store.dispatch('info/getDepartments')
     await store.dispatch('info/getTelDirectories')
     await store.dispatch('info/getCourses')
+    await store.dispatch('info/getFAQs')
   }
 
   loadData()
-  mediaPipeHandsSetup()
+  // mediaPipeHandsSetup()
 
 }
