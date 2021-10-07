@@ -1,91 +1,108 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-const Feedback = () => import('../views/Feedback.vue')
+const Feedback = () =>
+    import ('../views/Feedback.vue')
 
-const University = () => import('../views/University/University.vue')
-const TelDirectory = () => import('../views/University/TelDirectory.vue')
+const University = () =>
+    import ('../views/University/University.vue')
+const TelDirectory = () =>
+    import ('../views/University/TelDirectory.vue')
 
-const Announcement = () => import('../views/Announcement/Announcement.vue')
+const Announcement = () =>
+    import ('../views/Announcement/Announcement.vue')
 
-const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
+const Entertainment = () =>
+    import ('../views/Entertainment/Entertainment.vue')
+const TicTacToe = () =>
+    import ('../views/Entertainment/TicTacToe.vue')
 
-const Hymn = () => import('../views/Hymn.vue')
-const Mission = () => import('../views/Mission.vue')
-const FAQS = () => import('../views/University/FAQs.vue')
-const CoreValues = () => import('../views/CoreValues.vue')
-const Programs = () => import('../views/Programs.vue')
-const Vision = () => import('../views/Vision.vue')
+const Hymn = () =>
+    import ('../views/Hymn.vue')
+const Mission = () =>
+    import ('../views/Mission.vue')
+const FAQS = () =>
+    import ('../views/University/FAQs.vue')
+const CoreValues = () =>
+    import ('../views/CoreValues.vue')
+const Programs = () =>
+    import ('../views/Programs.vue')
+const Vision = () =>
+    import ('../views/Vision.vue')
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/feedback',
-    name: 'Feedback',
-    component: Feedback
-  },
-  {
-    path: '/corevalues',
-    name: 'CoreValues',
-    component: CoreValues
-  },
-  {
-    path: '/university',
-    name: 'University',
-    component: University
-  },
-  {
-    path: '/university/teldirectory',
-    name: 'TelDirectory',
-    component: TelDirectory
-  },
-  {
-    path: '/university/faqs',
-    name: 'faqs',
-    component: FAQS
-  },
-  {
-    path: '/announcement',
-    name: 'Announcement',
-    component: Announcement
-  },
-  {
-    path: '/hymn',
-    name: 'Hymn',
-    component: Hymn
-  },
-  {
-    path: '/mission',
-    name: 'Mission',
-    component: Mission
-  },
-  {
-    path: '/vision',
-    name: 'Vision',
-    component: Vision
-  },
-  {
-    path: '/programs',
-    name: 'Programs',
-    component: Programs
-  },
-  {
-    path: '/entertainment',
-    name: 'Entertainment',
-    component: Entertainment
-  },
-  
+const routes = [{
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/feedback',
+        name: 'Feedback',
+        component: Feedback
+    },
+    {
+        path: '/corevalues',
+        name: 'CoreValues',
+        component: CoreValues
+    },
+    {
+        path: '/university',
+        name: 'University',
+        component: University
+    },
+    {
+        path: '/university/teldirectory',
+        name: 'TelDirectory',
+        component: TelDirectory
+    },
+    {
+        path: '/university/faqs',
+        name: 'faqs',
+        component: FAQS
+    },
+    {
+        path: '/announcement',
+        name: 'Announcement',
+        component: Announcement
+    },
+    {
+        path: '/hymn',
+        name: 'Hymn',
+        component: Hymn
+    },
+    {
+        path: '/mission',
+        name: 'Mission',
+        component: Mission
+    },
+    {
+        path: '/vision',
+        name: 'Vision',
+        component: Vision
+    },
+    {
+        path: '/programs',
+        name: 'Programs',
+        component: Programs
+    },
+    {
+        path: '/entertainment',
+        name: 'Entertainment',
+        component: Entertainment
+    },
+    {
+        path: '/tictactoe',
+        name: 'TicTacToe',
+        component: TicTacToe
+    },
+
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router
