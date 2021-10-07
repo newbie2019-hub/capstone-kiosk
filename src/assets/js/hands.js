@@ -1,5 +1,6 @@
-import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
-import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
+import { Hands } from '@mediapipe/hands'
+// import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
+// import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
 import store from '../../store'
@@ -27,9 +28,12 @@ window.onload = function () {
 
      // LOADING INDICATOR - REMOVE
      if (!loaded) {
-      setTimeout(() => {
-        document.getElementsByClassName('loader')[0].remove()
-      }, 1800)
+       setTimeout(() => {
+         document.getElementsByClassName('loader')[0].remove()
+         console.clear()
+         console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
+         console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
+      }, 2000)
       loaded = true
     }
 
@@ -46,12 +50,6 @@ window.onload = function () {
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height); 
 
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
-      // const { multiHandLandmarks } = results
-
-      // console.log(multiHandLandmarks[0])
-      // if(multiHandLandmarks[0][1].z > -0.019) {
-      //   console.log('\nYou\'re too far from the camera')
-      // }
 
       scrollingFunctionality(results.multiHandedness)
       notifScrolling()
@@ -144,7 +142,6 @@ window.onload = function () {
   let elem, prevEl = ''
   function hoverElement(x, y) {
 
-
     if (scroll_count > 3) {
       if (prevEl) {
         prevEl.classList.remove('border-hover')
@@ -155,7 +152,7 @@ window.onload = function () {
     elem = document.elementFromPoint(x, y);
     if (elem) {
       const parentEl = elem.parentElement
-
+      if (!parentEl) return
       if (checkHover(parentEl.className)) {
         parentEl.classList.add('border-hover')
         if (prevEl == '') {
@@ -172,14 +169,14 @@ window.onload = function () {
 
   }
 
-  //Check if hover element has a card
+  // Check if hover element has a card
   function checkHover(input) {
-    if(window.location.pathname == '/feedback') return
-    
-    if (input.includes('card-content')) {
-      return false
+    // Check if input is typeof String
+    // Return true if input includes className of card and card-small 
+    // false if input includes card-content
+    if(typeof input == 'string'){
+      return (input.includes('card') || input.includes('card-small')) && !input.includes('card-content')
     }
-    return input.includes('card') || input.includes('card-small')
   }
 
   // //RETURN GESTURE 
@@ -231,6 +228,7 @@ window.onload = function () {
       if(countdown < 0){
         clearReturn()
       }
+      //Threshold or Interval to emit the return gesture again
       sleep(2000)
     }, 1000)
   
@@ -256,6 +254,7 @@ window.onload = function () {
 
     //If scrolling, return immediately
     if(prevCounter != 0) return
+    if(emitNavigation) return
     if(scroll_count > 3 ) return
 
     if (distance < 0.05) {
@@ -280,6 +279,7 @@ window.onload = function () {
     }
 
 
+    //Delay for the navigation of left or right
     if(hasNavigated){
       setTimeout(() => {
         hasNavigated = false
@@ -288,27 +288,27 @@ window.onload = function () {
 
     if (clicked && click_counter == 0 && !hasNavigated) {
       drawRipple()
-      const $el = document.elementFromPoint(x + 20, y + 20)
+      const $el = document.elementFromPoint(x + 22, y + 22)
       if ($el) {
         $el.dispatchEvent(
           new MouseEvent('mouseup', {
             bubbles: true,
             view: window,
             cancelable: true,
-            clientX: x,
-            clientY: y,
-            pageX: x,
-            pageY: y,
+            clientX: x + 22 ,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
           })
         )
         $el.dispatchEvent(
           new MouseEvent('mousedown', {
             bubbles: true,
             cancelable: true,
-            clientX: x,
-            clientY: y,
-            pageX: x,
-            pageY: y,
+            clientX: x + 22,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
           })
         )
         $el.dispatchEvent(
@@ -536,8 +536,8 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 2,
-      minDetectionConfidence: 0.8,
-      minTrackingConfidence: 0.8,
+      minDetectionConfidence: 0.7,
+      minTrackingConfidence: 0.9,
       selfieMode: true,
     });
 
@@ -564,6 +564,6 @@ window.onload = function () {
   }
 
   loadData()
-  // mediaPipeHandsSetup()
+  mediaPipeHandsSetup()
 
 }

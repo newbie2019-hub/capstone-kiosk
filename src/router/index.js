@@ -9,17 +9,18 @@ const TelDirectory = () => import('../views/University/TelDirectory.vue')
 const Announcement = () => import('../views/Announcement/Announcement.vue')
 
 const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
+const TicTacToe = () => import ('../views/Entertainment/TicTacToe.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
 const Mission = () => import('../views/Mission.vue')
 
 const FAQS = () => import('../views/University/FAQs.vue')
 const Organization = () => import('../views/University/Organization.vue')
+const Departments = () => import('../views/University/Departments.vue')
 const SchoolOfficials = () => import('../views/University/SchoolOfficials.vue')
 
 const CoreValues = () => import('../views/CoreValues.vue')
 const Programs = () => import('../views/Programs.vue')
-const Vision = () => import('../views/Vision.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -59,6 +60,11 @@ const routes = [
     component: Organization
   },
   {
+    path: '/university/departments',
+    name: 'departments',
+    component: Departments
+  },
+  {
     path: '/university/schoolofficials',
     name: 'schoolofficials',
     component: SchoolOfficials
@@ -78,11 +84,7 @@ const routes = [
     name: 'Mission',
     component: Mission
   },
-  {
-    path: '/vision',
-    name: 'Vision',
-    component: Vision
-  },
+
   {
     path: '/programs',
     name: 'Programs',
@@ -93,7 +95,11 @@ const routes = [
     name: 'Entertainment',
     component: Entertainment
   },
-  
+  {
+    path: '/entertainment/tictactoe',
+    name: 'TicTacToe',
+    component: TicTacToe
+  }  
 ]
 
 const router = new VueRouter({

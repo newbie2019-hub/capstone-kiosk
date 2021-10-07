@@ -25,9 +25,6 @@ import {mapState} from 'vuex'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 export default {
 
-  mounted() {
-    document.getElementsByClassName('scroll')[0].style.display = 'none'
-  },
   components: {
       Swiper,
       SwiperSlide,

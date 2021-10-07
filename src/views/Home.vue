@@ -81,8 +81,7 @@
      </div>
      <nav>
       <router-link to="/corevalues">Core Values</router-link>
-      <router-link to="/mission">Mission</router-link>
-      <router-link to="/vision">Vision</router-link>
+      <router-link to="/mission">Mission &amp; Vision</router-link>
       <router-link to="/hymn">Hymn</router-link>
     </nav>
    </section>
@@ -169,12 +168,6 @@
      </div>
    </section>
 
-   <section class="container mb-5 pt-5">
-     <div class="row justify-content-center text-white">
-       <h4 class="text-uppercase">Frequently Asked Questions (FAQs)</h4>
-       <hr class="mt-2"/>
-     </div>
-   </section>
  </div>
 </template>
 
@@ -183,9 +176,7 @@
 
 export default {
   name: 'Home',
-  components: {
-    
-  },
+
   mounted() {
     document.title = 'Touchless Information Kiosk - Main Menu'
   }

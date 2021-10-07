@@ -1,14 +1,14 @@
 <template>
   <section class="container" >
    <div class="row h-100">
-      <h3 class="text-center text-white mt-3">ORGANIZATIONS</h3>
-      <p class="text-center mb-5 text-white">To view other organization slide either left or right</p>
+      <h3 class="text-center text-white mt-3">DEPARTMENTS</h3>
+      <p class="text-center mb-5 text-white">Slide either left or right to view other departments</p>
       <div class="example-3d">
       <swiper ref="swiper" class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(org, i) in organizations" :key="i">
+        <swiper-slide v-for="(dep, i) in departments" :key="i">
          <div class="d-flex flex-column justify-content-center align-items-center h-100 w-100">
           <img src="@/assets/images/logo.png" width="150" height="150" alt="">
-          <h5 class="mt-4 pe-4 ps-4">{{org.organization}}</h5>
+          <h5 class="mt-4 pe-4 ps-4">{{dep.unit}}</h5>
          </div>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -47,7 +47,7 @@ export default {
     }
   },
    computed: {
-   ...mapState('info', ['organizations'])
+   ...mapState('info', ['departments'])
    }
 }
 </script>
@@ -79,7 +79,6 @@ export default {
   height: 350px;
   text-align: center;
   font-weight: bold;
-  /* border-radius: 10px; */
   background-color: rgb(39, 115, 187);
   background-position: center;
   background-size: cover;
