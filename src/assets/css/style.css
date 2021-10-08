@@ -416,6 +416,18 @@ blockquote:after {
 	}
 }
 
+/* CARD - COLLEGE */
+.card-education-selection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: rgba(53, 53, 53, 0.925); 
+  background-clip: border-box;
+  padding: 1.5rem 1.5rem;
+}
+
 /* CARD ANNOUNCEMENT */
 .card-announcement {
   position: relative;
@@ -525,6 +537,11 @@ blockquote:after {
 .hg-theme-default .hg-button:hover {
   background: rgba(0, 0, 0, 0.753) !important;
   color: #fff;
+}
+
+
+.feedback-success {
+  font-size: 8.5rem !important;
 }
 
 

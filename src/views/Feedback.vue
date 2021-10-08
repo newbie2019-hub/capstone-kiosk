@@ -1,14 +1,13 @@
 <template>
  <div>
    <div class="rate-success">
-     <i class="fas fa-check feedback-emoji emoji-check"></i>
-     <h5 class="rate-feedback-text">Thank you for your feedback!</h5>
+     <h5 class="rate-feedback-text mt-3">Thank you for your feedback!</h5>
    </div>
    <div class="input-suggestion" v-if="isCardClicked"> 
-     <h3 class="text-white">Input Your Suggestions</h3>
-     <h5 class="text-white font-weight-400">Click submit once done</h5>
-     <textarea placeholder="Enter your suggestion" class="form-suggestion mb-3 mt-5" type="text" @click="inputVisible = true" :value="input" @input="onInputChange" rows="5"></textarea>
-     <SimpleKeyboard v-if="inputVisible" @onChange="onChange" @onKeyPress="onKeyPress" :input="input"/>
+     <h3 class="text-white mb-1">Give us your Feedback</h3>
+     <h6 class="text-white font-weight-400">Your feedback is important to us</h6>
+     <textarea placeholder="Enter your feedback" class="form-suggestion mb-3 mt-5" type="text" @click="inputVisible = true" :value="data.suggestion" @input="onInputChange" rows="5"></textarea>
+     <SimpleKeyboard v-if="inputVisible" @onChange="onChange" @onKeyPress="onKeyPress" :input="data.suggestion"/>
    </div>
   <div class="container">
    <div class="row justify-content-center">
@@ -31,7 +30,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import SimpleKeyboard from "../components/Virtual-Keyboard.vue";
-
+import {gsap} from 'gsap';
 export default {
   mounted() {
     document.title = "Touchless Information Kiosk - Feedback"
@@ -46,7 +45,10 @@ export default {
     return {
       isCardClicked: false,
       inputVisible: false,
-      input: '',
+      data: {
+        emoji: '',
+        suggestion: '',
+      },
       swiperOption: {
         effect: 'coverflow',
         grabCursor: true,
@@ -67,29 +69,53 @@ export default {
   },
   methods: {
     clicked(){
+      let emoji = [
+        ['far', 'fa-thumbs-up'], 
+        ['far',  'fa-thumbs-down'], 
+        ['far', 'fa-grin-hearts'], 
+        ['far', 'fa-surprise'], 
+        ['fas', 'fa-fire']
+      ]
+
       let swiper_cards = document.getElementsByClassName('swiper-slide')
+      const emoji_container = document.createElement('i')
+
       swiper_cards.forEach((card, i) => {
         card.addEventListener('click', () => {    
-          // gsap.from('.rate-success', 1.4, {
-          //   display: 'flex',
-          // })
-          // gsap.from('.emoji-check', .45, {
-          //   x: -20,
-          //   opacity: 0,
-          // })
-          // gsap.from('.rate-feedback-text', .45, {
-          //   x: -20,
-          //   opacity: 0,
-          //   delay: .45
-          // })
           this.isCardClicked = true
-          
+          this.data.emoji = i
+
+          emoji_container.classList.add(emoji[i][0], emoji[i][1], 'feedback-success')
+          document.getElementsByClassName('rate-success')[0].prepend(emoji_container)
+          console.log(emoji[i][0], emoji[i][1], 'feedback-success')
         })
       });
     },
+    showSuccess(){
+      gsap.from('.rate-success', 1.4, {
+        display: 'flex',
+      })
+      gsap.from('.feedback-emoji', .45, {
+        x: -20,
+        opacity: 0,
+      })
+      gsap.from('.rate-feedback-text', .45, {
+        x: -20,
+        opacity: 0,
+        delay: .45
+      })
+      setTimeout(() => {
+        history.back(-1)
+      }, 1000)
+      this.inputVisible = false
+      this.isCardClicked = false
+      this.data.suggestion = ''
+    },
     onChange(input) {
-      if(input === "▼" || input === 'Cancel') return
-      this.input = input;
+      if(input === 'Cancel') return
+      if(input === 'Submit' || input.includes('Submit')) return
+      if(typeof input === 'string' && input.includes('▼')) return
+      this.data.suggestion = input
     },
     onKeyPress(button) {
       if(button === "▼"){
@@ -98,10 +124,16 @@ export default {
       if(button === "Cancel"){
         this.inputVisible = false
         this.isCardClicked = false
+        document.getElementsByClassName('feedback-success').forEach((el, i) => {
+          el.remove()
+        })
+      }
+      if(button === "Submit"){
+        this.showSuccess()
       }
     },
     onInputChange(input) {
-      this.input = input.target.value;
+      this.data.suggestion = input.target.value;
     }
   }
   

@@ -34,6 +34,7 @@ export default {
 <style>
 .official-card {
   padding: 1rem 1rem;
+  border-bottom: 1px solid rgb(29, 29, 29);
 }
 
 </style>

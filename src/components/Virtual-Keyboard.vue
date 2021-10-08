@@ -28,14 +28,14 @@ export default {
       layout: {
         'default': [
           '▼ q w e r t y u i o p {bksp}',
-          'Cancel a s d f g h j k l {enter}',
-          '{shift} z x c v b n m {shift}',
+          'Cancel a s d f g h j k l ',
+          '{shift} z x c v b n m Submit',
           '{space}'
         ],
         'shift': [
           '▼ Q W E R T Y U I O P {bksp}',
-          'Cancel A S D F G H J K L {enter}',
-          '{shift} Z X C V B N M {shift}',
+          'Cancel A S D F G H J K L ',
+          '{shift} Z X C V B N M Submit',
           '{space}'
         ]
       },

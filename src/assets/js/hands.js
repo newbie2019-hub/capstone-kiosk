@@ -1,8 +1,9 @@
-import { Hands } from '@mediapipe/hands'
-// import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
-// import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
+// import { Hands } from '@mediapipe/hands'
+import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
+import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
+
 import store from '../../store'
 window.onload = function () {
   
@@ -33,7 +34,7 @@ window.onload = function () {
          console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
-      }, 2000)
+      }, 2800)
       loaded = true
     }
 
@@ -91,11 +92,11 @@ window.onload = function () {
             // fingersUp(landmarks)
 
             //DRAW LANDMARKS - SKELETON
-            // drawConnectors(canvasCtx, click, HAND_CONNECTIONS,
-            //                {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 3});
-            // drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-            //                {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 1});
-            // drawLandmarks(canvasCtx, landmarks, {color: '#17c0eb', lineWidth: 1});
+            drawConnectors(canvasCtx, click, HAND_CONNECTIONS,
+                           {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 3});
+            drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+                           {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 1});
+            drawLandmarks(canvasCtx, landmarks, {color: '#17c0eb', lineWidth: 1});
           }
         }
       }
@@ -229,7 +230,7 @@ window.onload = function () {
         clearReturn()
       }
       //Threshold or Interval to emit the return gesture again
-      sleep(2000)
+      sleep(3000)
     }, 1000)
   
     return_timer = window.setTimeout(()=>{
@@ -281,6 +282,7 @@ window.onload = function () {
 
     //Delay for the navigation of left or right
     if(hasNavigated){
+      sleep(500)
       setTimeout(() => {
         hasNavigated = false
       }, 500)
@@ -536,8 +538,8 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 2,
-      minDetectionConfidence: 0.7,
-      minTrackingConfidence: 0.9,
+      minDetectionConfidence: 0.85,
+      minTrackingConfidence: 0.7,
       selfieMode: true,
     });
 

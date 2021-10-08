@@ -3,12 +3,18 @@
   <h3 class="text-center text-white">TELEPHONE DIRECTORY</h3>
   <p class="text-center mb-5 text-white">Scroll down to see more list of telephone numbers</p>
   <div class="row justify-content-center">
-    <div class="col-5 mb-5">
-      <div class="telephone mt-2" v-once v-for="(tel, i) in teldirectories" :key="i">
-        <p class="">{{tel.name}}</p>
-        <p class="">{{tel.tel_num}}</p>
+     <div class="col-10 col-xl-5 col-lg-6">
+          <div class="telephone mb-3" v-once v-for="(tel, i) in teldirectories" :key="i">
+            <div class="d-flex">
+            <img v-once src="@/assets/images/logo.png" alt="" height="80" width="80">
+            <div class="d-flex flex-column ms-4 justify-content-center text-white">
+              <p class="">{{tel.name}}</p>
+              <p class=""><i class="fas fa-phone-alt"></i> {{tel.tel_num}}</p>
+            </div>
+            </div>
+          </div>
       </div>
-    </div>
+      <p class="text-white text-center mt-4 mb-4">End of the telephone list</p>
   </div>
  </div>
 </template>
@@ -27,27 +33,17 @@ export default {
 }
 
 .telephone {
-  background-color: rgba(53, 53, 53, 0.925); 
   color: rgb(255, 255, 255);
   border-bottom: 1px solid rgba(87, 87, 87, 0.342) !important;
   cursor: pointer;
-  padding: 20px 50px 20px 80px;
+  padding: 1rem 1rem;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   transition: 0.5s;
   position: relative;
 }
 
-.telephone::after {
-  content: '\260E';
-  font-size: 1.5rem;
-  position: absolute;
-  left: 0;
-  margin-left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-}
 </style>
