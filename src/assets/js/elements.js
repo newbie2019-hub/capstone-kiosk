@@ -33,8 +33,8 @@ function createElements(){
  parent_div.appendChild(span_dots)
 
  for(let i = 1; i <= 3; i++){
-   let span = document.createElement('span')
-   span_dots.appendChild(span)
+  let span = document.createElement('span')
+  span_dots.appendChild(span)
  }
 
  const loading_text = document.createElement('p')
