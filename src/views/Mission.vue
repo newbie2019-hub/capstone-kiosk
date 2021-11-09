@@ -1,8 +1,25 @@
 <template>
  <div>
-  <h3 class="text-center text-white mt-3">Mission and Vision</h3>
-  <p class="text-center text-white">Close and Open your hands to navigate left or right</p>
-  <div v-once class="text-white text-center font-hymn p-5 mb-5" >
+     <div class="grid-container-home">
+      <div class="title-home">
+        <h2 class="">MISSION AND VISION</h2>
+        <p class="text-muted">Pinch and drag to scroll left or right</p>
+        <hr v-once class="mt-2 bg-white zindex-999"/>
+      </div>
+       <main class="grid-item main">
+        <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+          <div id="introcard" class="item-corevalues" v-for="(core, i) in core_values" :key="i">
+            <div class="text-wrap">
+              <blockquote>
+                <h2 class="font-title">{{core.core_value}}</h2>
+                <h5 class="font-description mt-4">{{core.description}}</h5>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </main>
+   </div>
+  <!-- <div v-once class="text-white text-center font-hymn p-5 mb-5" >
       <swiper class="swiper">
         <swiper-slide>
           <blockquote>
@@ -19,21 +36,40 @@
           </blockquote>
         </swiper-slide>
       </swiper>
-   </div>
+   </div> -->
  </div>
 </template>
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+// import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import {mapState} from 'vuex'
 export default {
    computed: {
    ...mapState('info', ['missionvision'])
    },
-
-   components: {
-      Swiper,
-      SwiperSlide,
-   },
+  methods: {
+     currentNumber(i){
+      return i + 1 < 10 ? `0${i + 1}` : i + 1
+    },
+    onMouseDown(e) {
+      this.isDown = true
+      this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
+      this.scrollLeft = this.$refs.horizontal.scrollLeft;
+    },
+    onMouseUp() {
+      this.isDown = false
+    },
+    onMouseMove(e) {
+      if(!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.horizontal.offsetLeft;
+      const walk = (x - this.startX) * 1.3; //scroll-fast
+      this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
+    },
+  }
+  //  components: {
+  //     Swiper,
+  //     SwiperSlide,
+  //  },
 }
 </script>
 <style>

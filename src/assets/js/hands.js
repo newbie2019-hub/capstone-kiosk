@@ -5,6 +5,8 @@ import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
 
 import store from '../../store'
+import { TweenMax } from 'gsap/gsap-core'
+import { TweenLite } from 'gsap/gsap-core'
 window.onload = function () {
   
   const mouse_pointer = document.getElementsByClassName('pointer')[0]
@@ -44,7 +46,7 @@ window.onload = function () {
     //SLIDE NAVIGATION - 
     //IF NO FINGERS ARE UP EMIT SCROLL 
     //(e.g. left or right hand - left or right scroll)
-    slideNavigation()
+    // slideNavigation()
    
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
@@ -52,24 +54,24 @@ window.onload = function () {
 
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
-      scrollingFunctionality(results.multiHandedness)
-      notifScrolling()
+      // scrollingFunctionality(results.multiHandedness)
+      // notifScrolling()
       returnGestureRecog(results)
 
-      if(hasSwiper){
-        monitorSwiperNavigation(results)
-      }
+      // if(hasSwiper){
+      //   monitorSwiperNavigation(results)
+      // }
 
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
         const classification = results.multiHandedness[index];
         const isRightHand = classification.label === 'Right';
 
         //SCROLLING - PASS RIGHT HAND INDEX
-        if (scroll_count > 3) {
-          if (isRightHand) {
-            scrollingDetection(results.multiHandLandmarks[index])
-          }
-        }
+        // if (scroll_count > 3) {
+        //   if (isRightHand) {
+        //     scrollingDetection(results.multiHandLandmarks[index])
+        //   }
+        // }
 
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
@@ -86,17 +88,14 @@ window.onload = function () {
 
             hoverElement(x, y)
 
-            let click = [landmarks[4], landmarks[8]]
+            const click = [landmarks[4], landmarks[8]]
             isClicked(lineDistance(click[0], click[1]), x, y)
-
             // fingersUp(landmarks)
 
             //DRAW LANDMARKS - SKELETON
-            drawConnectors(canvasCtx, click, HAND_CONNECTIONS,
-                           {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 3});
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-                           {color: isRightHand ? '#00FF00' : '#FF0000', lineWidth: 1});
-            drawLandmarks(canvasCtx, landmarks, {color: '#17c0eb', lineWidth: 1});
+              {color: '#2d90a8', lineWidth: 2});
+            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 1});
           }
         }
       }
@@ -142,13 +141,6 @@ window.onload = function () {
   //ELEMENT FROM POINT
   let elem, prevEl = ''
   function hoverElement(x, y) {
-
-    if (scroll_count > 3) {
-      if (prevEl) {
-        prevEl.classList.remove('border-hover')
-      }
-      return
-    }
 
     elem = document.elementFromPoint(x, y);
     if (elem) {
@@ -235,7 +227,7 @@ window.onload = function () {
   
     return_timer = window.setTimeout(()=>{
       history.back()
-    }, 3700)
+    }, 3400)
   }
 
   function clearReturn(){
@@ -248,26 +240,30 @@ window.onload = function () {
   }
 
   //Check if distance between landmark[4] and landmark[8]
-  let click_counter = 0;
+  let click_counter = 0, prevCounter = 0;
   let click_status = 'none'
   let clicked = false
+  let targetWindow = null
   async function isClicked(distance, x, y) {
 
-    //If scrolling, return immediately
-    if(prevCounter != 0) return
-    if(emitNavigation) return
-    if(scroll_count > 3 ) return
+    const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (distance < 0.05) {
+    if (distance < 0.06) {
       click_counter++
     }
     else {
+      if(click_counter != 0){
+        prevCounter = click_counter
+      }
       click_counter = 0
-      if (click_status == 'held') {
+      if (click_status == 'held') { 
         click_status = 'released'
         clicked = true
       }
     }
+
+    mousePointerUpdate(click_status, x, y)
+    targetWindow = getTarget($el)
 
     if (click_status == 'released' && click_counter == 0) {
       click_status = 'none'
@@ -279,30 +275,10 @@ window.onload = function () {
       click_status = 'held'
     }
 
-
-    //Delay for the navigation of left or right
-    if(hasNavigated){
-      sleep(500)
-      setTimeout(() => {
-        hasNavigated = false
-      }, 500)
-    }
-
-    if (clicked && click_counter == 0 && !hasNavigated) {
+    if(prevCounter > 15) return
+    if (clicked && click_counter == 0) {
       drawRipple()
-      const $el = document.elementFromPoint(x + 22, y + 22)
       if ($el) {
-        $el.dispatchEvent(
-          new MouseEvent('mouseup', {
-            bubbles: true,
-            view: window,
-            cancelable: true,
-            clientX: x + 22 ,
-            clientY: y + 22,
-            pageX: x + 22,
-            pageY: y + 22,
-          })
-        )
         $el.dispatchEvent(
           new MouseEvent('mousedown', {
             bubbles: true,
@@ -321,6 +297,17 @@ window.onload = function () {
             clientY: y,
             pageX: x,
             pageY: y,
+          })
+        )
+        $el.dispatchEvent(
+          new MouseEvent('mouseup', {
+            bubbles: true,
+            view: window,
+            cancelable: true,
+            clientX: x + 22 ,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
           })
         )
 
@@ -354,53 +341,168 @@ window.onload = function () {
       flag_pointer = true
     }
     else {
-      if (scroll_count < 4) {
-        if (flag_pointer) {
-          gsap.to('.pointer', 0.5, {
-            css: {
-              scale: 1,
-              opacity: 1,
-            }
-          });
+      if (flag_pointer) {
+        gsap.to('.pointer', 0.5, {
+          css: {
+            scale: 1,
+            opacity: 1,
+          }
+        });
+      }
+      flag_pointer = false
+    }
+  }
+
+  //MOUSE POINTER INTERACTIVITY
+  let mousePointerStatus = 'none'
+  let initialX = 0, initialY = 0
+  var tweenScroll = {y: 0}
+  function mousePointerUpdate(status, x, y){
+    const $el = document.elementFromPoint(x + 22, y + 22)
+    if(status == 'start'){
+      //MOUSE EVENT START
+      if(mousePointerStatus != 'start'){
+        mousePointerStatus = 'start'
+
+        if(initialY == 0){
+          initialY = y
         }
-        flag_pointer = false
+        //MOUSE DOWN EVENT
+        $el.dispatchEvent(
+          new MouseEvent('mousedown', {
+            bubbles: true,
+            cancelable: true,
+            clientX: x + 22,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
+          })
+        )
+
+        tweenScroll.y = targetWindow.scrollY || targetWindow.scrollTop || 0
+        gsap.killTweensOf(tweenScroll)
+
+      }
+    }
+    if(status == 'held'){
+      
+      if(mousePointerStatus != 'held'){
+        mousePointerStatus = 'held'
+        mouse_pointer.classList.add('pointer-interaction')
+      }
+
+      gsap.to(tweenScroll, {
+        y: tweenScroll.y + (initialY - y) * 1.2,
+        duration: 1,
+        overwrite: true,
+        immediateRender: true,
+        ease: 'linear.easeNone',
+      })
+
+      targetWindow.scrollTo(0, tweenScroll.y)
+
+      //MOUSE MOVE EVENT
+      $el.dispatchEvent(
+        new MouseEvent('mousemove', {
+          bubbles: true,
+          cancelable: true,
+          clientX: x + 22,
+          clientY: y + 22,
+          pageX: x + 22,
+          pageY: y + 22,
+        })
+      )
+
+    }
+    if(status == 'released'){
+      if(mousePointerStatus != 'released'){
+        mousePointerStatus = 'released'
+        mouse_pointer.classList.remove('pointer-interaction')
+        
+        //MOUSE MOVE EVENT
+        $el.dispatchEvent(
+          new MouseEvent('mouseup', {
+            bubbles: true,
+            cancelable: true,
+            clientX: x + 22,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
+          })
+        )
+
+        initialY = 0
+
       }
     }
   }
 
-  //SCROLL COUNT IF > 0 START POSITION SAVE ELSE RESET
-  let scroll_count = 0;
+  /**
+   * 
+   * FINDS THE CLOSEST SCROLLABLE AREA
+   * FROM THE HOVERED ELEMENT 
+   * CHECK IF IT IS SCROLLABLE
+   * IF NOT RETURN THE WINDOW OBJECT
+   * 
+   */
+  function getTarget($potTarget) {
+    const styles = $potTarget && $potTarget.getBoundingClientRect ? getComputedStyle($potTarget) : {}
 
-  //Scrolling functionality
-  function scrollingFunctionality(result) {
-
-    if (result.length != 2) {
-     
-      scroll_count = 0
-      initPosY = 0
-      return
-    }
-
-    if ((result[0].label == 'Right' && result[1].label == 'Left') || (result[0].label == 'Left' && result[1].label == 'Right')) {
-      scroll_count++
+    if ($potTarget && $potTarget.scrollHeight > $potTarget.clientHeight &&
+      (styles.overflow === 'auto' ||
+        styles.overflow === 'auto scroll' ||
+        styles.overflowY === 'auto' ||
+        styles.overflowY === 'auto scroll')
+    ) {
+      return $potTarget
+    } else {
+      if ($potTarget && $potTarget.parentElement) {
+        return getTarget($potTarget.parentElement)
+      } else {
+        return window
+      }
     }
   }
 
+  /**
+   * 
+   * SCROLL COUNT IF > 0 START POSITION
+   * 
+   * TWO HANDS SCROLL - DISABLED
+   * TO BE REMOVED 
+   * REPLACED WITH PINCH AND DRAG 
+   * FOR VERTICAL SCROLLING
+   * 
+   */
+  // let scroll_count = 0;
+  // function scrollingFunctionality(result) {
+  //   if (result.length != 2) {
+  //     scroll_count = 0
+  //     initPosY = 0
+  //     return
+  //   }
+  //   if ((result[0].label == 'Right' && result[1].label == 'Left') || (result[0].label == 'Left' && result[1].label == 'Right')) {
+  //     scroll_count++
+  //   }
+  // }
+
+  /**
+   * NOTIFICATION FOR TWO HANDS SCROLLING
+   * DISABLED - TO BE REMOVED
+   */
   //Notif message - Scrolling Enabled
-  function notifScrolling() {
-    if (scroll_count > 3) {
-      if (scroll_count && notif.style.display == 'block') return
-      notif.style.display = 'block';
-      notiftitle.innerText = 'Scrolling Enabled'
-      notifmessage.innerText = 'Slide your right hand from top to bottom or vice-versa'
-    }
-  }
+  // function notifScrolling() {
+  //   if (scroll_count > 3) {
+  //     if (scroll_count && notif.style.display == 'block') return
+  //     notif.style.display = 'block';
+  //     notiftitle.innerText = 'Scrolling Enabled'
+  //     notifmessage.innerText = 'Slide your right hand from top to bottom or vice-versa'
+  //   }
+  // }
 
   //Notif message - No Hands Detected
   let nohands = true
   function notifNoHandsDetected(multiHandLandmarks) {
-    if (scroll_count > 3) return
-
     nohands = multiHandLandmarks.length == 0 ? true : false
 
     if (!nohands) {
@@ -436,87 +538,15 @@ window.onload = function () {
     // console.log(currentPosY + '\n');
 
     if ((initPosY - 0.04) > currentPosY) {
-      // console.log('Scrolling Up')
+      console.log('Scrolling Up')
       window.scrollTo(0, window.scrollY + 25)
     }
 
     if ((initPosY + 0.04) < currentPosY) {
-      // console.log('Scrolling Down')
+      console.log('Scrolling Down')
       window.scrollTo(0, window.scrollY - 25)
     }
 
-  }
-
-  //SWIPER NAVIGATION
-  //CHECK IF ROUTE HAS SWIPER 
-  let swiper
-  let hasSwiper = false
-  function slideNavigation(){
-    const swiper_el = document.querySelector('.swiper');
-
-    if(!swiper_el) {
-      swiper = ''
-      hasSwiper = false
-      return
-    }
-    
-    swiper = swiper_el.swiper
-    
-    if(swiper && hasSwiper) return
-
-    if(swiper && !hasSwiper) {
-      hasSwiper = true
-    }
-  }
-
-  //CHECK NAVIGATION IF LEFT OR RIGHT
-  let navigate = false
-  let emitNavigation = false, isRight = false
-  let prevCounter = 0
-  let hasNavigated = false //THRESHOLD FOR NAVIGATION TO PREVENT UNINTENTIONAL CLICKS
-  function monitorSwiperNavigation(results){
-    for (let index = 0; index < results.multiHandLandmarks.length; index++) {
-      const classification = results.multiHandedness[index];
-      isRight = classification.label === 'Right';
-
-      let counter = 0
-      //RIGHT HAND SCROLL
-
-      fingersUp(results.multiHandLandmarks[index]).forEach(value => {
-        if(value == 0) {
-          counter++
-        }
-      });
-
-      if(counter == 5){
-        navigate = true
-        if(prevCounter == 0){
-          prevCounter = counter
-        }
-      }
-      else {
-        navigate = false
-      }
-
-      if(prevCounter != 0 && counter == 0){
-        if(!emitNavigation){
-          emitNavigation = true
-        }
-      }
- 
-    }
-
-    if(emitNavigation) {
-      hasNavigated = true
-      if(isRight){
-        swiper.slideNext()
-      }
-      else {
-        swiper.slidePrev()
-      }
-      emitNavigation = false
-      prevCounter = 0
-    }
   }
 
   //Ripple Event Handler
@@ -537,7 +567,7 @@ window.onload = function () {
     });
 
     hands.setOptions({
-      maxNumHands: 2,
+      maxNumHands: 1,
       minDetectionConfidence: 0.85,
       minTrackingConfidence: 0.7,
       selfieMode: true,

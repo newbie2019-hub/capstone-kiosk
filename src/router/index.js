@@ -19,7 +19,6 @@ const Organization = () => import('../views/University/Organization.vue')
 const Departments = () => import('../views/University/Departments.vue')
 const SchoolOfficials = () => import('../views/University/SchoolOfficials.vue')
 
-const CoreValues = () => import('../views/CoreValues.vue')
 const Programs = () => import('../views/Programs.vue')
 Vue.use(VueRouter)
 
@@ -33,11 +32,6 @@ const routes = [
     path: '/feedback',
     name: 'Feedback',
     component: Feedback
-  },
-  {
-    path: '/corevalues',
-    name: 'CoreValues',
-    component: CoreValues
   },
   {
     path: '/university',

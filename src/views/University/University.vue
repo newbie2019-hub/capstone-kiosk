@@ -1,9 +1,10 @@
 <template>
  <div>
-   <section class="container mb-5">
+   <section class="container mb-5 pt-5">
+     <h2 class="text-white mt-5">UNIVERSITY</h2>
+     <p class="text-muted">Pinch your finger on any of the cards</p>
+     <hr v-once class="mb-5 mt-2 bg-white zindex-999"/>
      <div class="row justify-content-center">
-       <h3 class="text-center text-white mt-3">UNIVERSITY</h3>
-       <p class="text-center mb-5 text-white">Pinch your finger on any of the cards</p>
        <div class="col-md-6 col-lg-6">
          <router-link to="/university/departments" class="text-decoration-none">
           <div v-once class="card">
@@ -35,7 +36,7 @@
           <div v-once class="card">
               <img v-once src="@/assets/images/university-logo.png" alt="" loading=lazy>
               <div class="card-content">
-                <h5>PROGRAMS</h5>
+                <h5>COLLEGES</h5>
                 <p>See what programs are offered by the university.</p>
               </div>
             <div class="card-border card-border-university "></div>
@@ -44,7 +45,7 @@
        </div>
      </div>
      <div class="row justify-content-center mt-2">
-       <div class="col-md-6 col-lg-3">
+       <div class="col-md-6 col-lg-6">
         <router-link to="/university/teldirectory" class="text-decoration-none">
           <div v-once class="card">
             <div class="card-small">
@@ -55,18 +56,6 @@
               </div>
             </div>
             <div class="card-border card-border-telephone "></div>
-          </div>
-         </router-link>
-       </div>
-       <div class="col-md-6 col-lg-3">
-         <router-link to="/university/faqs" class="text-decoration-none">
-          <div v-once class="card">
-              <img v-once src="@/assets/images/faqs.jpg" alt="" loading=lazy>
-              <div class="card-content">
-                <h5>FAQs</h5>
-                <p>Frequently Asked Questions about the University.</p>
-              </div>
-            <div class="card-border card-border-feedback "></div>
           </div>
          </router-link>
        </div>
@@ -86,17 +75,53 @@
        </div>
      </div>
    </section>
+
+   <section class="container mb-5 mt-5 pt-3">
+      <h2 class="text-white mt-5">FAQS</h2>
+      <p class="text-muted">Pinch on any of the question to expand</p>
+      <hr v-once class="mb-5 mt-2 bg-white zindex-999"/>
+      <div class="row">
+      <div class="col-lg-12">
+        <div v-for="(faq, i) in faqs" :key="i">
+          <button class="accordion">{{faq.question}}</button>
+          <div class="panel">
+            <p>{{faq.answer}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+   </section>
  </div>
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
 export default {
-  name: 'University',
-  components: {
-    
-  },
   mounted() {
-    document.title = 'Touchless Information Kiosk - Main Menu'
+    document.title = 'Touchless Information Kiosk - FAQs'
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  },
+  computed: {
+    ...mapState('info', ['faqs'])
   }
 }
 </script>

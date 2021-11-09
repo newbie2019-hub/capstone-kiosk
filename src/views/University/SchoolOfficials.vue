@@ -1,40 +1,63 @@
 <template>
-  <section class="container" >
-   <div class="row h-100">
-      <h3 class="text-center text-white mt-3">SCHOOL OFFICIALS</h3>
-      <p class="text-center mb-5 text-white">Scroll down to see more school official</p>
-      <div class="row justify-content-center">
-        <div class="col-10 col-xl-6 col-lg-7">
-           <div class="official-card mb-3" v-for="(official, i) in schoolofficials" :key="i">
-             <div class="d-flex">
-              <img v-if="official.image == null" src="@/assets/images/logo.png" alt="" height="90" width="90">
-              <img v-else :src="'http://127.0.0.1:8000/images/' + official.image" alt="" height="90" width="90">
-              <div class="d-flex flex-column ms-4 justify-content-center text-white">
-                <h4>{{official.title}} {{official.first_name}} {{official.last_name}}</h4>
-                <h6 class="font-weight-400">Role: {{official.role}}</h6>
-                <h6 class="font-weight-400">Email: {{official.email}}</h6>
-              </div>
-             </div>
-            </div>
-        </div>
+  <div >
+    <div class="grid-container">
+      <div class="title">
+        <h2 class="text-center ">SCHOOL OFFICIALS</h2>
+        <p class="text-muted">Pinch and drag to scroll left or right</p>
       </div>
+       <main class="grid-item main">
+        <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+          <div id="introcard" class="item" v-for="(official, i) in schoolofficials" :key="i">
+            <div class="d-flex justify-content-end">
+              <p class="mt-3 me-4">{{currentNumber(i)}}</p>
+            </div>
+            <img id="introcard" v-if="official.image" :src="official.image ? official.image : ''" alt="">
+            <img id="introcard" v-else src="@/assets/images/logo.png" alt="">
+            <div class="introcard-description">
+              <h6 class="text-uppercase text-center">{{official.title}} {{official.first_name}} {{official.last_name}}</h6>
+              <h6 class="fw-light text-muted text-center"><small>{{official.role}}</small></h6>
+              <h6 class="fw-light text-muted text-center"><small>{{official.email}}</small></h6>
+            </div>
+          </div>
+        </div>
+      </main>
    </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 export default {
+  data() {
+    return {
+     
+    }
+  },
+   methods: {
+    currentNumber(i){
+      return i + 1 < 10 ? `0${i + 1}` : i + 1
+    },
+    onMouseDown(e) {
+      this.isDown = true
+      this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
+      this.scrollLeft = this.$refs.horizontal.scrollLeft;
+    },
+    onMouseUp() {
+      this.isDown = false
+    },
+    onMouseMove(e) {
+      if(!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.horizontal.offsetLeft;
+      const walk = (x - this.startX) * 1.1; //scroll-fast
+      this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
+    },
+    
+  },
   computed: {
-    ...mapState('info', ['schoolofficials'])
- }
+  ...mapState('info', ['schoolofficials'])
+  }
 }
 </script>
 
-<style>
-.official-card {
-  padding: 1rem 1rem;
-  border-bottom: 1px solid rgb(29, 29, 29);
-}
 
-</style>

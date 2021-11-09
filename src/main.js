@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import 'swiper/css/swiper.css'
 import './assets/js/elements'
 import './assets/js/hands'
 import './assets/css/style.css'

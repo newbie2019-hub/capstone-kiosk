@@ -1,6 +1,6 @@
 <template>
  <div>
-  <h3 class="text-center text-white">TELEPHONE DIRECTORY</h3>
+  <h3 class="text-center text-white mt-5 pt-5">TELEPHONE DIRECTORY</h3>
   <p class="text-center mb-5 text-white">Scroll down to see more list of telephone numbers</p>
   <div class="row justify-content-center">
      <div class="col-10 col-xl-5 col-lg-6">

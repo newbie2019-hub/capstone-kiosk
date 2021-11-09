@@ -124,7 +124,7 @@ export default {
       return res;
     },
     async sendReview({commit}, data){
-      const res = await API.post('/rate', data).then(res => {
+      const res = await API.post('/review', data).then(res => {
         return res;
       }).catch(err => {
        return err.response;

@@ -1,95 +1,121 @@
 <template>
- <div>
-   <div class="rate-success">
+  <div>
+    <div class="rate-success">
+     <i class="fas fa-check feedback-emoji"></i>
      <h5 class="rate-feedback-text mt-3">Thank you for your feedback!</h5>
    </div>
-   <div class="input-suggestion" v-if="isCardClicked"> 
-     <h3 class="text-white mb-1">Give us your Feedback</h3>
-     <h6 class="text-white font-weight-400">Your feedback is important to us</h6>
-     <textarea placeholder="Enter your feedback" class="form-suggestion mb-3 mt-5" type="text" @click="inputVisible = true" :value="data.suggestion" @input="onInputChange" rows="5"></textarea>
-     <SimpleKeyboard v-if="inputVisible" @onChange="onChange" @onKeyPress="onKeyPress" :input="data.suggestion"/>
-   </div>
-  <div class="container">
-   <div class="row justify-content-center">
-     <h3 class="text-center text-white mt-3">FEEDBACK</h3>
-     <p class="text-center mb-5 text-white">Pinch your finger on any of the cards</p>
-    <div class="example-3d">
-      <swiper ref="swiper" class="swiper" :options="swiperOption">
-        <swiper-slide ><i class="far fa-thumbs-up feedback-emoji"></i></swiper-slide>
-        <swiper-slide><i class="far fa-thumbs-down feedback-emoji"></i></swiper-slide>
-        <swiper-slide><i class="far fa-grin-hearts feedback-emoji"></i></swiper-slide>
-        <swiper-slide><i class="far fa-surprise feedback-emoji"></i></swiper-slide>
-        <swiper-slide><i class="fas fa-fire feedback-emoji"></i></swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
+    <div class="feedback" v-if="isFeedBack">
+      <div class="feedback-input">
+        <h2 class="text-uppercase">Enter your feedback</h2>
+        <p class="mb-5 text-subheading">Please type your feedback with your keyboard</p>
+        <input v-model="data.suggestion" type="text" required class="pt-3 feedback-control text-center">
+        <p v-if="!hasError" class="mt-2 text-subheading">We currently dont have an on-screen keyboard</p>
+        <p v-else class="mt-2 text-danger">Please fill in this field</p>
+        <button class="btn btn-lg mt-5 btn-primary me-3" @click.prevent="isFeedBack = false">Cancel</button>
+        <button class="btn btn-lg mt-5 btn-primary" @click.prevent="submitFeedback">Submit</button>
+      </div>
     </div>
+    <div class="grid-container">
+      <div class="title">
+        <h2 class="text-center fw-light">FEEDBACK</h2>
+        <p class="text-muted">Pinch and drag to scroll left or right</p>
+      </div>
+       <main class="grid-item main">
+        <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+          <div id="introcard" class="item" v-for="(em, i) in emoji" :key="i">
+            <div class="d-flex justify-content-end">
+              <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
+            </div>
+            <div class="feedback-container" @click.prevent="showFeedBack(em)">
+              <i :class="em.class"></i>
+            </div>
+            <div class="introcard-description">
+              <h6 class="mt-4 text-uppercase text-center">{{em.name}}</h6>
+            </div>
+          </div>
+        </div>
+      </main>
    </div>
   </div>
- </div>
 </template>
+
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import SimpleKeyboard from "../components/Virtual-Keyboard.vue";
+import { mapState } from 'vuex';
 import {gsap} from 'gsap';
+
 export default {
-  mounted() {
-    document.title = "Touchless Information Kiosk - Feedback"
-    this.clicked()
-  },
-  components: {
-      Swiper,
-      SwiperSlide,
-      SimpleKeyboard
-  },
   data() {
     return {
-      isCardClicked: false,
-      inputVisible: false,
+      isFeedBack: false,
       data: {
-        emoji: '',
         suggestion: '',
+        emoji: '',
       },
-      swiperOption: {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-          rotate: 50,
-          stretch: 0,
-          depth: 50,
-          modifier: 1,
-          slideShadows : true
+      hasError: false,
+      emoji: [
+        {
+          name: 'Satisfied',
+          class: 'far fa-thumbs-up feedback-emoji'
         },
-        pagination: {
-          el: '.swiper-pagination'
-        }
-      }
+        {
+          name: 'Needs Improvement',
+          class: 'far fa-thumbs-down feedback-emoji'
+        },
+        {
+          name: 'Lovely',
+          class: 'far fa-grin-hearts feedback-emoji'
+        },
+        {
+          name: 'Surprised',
+          class: 'far fa-surprise feedback-emoji'
+        },
+        {
+          name: 'Awesome',
+          class: 'fas fa-fire feedback-emoji'
+        },
+      ]
     }
   },
-  methods: {
-    clicked(){
-      let emoji = [
-        ['far', 'fa-thumbs-up'], 
-        ['far',  'fa-thumbs-down'], 
-        ['far', 'fa-grin-hearts'], 
-        ['far', 'fa-surprise'], 
-        ['fas', 'fa-fire']
-      ]
-
-      let swiper_cards = document.getElementsByClassName('swiper-slide')
-      const emoji_container = document.createElement('i')
-
-      swiper_cards.forEach((card, i) => {
-        card.addEventListener('click', () => {    
-          this.isCardClicked = true
-          this.data.emoji = i
-
-          emoji_container.classList.add(emoji[i][0], emoji[i][1], 'feedback-success')
-          document.getElementsByClassName('rate-success')[0].prepend(emoji_container)
-          console.log(emoji[i][0], emoji[i][1], 'feedback-success')
-        })
-      });
+  mounted(){
+    document.title = 'Feedback Section'
+  },
+   methods: {
+    async submitFeedback(){
+      if(this.data.suggestion.trim() == '') {
+        this.hasError = true
+      }
+      else {
+        this.hasError = false
+      }
+      if(!this.hasError){
+        const {status} = await this.$store.dispatch('info/sendReview', this.data)
+        if(status == 200) {
+          this.data = {emoji: '', suggestion: ''}
+          this.showSuccess()
+        }
+      }
+    },
+    showFeedBack(data){
+      this.isFeedBack = true
+      this.data.emoji = data.name
+    },
+    currentNumber(i){
+      return i + 1 < 10 ? `0${i + 1}` : i + 1
+    },
+    onMouseDown(e) {
+      this.isDown = true
+      this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
+      this.scrollLeft = this.$refs.horizontal.scrollLeft;
+    },
+    onMouseUp() {
+      this.isDown = false
+    },
+    onMouseMove(e) {
+      if(!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.horizontal.offsetLeft;
+      const walk = (x - this.startX) * 1.1; //scroll-fast
+      this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
     },
     showSuccess(){
       gsap.from('.rate-success', 1.4, {
@@ -104,79 +130,71 @@ export default {
         opacity: 0,
         delay: .45
       })
-      setTimeout(() => {
-        history.back(-1)
-      }, 1000)
-      this.inputVisible = false
-      this.isCardClicked = false
-      this.data.suggestion = ''
+      this.isFeedBack = false
     },
-    onChange(input) {
-      if(input === 'Cancel') return
-      if(input === 'Submit' || input.includes('Submit')) return
-      if(typeof input === 'string' && input.includes('▼')) return
-      this.data.suggestion = input
-    },
-    onKeyPress(button) {
-      if(button === "▼"){
-        this.inputVisible = false
-      }
-      if(button === "Cancel"){
-        this.inputVisible = false
-        this.isCardClicked = false
-        document.getElementsByClassName('feedback-success').forEach((el, i) => {
-          el.remove()
-        })
-      }
-      if(button === "Submit"){
-        this.showSuccess()
-      }
-    },
-    onInputChange(input) {
-      this.data.suggestion = input.target.value;
-    }
+    
+  },
+  computed: {
+  ...mapState('info', ['departments'])
   }
-  
 }
 </script>
-
-<style lang="css" scoped>
-.example-3d {
+<style >
+.feedback-emoji {
+  font-size: 8.5rem !important;
+}
+.feedback-container {
+  display: flex;
   width: 100%;
-  height: 400px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  background: rgb(27, 122, 199);
+  padding: 3rem 1rem 3rem 1rem!important;
+  margin-top: .6rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.swiper-container {
-  overflow: visible !important;
-}
-
-.swiper {
+.feedback {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  overflow: hidden;
-}
-
-.swiper .swiper-slide {
+  height: 100vh;
+  background: rgba(17, 17, 17, 0.89);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 350px;
-  height: 350px;
-  text-align: center;
-  font-weight: bold;
-  background-color: #2C8DFB;
-  background-position: center;
-  background-size: cover;
-  color: white;
-}
-
-.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-  bottom: -10% !important;
 }
 
 .feedback-emoji {
   font-size: 8.5rem !important;
+}
+
+.feedback-input {
+  text-align: center;
+  color: #fff;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+}
+
+.feedback-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  outline: none;
+  color: #f7f7f7;
+  border: 0 none !important;
+  border-bottom: 2px solid #ced4da !important;
+  background-color: rgba(255, 255, 255, 0);
+  background-clip: padding-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .rate-success {
@@ -197,15 +215,5 @@ export default {
 
 .rate-success i {
   font-size: 2rem !important;
-}
-
-.simple-keyboard {
-  max-width: 940px;
-}
-
-.simple-keyboard.dark-mode-theme {
-  background-color: rgba(66, 66, 66, 0.8);
-  border-radius: 5px;
-  
 }
 </style>

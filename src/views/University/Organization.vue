@@ -1,93 +1,60 @@
 <template>
-  <section class="container" >
-   <div class="row h-100">
-      <h3 class="text-center text-white mt-3">ORGANIZATIONS</h3>
-      <p class="text-center mb-5 text-white">To view other organization slide either left or right</p>
-      <div class="example-3d">
-      <swiper ref="swiper" class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(org, i) in organizations" :key="i">
-         <div class="d-flex flex-column justify-content-center align-items-center h-100 w-100">
-          <img src="@/assets/images/logo.png" width="150" height="150" alt="">
-          <h5 class="mt-4 pe-4 ps-4">{{org.organization}}</h5>
-         </div>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-    </div>
+  <div >
+    <div class="grid-container">
+      <div class="title">
+        <h2 class="text-center ">ORGANIZATIONS</h2>
+        <p class="text-muted">Pinch and drag to scroll left or right</p>
+      </div>
+       <main class="grid-item main">
+        <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+          <div id="introcard" class="item" v-for="(org, i) in organizations" :key="i">
+            <div class="d-flex justify-content-end">
+              <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
+            </div>
+            <img id="introcard" v-if="org.image" :src="org.image ? org.image : ''" alt="">
+            <img id="introcard" v-else src="@/assets/images/logo.png" alt="">
+            <div class="introcard-description">
+              <h6 class="mt-2 text-uppercase">{{org.name}}</h6>
+            </div>
+          </div>
+        </div>
+      </main>
    </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import { mapState } from 'vuex';
 export default {
-  components: {
-      Swiper,
-      SwiperSlide,
-  },
   data() {
     return {
-      swiperOption: {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-          rotate: 50,
-          stretch: 0,
-          depth: 50,
-          modifier: 1,
-          slideShadows : true
-        },
-        pagination: {
-          el: '.swiper-pagination'
-        }
-      }
+     
     }
   },
-   computed: {
-   ...mapState('info', ['organizations'])
-   }
+   methods: {
+    currentNumber(i){
+      return i + 1 < 10 ? `0${i + 1}` : i + 1
+    },
+    onMouseDown(e) {
+      this.isDown = true
+      this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
+      this.scrollLeft = this.$refs.horizontal.scrollLeft;
+    },
+    onMouseUp() {
+      this.isDown = false
+    },
+    onMouseMove(e) {
+      if(!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.horizontal.offsetLeft;
+      const walk = (x - this.startX) * 1.1; //scroll-fast
+      this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
+    },
+    
+  },
+  computed: {
+  ...mapState('info', ['organizations'])
+  }
 }
 </script>
 
-
-<style lang="css" scoped>
-.example-3d {
-  width: 100%;
-  height: 400px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-.swiper-container {
-  overflow: visible !important;
-}
-
-.swiper {
-  /* height: 100%; */
-  width: 100%;
-  overflow: hidden;
-}
-
-.swiper .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 350px;
-  text-align: center;
-  font-weight: bold;
-  /* border-radius: 10px; */
-  background-color: rgb(39, 115, 187);
-  background-position: center;
-  background-size: cover;
-  color: white;
-}
-
-.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-  bottom: -10% !important;
-}
-
-</style>

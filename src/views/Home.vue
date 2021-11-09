@@ -1,9 +1,10 @@
 <template>
  <div>
-   <section v-once class="container mb-5">
+   <section v-once class="container mb-5 pt-5">
+    <h2 class="text-white mt-5">MAIN MENU</h2>
+    <p class="text-muted">Show both of your hands to scroll</p>
+    <hr v-once class="mb-5 mt-2 bg-white zindex-999"/>
      <div v-once class="row justify-content-center">
-        <h3 class="text-center text-white mt-3">MAIN MENU</h3>
-       <p class="text-center mb-5 text-white">Pinch your finger on any of the cards or scroll down</p>
        <div class="col-md-6 col-lg-6">
          <router-link v-once to="/university" class="text-decoration-none">
           <div v-once class="card">
@@ -35,7 +36,7 @@
           <div v-once class="card">
               <img v-once src="@/assets/images/university-logo.png" alt="">
               <div v-once class="card-content">
-                <h5 v-once>PROGRAMS</h5>
+                <h5 v-once>COLLEGES</h5>
                 <p v-once>See what programs are offered by the university.</p>
               </div>
             <div v-once class="card-border card-border-university "></div>
@@ -75,15 +76,16 @@
      </div>
    </section>
 
-   <section v-once class="container mb-5 pt-5">
-     <div v-once class="row justify-content-center text-white">
+   <section v-once class="container mb-2 pt-5">
+     <!-- <div v-once class="row justify-content-center text-white">
        <h4 v-once class="text-uppercase">QUICK LINKS</h4>
-     </div>
-     <nav>
+     </div> -->
+     <!-- <nav>
       <router-link to="/corevalues">Core Values</router-link>
       <router-link to="/mission">Mission &amp; Vision</router-link>
       <router-link to="/hymn">Hymn</router-link>
-    </nav>
+    </nav> -->
+    <core-value/>
    </section>
 
    <section v-once class="container mb-5 pt-5">
@@ -170,15 +172,13 @@
 
  </div>
 </template>
-
 <script>
-
-
+import CoreValue from './CoreValues.vue'
 export default {
   name: 'Home',
-
   mounted() {
     document.title = 'Touchless Information Kiosk - Main Menu'
-  }
+  },
+  components: {CoreValue}
 }
 </script>
