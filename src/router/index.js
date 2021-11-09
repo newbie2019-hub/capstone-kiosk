@@ -9,7 +9,6 @@ const TelDirectory = () => import('../views/University/TelDirectory.vue')
 const Announcement = () => import('../views/Announcement/Announcement.vue')
 
 const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
-const TicTacToe = () => import ('../views/Entertainment/TicTacToe.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
 const Mission = () => import('../views/Mission.vue')
@@ -89,11 +88,6 @@ const routes = [
     name: 'Entertainment',
     component: Entertainment
   },
-  {
-    path: '/entertainment/tictactoe',
-    name: 'TicTacToe',
-    component: TicTacToe
-  }  
 ]
 
 const router = new VueRouter({
