@@ -7,6 +7,8 @@ body {
 }
 
 html {
+  /* pointer-events: none; */
+  cursor: none;
   scroll-behavior: smooth;
 }
 
