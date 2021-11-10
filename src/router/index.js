@@ -11,9 +11,7 @@ const Announcement = () => import('../views/Announcement/Announcement.vue')
 const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
-const Mission = () => import('../views/Mission.vue')
 
-const FAQS = () => import('../views/University/FAQs.vue')
 const Organization = () => import('../views/University/Organization.vue')
 const Departments = () => import('../views/University/Departments.vue')
 const SchoolOfficials = () => import('../views/University/SchoolOfficials.vue')
@@ -43,11 +41,6 @@ const routes = [
     component: TelDirectory
   },
   {
-    path: '/university/faqs',
-    name: 'faqs',
-    component: FAQS
-  },
-  {
     path: '/university/organization',
     name: 'organization',
     component: Organization
@@ -72,12 +65,6 @@ const routes = [
     name: 'Hymn',
     component: Hymn
   },
-  {
-    path: '/mission',
-    name: 'Mission',
-    component: Mission
-  },
-
   {
     path: '/programs',
     name: 'Programs',

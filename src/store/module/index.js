@@ -11,6 +11,7 @@ export default {
    teldirectories: [],
    colleges: [],
    faqs: [],
+   posts: [],
   },
   getters: {
 
@@ -21,6 +22,9 @@ export default {
    },
    SET_FAQS(state, data){
     state.faqs = data
+   },
+   SET_POSTS(state, data){
+    state.posts = data
    },
    SET_TEL_DIRECTORIES(state, data){
     state.teldirectories = data
@@ -43,6 +47,16 @@ export default {
   
   },
   actions: {
+    async getPosts({commit}){
+      const res = await API.get(`/posts`).then(res => {
+        commit('SET_POSTS', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
     async getFAQs({commit}){
       const res = await API.get(`/faqs`).then(res => {
         commit('SET_FAQS', res.data)

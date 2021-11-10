@@ -8,12 +8,12 @@
        <div class="col-md-6 col-lg-6">
          <router-link v-once to="/university" class="text-decoration-none">
           <div v-once class="card">
-            <img v-once src="@/assets/images/university.jpg" alt="">
+            <img src="@/assets/images/university.jpg" alt="">
             <div class="card-content">
               <h5 v-once>University</h5>
               <p v-once>A leading university of education and diverse disciplines attuned to local and global development needs</p>
             </div>
-            <div v-once class="card-border card-border-university"></div>
+            <div class="card-border card-border-university"></div>
           </div>
          </router-link>
        </div>
@@ -50,9 +50,9 @@
           <div v-once class="card">
             <div class="card-small">
               <img v-once src="@/assets/images/announcement.jpg" alt="">
-              <div v-once class="card-content">
-                <h5 v-once>Announcement</h5>
-                <p v-once>Stay updated with the University’s current events, announcements and news.</p>
+              <div class="card-content">
+                <h5>Announcement</h5>
+                <p>Stay updated with the University’s current events, announcements and news.</p>
               </div>
             </div>
             <div v-once class="card-border card-border-announcement"></div>
@@ -77,18 +77,15 @@
    </section>
 
    <section v-once class="container mb-2 pt-5">
-     <!-- <div v-once class="row justify-content-center text-white">
-       <h4 v-once class="text-uppercase">QUICK LINKS</h4>
-     </div> -->
-     <!-- <nav>
-      <router-link to="/corevalues">Core Values</router-link>
-      <router-link to="/mission">Mission &amp; Vision</router-link>
-      <router-link to="/hymn">Hymn</router-link>
-    </nav> -->
     <core-value/>
    </section>
 
-   <section v-once class="container mb-5 pt-5">
+   <section v-once class="container mb-4 pt-5">
+      <!-- <router-link to="/hymn">Hymn</router-link> -->
+    <mission-vision/>
+   </section>
+
+   <!-- <section v-once class="container mb-5 pt-5">
      <div v-once class="row justify-content-center text-white">
        <h4 v-once class="text-uppercase">Announcements</h4>
        <hr v-once class="mt-2"/>
@@ -168,17 +165,18 @@
          </div>
        </div>
      </div>
-   </section>
+   </section> -->
 
  </div>
 </template>
 <script>
 import CoreValue from './CoreValues.vue'
+import MissionVision from './Mission.vue'
 export default {
   name: 'Home',
   mounted() {
     document.title = 'Touchless Information Kiosk - Main Menu'
   },
-  components: {CoreValue}
+  components: {CoreValue,MissionVision}
 }
 </script>

@@ -7,36 +7,26 @@
         <hr v-once class="mt-2 bg-white zindex-999"/>
       </div>
        <main class="grid-item main">
-        <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item-corevalues" v-for="(core, i) in core_values" :key="i">
+        <div class="items" ref="horizontalmv" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+          <div id="introcard" class="item-corevalues">
             <div class="text-wrap">
               <blockquote>
-                <h2 class="font-title">{{core.core_value}}</h2>
-                <h5 class="font-description mt-4">{{core.description}}</h5>
+                <h2 class="font-title text-uppercase">Mission</h2>
+                <h2 class="mt-5">{{missionvision[0].lnu_mission}}</h2>
+              </blockquote>
+            </div>
+          </div>
+          <div id="introcard" class="item-corevalues">
+            <div class="text-wrap">
+              <blockquote>
+                <h2 class="font-title">Vision</h2>
+                <h2 class="mt-5">{{missionvision[0].lnu_vision}}</h2>
               </blockquote>
             </div>
           </div>
         </div>
       </main>
    </div>
-  <!-- <div v-once class="text-white text-center font-hymn p-5 mb-5" >
-      <swiper class="swiper">
-        <swiper-slide>
-          <blockquote>
-            <div class="corevalue">
-               <h5 class="font-description mt-4">{{missionvision[0].lnu_mission}}</h5>
-            </div>
-          </blockquote>
-        </swiper-slide>
-        <swiper-slide>
-          <blockquote>
-            <div class="corevalue">
-               <h5 class="font-description mt-4">{{missionvision[0].lnu_mission}}</h5>
-            </div>
-          </blockquote>
-        </swiper-slide>
-      </swiper>
-   </div> -->
  </div>
 </template>
 <script>
@@ -52,8 +42,8 @@ export default {
     },
     onMouseDown(e) {
       this.isDown = true
-      this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
-      this.scrollLeft = this.$refs.horizontal.scrollLeft;
+      this.startX = e.pageX - this.$refs.horizontalmv.offsetLeft;
+      this.scrollLeft = this.$refs.horizontalmv.scrollLeft;
     },
     onMouseUp() {
       this.isDown = false
@@ -61,9 +51,9 @@ export default {
     onMouseMove(e) {
       if(!this.isDown) return;
       e.preventDefault();
-      const x = e.pageX - this.$refs.horizontal.offsetLeft;
+      const x = e.pageX - this.$refs.horizontalmv.offsetLeft;
       const walk = (x - this.startX) * 1.3; //scroll-fast
-      this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
+      this.$refs.horizontalmv.scrollLeft = this.scrollLeft - walk;
     },
   }
   //  components: {

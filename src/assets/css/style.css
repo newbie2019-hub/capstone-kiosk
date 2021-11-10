@@ -8,7 +8,7 @@ body {
 
 html {
   /* pointer-events: none; */
-  cursor: none;
+  /* cursor: none; */
   scroll-behavior: smooth;
 }
 
@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .output_canvas {
   z-index: -1;
-  filter: brightness(15%);
+  filter: brightness(20%);
 }
 
 
@@ -193,7 +193,7 @@ nav a:hover {
   filter: brightness(30%);
   width: 100%;
   height: 100%;
-  max-height: 300px;
+  max-height: 320px;
   object-fit: cover;
 }
 
@@ -364,18 +364,18 @@ blockquote:after {
 
 blockquote:before {
   top: 1rem;
-  left: 13rem;
+  left: 8rem;
 }
 
 blockquote:after {
   content: "\201D";
-  right: 9rem;
+  right: 5rem;
   bottom: 0rem;
 }
 
 /** SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 4.5px;
   height: 0px;
 }
 
@@ -385,12 +385,12 @@ blockquote:after {
 }
  
 ::-webkit-scrollbar-thumb {
-  background: #2087eed0; 
-  border-radius: 0px;
+  background: #20a2eee7; 
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1b79d8d0
+  background: #2c8ff3d0
 }
 
 /** SCROLL INDICATOR */
@@ -460,20 +460,38 @@ blockquote:after {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: rgba(22, 22, 22, 0.856);
-  border: 1px solid rgba(255, 255, 255, 0.363);
+  background-color: rgba(24, 24, 24, 0.863);
+  border: 1px solid rgba(255, 255, 255, 0.226);
   background-clip: border-box;
-  padding: 1.5rem 1.5rem;
+  padding: 1.8rem 1.8rem;
   /* border-radius: 5px; */
 }
 
+.card-announcement:hover {
+  background-color: rgba(31, 31, 31, 0.801);
+
+}
+
 /* UTILITY */
+
+.bottom-border {
+  border-bottom: 1px solid #646464 !important;
+}
+
+.w-65 {
+  width: 65%;
+}
+
 .text-sub {
   color: rgb(211, 211, 211) !important;
 }
 
 .font-weight-400 {
   font-weight: 400 !important;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden !important;
 }
 
 /* ACCORDION */
@@ -578,6 +596,10 @@ blockquote:after {
   overflow-x: hidden;
   overflow-y: hidden;
   position: relative;
+}
+
+.item-post {
+  margin: 2.2em 2em !important;
 }
 
 .item {
@@ -743,4 +765,28 @@ blockquote:after {
 
 .text-subheading {
   color: rgb(211, 211, 211);
+}
+
+.lh-0 {
+  line-height: 1rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/** BOOTSTRAP VUE AVATAR */
+.badge-info {
+  color: #fff;
+  background-color: #17a2b8;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: #007bff;
 }

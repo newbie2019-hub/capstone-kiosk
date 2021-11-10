@@ -517,37 +517,46 @@ window.onload = function () {
 
   }
 
-  //Y - Axis = Horizontal Scrolling
-  let initPosY = 0
-  let currentPosY = 0
-  function scrollingDetection(result) {
+  /**
+   * 
+   * CHECKING FOR THE INITIAL VALUE OF
+   * THE PALM LANDMARK 
+   * COMPARING IT TO CHECK IF THE SCROLL WILL
+   * MOVE UP OR MOVE DOWN
+   * 
+   * ---- DISABLED AND WAS REPLACED WITH
+   * ---- PINCH AND DRAG THE SAME GOES FOR
+   * ---- HORIZONTAL SCROLLING
+   * 
+   */
+  // let initPosY = 0
+  // let currentPosY = 0
+  // function scrollingDetection(result) {
+  //   mouse_pointer.style.display = 'none'
 
-    // console.log(result[0])
-    mouse_pointer.style.display = 'none'
+  //   if (initPosY == 0) {
+  //     initPosY = result[0].y
+  //   }
+  //   else {
+  //     currentPosY = result[0].y
+  //   }
 
-    if (initPosY == 0) {
-      initPosY = result[0].y
-    }
-    else {
-      currentPosY = result[0].y
-    }
+  //   // console.log('Initial Pos: ');
+  //   // console.log(initPosY + '\n');
+  //   // console.log('Current Pos: ');
+  //   // console.log(currentPosY + '\n');
 
-    // console.log('Initial Pos: ');
-    // console.log(initPosY + '\n');
-    // console.log('Current Pos: ');
-    // console.log(currentPosY + '\n');
+  //   if ((initPosY - 0.04) > currentPosY) {
+  //     console.log('Scrolling Up')
+  //     window.scrollTo(0, window.scrollY + 25)
+  //   }
 
-    if ((initPosY - 0.04) > currentPosY) {
-      console.log('Scrolling Up')
-      window.scrollTo(0, window.scrollY + 25)
-    }
+  //   if ((initPosY + 0.04) < currentPosY) {
+  //     console.log('Scrolling Down')
+  //     window.scrollTo(0, window.scrollY - 25)
+  //   }
 
-    if ((initPosY + 0.04) < currentPosY) {
-      console.log('Scrolling Down')
-      window.scrollTo(0, window.scrollY - 25)
-    }
-
-  }
+  // }
 
   //Ripple Event Handler
   function drawRipple() {
@@ -593,6 +602,7 @@ window.onload = function () {
     await store.dispatch('info/getTelDirectories')
     await store.dispatch('info/getCourses')
     await store.dispatch('info/getFAQs')
+    await store.dispatch('info/getPosts')
   }
 
   loadData()
