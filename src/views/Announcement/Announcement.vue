@@ -9,8 +9,10 @@
         <div class="d-flex align-items-center">
           <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
           <div class="d-flex flex-column ms-4 lh-0 mx-auto text-white" style="line-height: 1.2rem">
-            <h5>Genreve Fernandez</h5>
-            <h6>DIGITS, President</h6>
+            <h5>{{selectedPost.useraccount.userinfo.first_name}} {{selectedPost.useraccount.userinfo.last_name}}</h5>
+            <h6>{{selectedPost.useraccount.userinfo.organization.abbreviation ? selectedPost.useraccount.userinfo.organization.abbreviation : selectedPost.useraccount.userinfo.organization.name}} 
+             - {{selectedPost.useraccount.userinfo.role.role}}
+            </h6>
           </div>
           <div class="me-4">
             <p class="mb-4 text-white">September 23, 2021</p>
@@ -22,19 +24,21 @@
   </div>
   <div class="grid-container">
     <div class="title">
-      <h2 class="text-center fw-light">DEPARTMENTS</h2>
+      <h2 class="text-center fw-light">ANNOUNCEMENTS</h2>
       <p class="text-muted">Pinch and drag to scroll left or right</p>
     </div>
       <main class="grid-item main">
       <div class="items" ref="horizontalpost" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
         <div @click.prevent="setViewPost(post)" id="introcard" class="item item-post" v-for="(post, i) in posts" :key="i">
-          <img src="@/assets/images/entertainment.jpg" class="card-img" alt="...">
+          <img v-if="post.postcontent.image" :src="`http://127.0.0.1:8000/uploads/${post.postcontent.image}`" class="card-img" alt="...">
+          <img v-else src="@/assets/images/lnubldg1.jpg" class="card-img" alt="...">
           <div class="card-img-overlay text-wrap p-4">
             <h5 class="card-title">{{post.postcontent.title }}</h5>
             <p class="card-text fw-light mt-3 ql-align-justify">{{post.postcontent.post_excerpt}}</p>
           </div>
           <div class="added-by">
-            <p>Added by: {{post.useraccount.userinfo.first_name}}</p>
+            <p>{{post.useraccount.userinfo.first_name}} {{post.useraccount.userinfo.last_name}}</p>
+            <p>{{post.useraccount.userinfo.role.role}}</p>
           </div>
         </div>
       </div>
@@ -74,6 +78,18 @@ export default {
       selectedPost: {
         postcontent: {
           content: ''
+        },
+        useraccount: {
+          userinfo: {
+            organization: {
+              abbreviation: '',
+              name: '',
+            },
+            department: {
+              abbreviation: '',
+              name: '',
+            }
+          }
         }
       },
       viewPost: false,
@@ -135,10 +151,10 @@ export default {
 .added-by {
   position: absolute;
   bottom: 1rem;
-  text-transform: uppercase;
   color: rgb(223, 223, 223);
   font-weight: 400;
-  left: 1rem 
+  left: 1.5rem;
+  font-size: .9rem;
 }
 
 .ql-align-justify {
@@ -149,7 +165,7 @@ export default {
 .close-section {
   position: fixed;
   top: 50%;
-  left: 10%;
+  left: 12%;
   transform: translateY(-50%);
   width: 50px;
   height: 50px;

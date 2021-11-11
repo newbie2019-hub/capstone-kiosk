@@ -602,13 +602,25 @@ blockquote:after {
   margin: 2.2em 2em !important;
 }
 
+
+.item-post img {
+  position: absolute !important;
+  top: 0; 
+  left: 0;
+  width: 100% !important;
+  min-height: 355px !important;
+  object-fit: cover !important;
+  padding: 0rem !important;
+  filter: brightness(20%);
+}
+
 .item {
   display: inline-block;
   background: rgba(17, 17, 17, 0.959);
   min-height: 355px;
   min-width: 320px;
   margin: 2em 5em;
-  box-shadow: 0px 0px 4px 1px rgba(36, 226, 240, 0.671);
+  box-shadow: 0px 0px 4px 1px rgba(156, 156, 156, 0.671);
   /* border: 1.5px solid grey;   */
   border-radius: 3px;
   position: relative;
