@@ -3,7 +3,10 @@ import API from '../base/'
 export default {
   namespaced: true,
   state: {
-   missionvision: [],
+   missionvision: [{
+     lnu_mission: '',
+     lnu_vision: ''
+   }],
    core_values: [],
    departments: [],
    organizations: [],
@@ -12,11 +15,17 @@ export default {
    colleges: [],
    faqs: [],
    posts: [],
+   isTutorial: true,
   },
   getters: {
-
+    GET_TUTORIAL(state){
+      return state.isTutorial
+    }
   },
   mutations: {
+   SET_TUTORIAL_STATE(state, data){
+    state.isTutorial = data
+   },
    SET_COURSES(state, data){
     state.colleges = data
    },

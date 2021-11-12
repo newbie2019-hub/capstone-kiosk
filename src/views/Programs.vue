@@ -107,7 +107,19 @@ export default {
       isGoal: false,
     }
   },
-   methods: {
+  mounted(){
+    
+  },
+  watch: {
+    cardClicked: function(){
+      if(this.cardClicked){
+        setTimeout(() => {
+          this.$refs.horizontalpopup.scrollLeft = '180';
+        }, 20);
+      }
+    }
+  },
+  methods: {
     currentNumber(i){
       return i + 1 < 10 ? `0${i + 1}` : i + 1
     },

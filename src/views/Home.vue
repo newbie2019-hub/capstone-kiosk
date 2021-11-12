@@ -47,7 +47,7 @@
      <div v-once class="row justify-content-center mt-2">
        <div v-once class="col-md-6 col-lg-6">
          <router-link v-once to="/announcement" class="text-decoration-none">
-          <div v-once class="card">
+          <div class="card">
             <div class="card-small">
               <img v-once src="@/assets/images/announcement.jpg" alt="">
               <div class="card-content">

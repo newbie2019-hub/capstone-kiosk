@@ -1,32 +1,30 @@
 <template>
   <div id="app">
-    <transition name="fade" mode="out-in">
-        <router-view/>
+    <tutorial v-if="isTutorial"/>
+    <transition name="fade" mode="out-in" v-else>
+      <router-view/>
     </transition>
   </div>
 </template>
 <script>
+import Tutorial from './views/Tutorial.vue'
 export default {
-  methods: {
-    
+  components: {Tutorial},
+  computed: {
+    isTutorial () {
+      return this.$store.getters['info/GET_TUTORIAL']
+    }
   }
 }
 </script>
 <style>
 .fade-enter, .fade-leave-to {
   opacity: 0;
-  transition: all .25s ease-out;
+  transition: all .35s ease-out;
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: all .3s ease-in;
+  transition: all .45s ease-in;
 }
-/* 
-.title {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  margin-top: 4rem;
-  color: white;
-} */
+
 </style>

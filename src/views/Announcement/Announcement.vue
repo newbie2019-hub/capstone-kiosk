@@ -44,29 +44,6 @@
       </div>
     </main>
   </div>
-  <!-- <div class="container">
-    <h2 class="text-white mt-5 pt-5">POST SECTION</h2>
-    <p class="text-muted">Pinch on a post to view more details</p>
-    <hr class="mb-2 mt-2 bg-white zindex-999 w-65"/>
-    <div class="row">
-      <div class="col-8 overflow-y-scroll">
-        <div @click.prevent="setViewPost(post)" class="card-announcement cursor-pointer text-white mt-2" v-for="(post, i) in posts" :key="i">
-          <div class="d-flex justify-content-between">
-            <div class="d-flex flex-column lh-0" style="line-height: 1.2rem">
-              <p>{{post.useraccount.userinfo.first_name}} {{post.useraccount.userinfo.last_name}}</p>
-              <p>DIGITS, President</p>
-            </div>
-            <div class="me-4">
-            <p class="mb-4">{{post.created_at}}</p>
-            </div>
-          </div>
-          <div class="d-flex flex-column mt-3 pe-4">
-            <p>{{post.postcontent.post_excerpt }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
  </div>
 </template>
 <script>
@@ -164,8 +141,8 @@ export default {
 
 .close-section {
   position: fixed;
-  top: 50%;
-  left: 12%;
+  top: 52%;
+  left: 14%;
   transform: translateY(-50%);
   width: 50px;
   height: 50px;

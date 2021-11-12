@@ -36,7 +36,7 @@ window.onload = function () {
          console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
-      }, 2800)
+      }, 1500)
       loaded = true
     }
 
@@ -50,7 +50,7 @@ window.onload = function () {
    
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height); 
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
@@ -94,8 +94,8 @@ window.onload = function () {
 
             //DRAW LANDMARKS - SKELETON
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-              {color: '#2d90a8', lineWidth: 2});
-            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 1});
+              {color: '#2d90a8', lineWidth: 5});
+            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 3});
           }
         }
       }
@@ -577,8 +577,9 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.85,
+      minDetectionConfidence: 0.75,
       minTrackingConfidence: 0.7,
+      modelComplexity: 0,
       selfieMode: true,
     });
 
@@ -605,7 +606,15 @@ window.onload = function () {
     await store.dispatch('info/getPosts')
   }
 
+
+  const memory = navigator.deviceMemory
+  const proc = navigator.hardwareConcurrency
+  console.log(proc)
+  if(memory < 8){
+    confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
+  }
+
   loadData()
-  // mediaPipeHandsSetup()
+  mediaPipeHandsSetup();
 
 }

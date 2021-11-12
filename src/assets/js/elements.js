@@ -21,28 +21,28 @@ function createElements(){
  createNotif()
  
  //CREATE LOADING ELEMENT
- // let parent_div = document.createElement('div');
- // parent_div.classList.add('loader')
+ let parent_div = document.createElement('div');
+ parent_div.classList.add('loader')
  
- // let span_dot = document.createElement('span')
- // span_dot.classList.add('dot')
- // parent_div.appendChild(span_dot)
+ let span_dot = document.createElement('span')
+ span_dot.classList.add('dot')
+ parent_div.appendChild(span_dot)
 
- // let span_dots = document.createElement('div')
- // span_dots.classList.add('dots')
- // parent_div.appendChild(span_dots)
+ let span_dots = document.createElement('div')
+ span_dots.classList.add('dots')
+ parent_div.appendChild(span_dots)
 
- // for(let i = 1; i <= 3; i++){
- //  let span = document.createElement('span')
- //  span_dots.appendChild(span)
- // }
+ for(let i = 1; i <= 3; i++){
+  let span = document.createElement('span')
+  span_dots.appendChild(span)
+ }
 
- // const loading_text = document.createElement('p')
- // loading_text.innerText = '\nLoading resources . .\n\n Setting up the model and data \n Loading the model for the first time might take a while \n but it will be cached by your browser after then.'
- // loading_text.classList.add('mt-1')
- // parent_div.appendChild(loading_text)
+ const loading_text = document.createElement('p')
+ loading_text.innerText = '\nLoading resources . .\n\n Setting up the model and data \n Loading the model for the first time might take a while \n but it will be cached by your browser after then.'
+ loading_text.classList.add('mt-1')
+ parent_div.appendChild(loading_text)
 
- // document.body.appendChild(parent_div)
+ document.body.appendChild(parent_div)
 
  //CANVAS
  const body_canvas = document.createElement('canvas');
