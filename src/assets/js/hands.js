@@ -71,7 +71,7 @@ window.onload = function () {
 
             //Check distance of the tip index and thumb
             //https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
-            let x = landmarks[4].x, y = landmarks[4].y;
+            let x = landmarks[9].x, y = landmarks[9].y;
 
             x *= window.outerWidth - 30
             y *= window.outerHeight - 100
