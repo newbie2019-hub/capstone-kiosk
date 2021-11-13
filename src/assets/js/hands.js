@@ -65,15 +65,6 @@ window.onload = function () {
       returnGestureRecog(results)
 
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
-        const classification = results.multiHandedness[index];
-        const isRightHand = classification.label === 'Right';
-
-        //SCROLLING - PASS RIGHT HAND INDEX
-        // if (scroll_count > 3) {
-        //   if (isRightHand) {
-        //     scrollingDetection(results.multiHandLandmarks[index])
-        //   }
-        // }
 
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
@@ -91,13 +82,13 @@ window.onload = function () {
             hoverElement(x, y)
 
             const click = [landmarks[4], landmarks[8]]
-            isClicked(lineDistance(click[0], click[1]), x, y)
-            // fingersUp(landmarks)
+            isDrag(lineDistance(click[0], click[1]), x, y)
+            isClicking(fingersUp(landmarks), x, y)
 
             //DRAW LANDMARKS - SKELETON
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
               {color: '#2d90a8', lineWidth: 5});
-            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 2});
+            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 3});
           }
         }
       }
@@ -241,44 +232,87 @@ window.onload = function () {
     flagReturn = false
   }
 
-  //Check if distance between landmark[4] and landmark[8]
-  let click_counter = 0, prevCounter = 0;
-  let click_status = 'none'
-  let clicked = false
+  /**
+   * 
+   * VERTICAL SCROLL GESTURE
+   * Check if distance between landmark[4] and landmark[8]
+   * 
+   */
+  let holdCounter = 0, prevCounter = 0;
+  let dragStatus = 'none'
   let targetWindow = null
-  async function isClicked(distance, x, y) {
+  async function isDrag(distance, x, y) {
 
     const $el = document.elementFromPoint(x + 22, y + 22)
 
     if (distance < 0.045) {
-      click_counter++
+      holdCounter++
     }
     else {
-      if(click_counter != 0){
-        prevCounter = click_counter
+      if(holdCounter != 0){
+        prevCounter = holdCounter
       }
-      click_counter = 0
+      holdCounter = 0
+      if (dragStatus == 'held') { 
+        dragStatus = 'released'
+      }
+    }
+
+    mousePointerUpdate(dragStatus, x, y)
+    targetWindow = getTarget($el)
+
+    if (dragStatus == 'released' && holdCounter == 0) {
+      dragStatus = 'none'
+    }
+    else if (holdCounter > 0 && holdCounter <= 1) {
+      dragStatus = 'start'
+    }
+    else if (holdCounter > 2) {
+      dragStatus = 'held'
+    }
+
+  }
+
+  /**
+   * 
+   * NEW IMPLEMENTATION OF CLICK GESTURE
+   * - PINCH YOUR MIDDLE AND INDEX 
+   * - FINGER TO EMIT THE CLICK
+   * - EVENT
+   * 
+   * CHECK IF data == [0, 1, 1, 0, 0] - PEACE SIGN
+   * 
+   */
+  let clickCounter = 0, prevClickCounter = 0, clicked = false
+  let click_status = 'none'
+  function isClicking(data, x, y){
+    const $el = document.elementFromPoint(x + 22, y + 22)
+
+    if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0])) {
+      clickCounter++
+    }
+    else {
+      if(clickCounter != 0){
+        prevClickCounter = clickCounter
+      }
+      clickCounter = 0
       if (click_status == 'held') { 
         click_status = 'released'
         clicked = true
       }
     }
 
-    mousePointerUpdate(click_status, x, y)
-    targetWindow = getTarget($el)
-
-    if (click_status == 'released' && click_counter == 0) {
+    if (click_status == 'released' && clickCounter == 0) {
       click_status = 'none'
     }
-    else if (click_counter > 0 && click_counter <= 1) {
+    else if (clickCounter > 0 && clickCounter <= 1) {
       click_status = 'start'
     }
-    else if (click_counter > 2) {
+    else if (clickCounter > 2) {
       click_status = 'held'
     }
 
-    if(prevCounter > 10) return
-    if (clicked && click_counter == 0) {
+    if (clicked && clickCounter == 0) {
       drawRipple()
       if ($el) {
         $el.dispatchEvent(
@@ -291,26 +325,90 @@ window.onload = function () {
             pageY: y,
           })
         )
-        $el.dispatchEvent(
-          new MouseEvent('mouseup', {
-            bubbles: true,
-            view: window,
-            cancelable: true,
-            clientX: x + 22 ,
-            clientY: y + 22,
-            pageX: x + 22,
-            pageY: y + 22,
-          })
-        )
-
         // Focus
         if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
           $el.focus()
       }
       clicked = false
     }
-
   }
+
+
+  /**
+   * 
+   * THIS WAS THE PREVIOUS IMPLEMENTATION
+   * OF CLICK GESTURE - TO CLICK
+   * PINCH YOUR THUMB AND INDEX FINGER
+   *
+   *  ---- REPLACED BY PEACE SIGN ----
+   * 
+   *
+   */
+  // async function isClicked(distance, x, y) {
+
+  //   const $el = document.elementFromPoint(x + 22, y + 22)
+
+  //   if (distance < 0.045) {
+  //     click_counter++
+  //   }
+  //   else {
+  //     if(click_counter != 0){
+  //       prevCounter = click_counter
+  //     }
+  //     click_counter = 0
+  //     if (click_status == 'held') { 
+  //       click_status = 'released'
+  //       clicked = true
+  //     }
+  //   }
+
+  //   mousePointerUpdate(click_status, x, y)
+  //   targetWindow = getTarget($el)
+
+  //   if (click_status == 'released' && click_counter == 0) {
+  //     click_status = 'none'
+  //   }
+  //   else if (click_counter > 0 && click_counter <= 1) {
+  //     click_status = 'start'
+  //   }
+  //   else if (click_counter > 2) {
+  //     click_status = 'held'
+  //   }
+
+  //   if(prevCounter > 10) return
+  //   if (clicked && click_counter == 0) {
+  //     drawRipple()
+  //     if ($el) {
+  //       $el.dispatchEvent(
+  //         new MouseEvent('click', {
+  //           bubbles: true,
+  //           cancelable: true,
+  //           clientX: x,
+  //           clientY: y,
+  //           pageX: x,
+  //           pageY: y,
+  //         })
+  //       )
+  //       $el.dispatchEvent(
+  //         new MouseEvent('mouseup', {
+  //           bubbles: true,
+  //           view: window,
+  //           cancelable: true,
+  //           clientX: x + 22 ,
+  //           clientY: y + 22,
+  //           pageX: x + 22,
+  //           pageY: y + 22,
+  //         })
+  //       )
+
+  //       // Focus
+  //       if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
+  //         $el.focus()
+  //     }
+  //     clicked = false
+  //   }
+
+  // }
 
   //Native Sleep
   function sleep(ms) {
@@ -347,7 +445,7 @@ window.onload = function () {
 
   //MOUSE POINTER INTERACTIVITY
   let mousePointerStatus = 'none'
-  let initialX = 0, initialY = 0
+  let initialY = 0
   var tweenScroll = {y: 0}
   function mousePointerUpdate(status, x, y){
     const $el = document.elementFromPoint(x + 22, y + 22)
@@ -384,11 +482,11 @@ window.onload = function () {
       }
 
       gsap.to(tweenScroll, {
-        y: tweenScroll.y + (initialY - y) * 1.2,
+        y: tweenScroll.y + (initialY - y) * 1.5,
         duration: 1,
         overwrite: true,
         immediateRender: true,
-        ease: 'linear.easeNone',
+        ease: 'expo.easeInOut',
       })
 
       targetWindow.scrollTo(0, tweenScroll.y)
@@ -569,8 +667,8 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.82,
+      minDetectionConfidence: 0.8,
+      minTrackingConfidence: 0.65,
       selfieMode: true,
     });
 

@@ -72,9 +72,9 @@
                <p class="mt-4 me-4 fw-light">CLICK GESTURE</p>
               </div>
             </div>
-            <img src="@/assets/images/click.gif" class="" width="" alt="">
+            <img src="@/assets/images/peaceclick.gif" class="" width="" alt="">
              <div :class="clickCount > 0 ? 'mb-4' : ''" class="position-absolute ms-4 mb-3 pe-3 bottom-0 text-wrap lh-0 fw-light ">
-               {{clickCount == 0 ? 'To click an element, simply hover to an element and pinch and unpinch your fingers to click.' : clickCount >= 2 ? `Click this card ${3 - clickCount} more time to proceed to main menu` : `Click this card ${3 - clickCount} more times to proceed to main menu`}} 
+               {{clickCount == 0 ? 'To click an element, simply hover to an element and make a peace gesture and release' : clickCount >= 2 ? `Click this card ${3 - clickCount} more time to proceed to main menu` : `Click this card ${3 - clickCount} more times to proceed to main menu`}} 
              </div>
            </div>
           </div>
