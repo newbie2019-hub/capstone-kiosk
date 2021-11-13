@@ -74,6 +74,22 @@
         </router-link>
        </div>
      </div>
+     <div class="row mt-2">
+       <div class="col-md-6 col-lg-3">
+         <router-link to="/hymn" class="text-decoration-none">
+          <div v-once class="card">
+            <div class="card-small">
+              <img v-once src="@/assets/images/university-logo.png" alt="" loading=lazy>
+              <div class="card-content">
+                <h5>LNU HYMN</h5>
+                <p>Learn the lyrics of the unvirsity hymn.</p>
+              </div>
+            </div>
+            <div class="card-border card-border-feedback "></div>
+          </div>
+         </router-link>
+       </div>
+     </div>
    </section>
 
    <section class="container mb-5 mt-5 pt-3">

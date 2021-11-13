@@ -287,7 +287,7 @@ window.onload = function () {
   let click_status = 'none'
   function isClicking(data, x, y){
     const $el = document.elementFromPoint(x + 22, y + 22)
-    // console.log(data)
+
     if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0]) || JSON.stringify(data) == JSON.stringify([1,1,1,0,0])) {
       clickCounter++
     }
@@ -704,6 +704,6 @@ window.onload = function () {
   }
 
   loadData()
-  mediaPipeHandsSetup();
+  // mediaPipeHandsSetup();
 
 }

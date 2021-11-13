@@ -14,7 +14,7 @@
             <img id="introcard" v-if="org.image" :src="org.image ? org.image : ''" alt="">
             <img id="introcard" v-else src="@/assets/images/logo.png" alt="">
             <div class="introcard-description">
-              <h6 class="mt-2 text-uppercase">{{org.name}}</h6>
+              <h6 class="mt-2 text-uppercase text-center">{{org.name}}</h6>
             </div>
           </div>
         </div>
