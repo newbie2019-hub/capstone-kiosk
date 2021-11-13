@@ -69,7 +69,7 @@
             <div class="d-flex w-100">
               <p class="mt-4 ms-4 fw-light">• 05</p>
               <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">CLICK GESTURE</p>
+               <p class="mt-4 me-4 fw-light">CLICK THIS CARD</p>
               </div>
             </div>
             <img src="@/assets/images/peaceclick.gif" class="" width="" alt="">

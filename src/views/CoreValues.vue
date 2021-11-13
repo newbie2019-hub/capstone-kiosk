@@ -3,7 +3,7 @@
    <div class="grid-container-home">
       <div class="title-home">
         <h2 class="">CORE VALUES</h2>
-        <p class="text-muted">Pinch and drag to scroll left or right</p>
+        <p class="">Pinch and drag to scroll left or right</p>
         <hr v-once class="mt-2 bg-white zindex-999"/>
       </div>
        <main class="grid-item main">

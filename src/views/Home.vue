@@ -74,6 +74,20 @@
          </router-link>
        </div>
      </div>
+     <div v-once class="row mt-2">
+       <div v-once class="col-md-6 col-lg-6">
+          <div class="card cursor-pointer" @click.prevent="enableTutorial">
+            <div class="card-small">
+              <img v-once src="@/assets/images/tutorial.jpg" alt="">
+              <div class="card-content">
+                <h5>Gesture Tutorial</h5>
+                <p>Learn how to navigate the system by using the hand gestures</p>
+              </div>
+            </div>
+            <div v-once class="card-border card-border-feedback"></div>
+          </div>
+       </div>
+     </div>
    </section>
 
    <section v-once class="container mb-2 pt-5">
@@ -81,91 +95,8 @@
    </section>
 
    <section v-once class="container mb-4 pt-5">
-      <!-- <router-link to="/hymn">Hymn</router-link> -->
     <mission-vision/>
    </section>
-
-   <!-- <section v-once class="container mb-5 pt-5">
-     <div v-once class="row justify-content-center text-white">
-       <h4 v-once class="text-uppercase">Announcements</h4>
-       <hr v-once class="mt-2"/>
-     </div>
-     <div v-once class="row justify-content-center text-white">
-       <div class="col-lg-8 col-xl-8 mt-3">
-          <h5 class="mb-4 text-sub">Latest Annoucements</h5>
-         <div v-once class="card-announcement mt-2">
-           <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
-             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
-              <p>Genreve Fernandez</p>
-              <p>DIGITS, President</p>
-             </div>
-             <div class="me-4">
-              <p class="mb-4">September 23, 2021</p>
-             </div>
-           </div>
-           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
-             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
-             <p class="mt-4 text-sub">Views: 300</p>
-           </div>
-         </div>
-         <div v-once class="card-announcement mt-2">
-           <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
-             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
-              <p>Genreve Fernandez</p>
-              <p>DIGITS, President</p>
-             </div>
-             <div class="me-4">
-              <p class="mb-4">September 23, 2021</p>
-             </div>
-           </div>
-           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
-             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
-             <p class="mt-4 text-sub">Views: 300</p>
-           </div>
-         </div>
-         <div v-once class="card-announcement mt-2">
-           <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
-             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
-              <p>Genreve Fernandez</p>
-              <p>DIGITS, President</p>
-             </div>
-             <div class="me-4">
-              <p class="mb-4">September 23, 2021</p>
-             </div>
-           </div>
-           <div class="d-flex flex-column ms-5 mt-3 ps-5 pe-4">
-             <p>Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card. </p>
-             <p class="mt-4 text-sub">Views: 300</p>
-           </div>
-         </div>
-         <div class="d-grid mt-3">
-           <button class="btn btn-primary">SHOW ALL</button>
-         </div>
-       </div>
-       <div class="col-lg-4 col-xl-4 mt-3">
-         <h5 class="mb-4 text-sub">Organizations</h5>
-         <div v-once class="card-announcement mt-2">
-           <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
-             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
-              <p>Developmental Integrated Group of Information Students (DIGITS)</p>
-             </div>
-           </div>
-         </div>
-         <div class="card-announcement mt-2">
-           <div class="d-flex align-items-center">
-             <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
-             <div class="d-flex flex-column ms-4 lh-0 mx-auto" style="line-height: 1.2rem">
-              <p>Developmental Integrated Group of Information Students (DIGITS)</p>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </section> -->
 
  </div>
 </template>
@@ -177,6 +108,11 @@ export default {
   mounted() {
     document.title = 'Touchless Information Kiosk - Main Menu'
   },
-  components: {CoreValue,MissionVision}
+  components: {CoreValue,MissionVision},
+  methods: {
+    enableTutorial(){
+      this.$store.commit('info/SET_TUTORIAL_STATE', true)
+    },
+  }
 }
 </script>

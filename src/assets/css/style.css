@@ -185,7 +185,8 @@ nav a:hover {
 }
 
 .border-hover {
-  border: 2px solid #6FDBFB !important;
+  border: 1px solid #6FDBFB !important;
+  box-shadow: 0px 0px 5px 3px #6FDBFB;
   transform: scale(1.03);
 }
 

@@ -3,7 +3,7 @@
      <div class="grid-container-home">
       <div class="title-home">
         <h2 class="">MISSION AND VISION</h2>
-        <p class="text-muted">Pinch and drag to scroll left or right</p>
+        <p class="">Pinch and drag to scroll left or right</p>
         <hr v-once class="mt-2 bg-white zindex-999"/>
       </div>
        <main class="grid-item main">
@@ -30,7 +30,7 @@
  </div>
 </template>
 <script>
-// import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+
 import {mapState} from 'vuex'
 export default {
    computed: {
@@ -56,10 +56,6 @@ export default {
       this.$refs.horizontalmv.scrollLeft = this.scrollLeft - walk;
     },
   }
-  //  components: {
-  //     Swiper,
-  //     SwiperSlide,
-  //  },
 }
 </script>
 <style>

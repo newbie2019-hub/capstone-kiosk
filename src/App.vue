@@ -14,6 +14,9 @@ export default {
     isTutorial () {
       return this.$store.getters['info/GET_TUTORIAL']
     }
+  },
+  methods: {
+  
   }
 }
 </script>
