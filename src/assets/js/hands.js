@@ -250,7 +250,7 @@ window.onload = function () {
 
     const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (distance < 0.06) {
+    if (distance < 0.045) {
       click_counter++
     }
     else {
@@ -277,20 +277,10 @@ window.onload = function () {
       click_status = 'held'
     }
 
-    if(prevCounter > 15) return
+    if(prevCounter > 10) return
     if (clicked && click_counter == 0) {
       drawRipple()
       if ($el) {
-        $el.dispatchEvent(
-          new MouseEvent('mousedown', {
-            bubbles: true,
-            cancelable: true,
-            clientX: x + 22,
-            clientY: y + 22,
-            pageX: x + 22,
-            pageY: y + 22,
-          })
-        )
         $el.dispatchEvent(
           new MouseEvent('click', {
             bubbles: true,
@@ -580,7 +570,7 @@ window.onload = function () {
     hands.setOptions({
       maxNumHands: 1,
       minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.8,
+      minTrackingConfidence: 0.82,
       selfieMode: true,
     });
 
