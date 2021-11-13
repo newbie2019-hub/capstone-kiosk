@@ -319,9 +319,9 @@ window.onload = function () {
           new MouseEvent('click', {
             bubbles: true,
             cancelable: true,
-            clientX: x,
+            clientX: x - 50,
             clientY: y,
-            pageX: x,
+            pageX: x - 50,
             pageY: y,
           })
         )
