@@ -13,6 +13,20 @@
             <div class="d-flex w-100">
               <p class="mt-4 ms-4 fw-light">• 01</p>
               <div class="d-flex w-100 justify-content-end">
+               <p class="mt-4 me-4 fw-light">SHOW YOUR HANDS</p>
+              </div>
+            </div>
+            <img src="@/assets/images/move.gif" class="" width="" alt="">
+             <div class="position-absolute ms-4 mb-3 bottom-0 text-wrap lh-0 fw-light ">
+               Show your hands to the camera. Please use slow hand movements as possible
+             </div>
+           </div>
+          </div>
+          <div ref="scrollgesture" class="item-tutorial">
+           <div id="tutorialcard" class="item-tutorial-card">
+            <div class="d-flex w-100">
+              <p class="mt-4 ms-4 fw-light">• 02</p>
+              <div class="d-flex w-100 justify-content-end">
                <p class="mt-4 me-4 fw-light">SCROLL GESTURE</p>
               </div>
             </div>
@@ -25,7 +39,7 @@
           <div class="item-tutorial">
            <div id="tutorialcard" class="item-tutorial-card">
             <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 02</p>
+              <p class="mt-4 ms-4 fw-light">• 03</p>
               <div class="d-flex w-100 justify-content-end">
                <p class="mt-4 me-4 fw-light">VERTICAL SCROLL</p>
               </div>
@@ -39,7 +53,7 @@
           <div class="item-tutorial">
            <div id="tutorialcard" class="item-tutorial-card">
             <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 03</p>
+              <p class="mt-4 ms-4 fw-light">• 04</p>
               <div class="d-flex w-100 justify-content-end">
                <p class="mt-4 me-4 fw-light">RETURN GESTURE</p>
               </div>
@@ -53,7 +67,7 @@
           <div class="item-tutorial">
            <div id="tutorialcard" class="item-tutorial-card" @click="setTutorialState">
             <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 04</p>
+              <p class="mt-4 ms-4 fw-light">• 05</p>
               <div class="d-flex w-100 justify-content-end">
                <p class="mt-4 me-4 fw-light">CLICK GESTURE</p>
               </div>
@@ -77,10 +91,20 @@
 export default {
   data() {
     return {
-      clickCount: 0
+      clickCount: 0,
+
     }
   },
+  mounted(){
+    document.addEventListener('hands-shown', (event) => {
+      this.handsShown()
+    })
+
+  },
   methods: {
+    handsShown(){
+      this.$refs.horizontal.scrollLeft = this.$refs.scrollgesture.offsetLeft
+    },
     setTutorialState(){
      if(this.clickCount >= 2){
       this.$store.commit('info/SET_TUTORIAL_STATE', false)

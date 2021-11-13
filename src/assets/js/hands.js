@@ -5,8 +5,7 @@ import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
 
 import store from '../../store'
-import { TweenMax } from 'gsap/gsap-core'
-import { TweenLite } from 'gsap/gsap-core'
+
 window.onload = function () {
   
   const mouse_pointer = document.getElementsByClassName('pointer')[0]
@@ -26,7 +25,7 @@ window.onload = function () {
 
   let flag_pointer = false
   let loaded = false
-
+  let handsshown = 0
   function onResults(results) {
 
      // LOADING INDICATOR - REMOVE
@@ -54,13 +53,16 @@ window.onload = function () {
 
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
-      // scrollingFunctionality(results.multiHandedness)
-      // notifScrolling()
-      returnGestureRecog(results)
+        
+      if (window.location.pathname == '/') {
+        if(handsshown == 0){
+          const event = new CustomEvent('hands-shown')
+          document.dispatchEvent(event)
+          handsshown++
+        }
+      }
 
-      // if(hasSwiper){
-      //   monitorSwiperNavigation(results)
-      // }
+      returnGestureRecog(results)
 
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
         const classification = results.multiHandedness[index];
@@ -95,7 +97,7 @@ window.onload = function () {
             //DRAW LANDMARKS - SKELETON
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
               {color: '#2d90a8', lineWidth: 5});
-            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 3});
+            drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 2});
           }
         }
       }
@@ -578,8 +580,7 @@ window.onload = function () {
     hands.setOptions({
       maxNumHands: 1,
       minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.7,
-      // modelComplexity: 0,
+      minTrackingConfidence: 0.8,
       selfieMode: true,
     });
 
