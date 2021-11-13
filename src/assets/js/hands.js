@@ -579,7 +579,7 @@ window.onload = function () {
       maxNumHands: 1,
       minDetectionConfidence: 0.75,
       minTrackingConfidence: 0.7,
-      modelComplexity: 0,
+      // modelComplexity: 0,
       selfieMode: true,
     });
 
@@ -609,7 +609,7 @@ window.onload = function () {
 
   const memory = navigator.deviceMemory
   const proc = navigator.hardwareConcurrency
-  console.log(proc)
+  // console.log(proc)
   if(memory < 8){
     confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
   }
