@@ -83,7 +83,7 @@
    </div>
   </div>
   <div class="tutorial-note">
-   <p>Please use slow hand movements</p>
+   <p ref="txttutorial">Please use slow hand movements</p>
   </div>
  </div>
 </template>
@@ -92,7 +92,7 @@ export default {
   data() {
     return {
       clickCount: 0,
-
+      currentTxt: 0,
     }
   },
   mounted(){
@@ -100,7 +100,7 @@ export default {
       this.handsShown()
     })
 
-  },
+  },  
   methods: {
     handsShown(){
       this.$refs.horizontal.scrollLeft = this.$refs.scrollgesture.offsetLeft

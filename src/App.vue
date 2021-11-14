@@ -15,8 +15,8 @@ export default {
       return this.$store.getters['info/GET_TUTORIAL']
     }
   },
-  methods: {
-  
+  mounted() {
+    document.title = 'Touchless Information Kiosk - Leyte Normal University'
   }
 }
 </script>

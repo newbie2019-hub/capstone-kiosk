@@ -5,22 +5,22 @@
   <div class="row justify-content-center">
      <div class="col-10 col-xl-5 col-lg-6">
           <div class="telephone mb-3" v-once v-for="(tel, i) in teldirectories" :key="i">
-            <div class="d-flex">
-            <img v-once src="@/assets/images/logo.png" alt="" height="80" width="80">
             <div class="d-flex flex-column ms-4 justify-content-center text-white">
               <p class="">{{tel.name}}</p>
               <p class=""><i class="fas fa-phone-alt"></i> {{tel.tel_num}}</p>
-            </div>
             </div>
           </div>
       </div>
       <p class="text-white text-center mt-4 mb-4">End of the telephone list</p>
   </div>
+  <return-gesture />
  </div>
 </template>
 <script>
 import {mapState} from 'vuex'
+import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
  computed: {
   ...mapState('info', ['teldirectories'])
  }

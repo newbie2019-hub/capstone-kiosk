@@ -1,10 +1,25 @@
-// import { Hands } from '@mediapipe/hands'
+/**
+ * ----------------------------------------------------------------
+ * 
+ *             DEVELOPMENT OF TOUCHLESS INTERACTIVE
+ *         INFORMATION KIOSK FOR LEYTE NORMAL UNIVERSITY
+ * 
+ *         GROUP MEMBERS:
+ *         1. YVAN SABAY
+ *         2. EZIKIEL TULAWAN
+ *         3. GENREVE FERNANDEZ
+ *         4. DANICA BARRIENTOS
+ * 
+ * ----------------------------------------------------------------
+ * 
+ */
 import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
 
 import store from '../../store'
+
 
 window.onload = function () {
   

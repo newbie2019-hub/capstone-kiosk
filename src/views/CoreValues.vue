@@ -14,6 +14,7 @@
                 <h2 class="font-title">{{core.core_value}}</h2>
                 <h5 class="font-description mt-4">{{core.description}}</h5>
               </blockquote>
+              <p class="text-white mt-4">{{i + 1}} - {{core_values.length}}</p>
             </div>
           </div>
         </div>

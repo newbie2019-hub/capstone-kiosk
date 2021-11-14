@@ -3,7 +3,7 @@
 body {
   font-family: 'Poppins', sans-serif !important;
   user-select: none;
-  background-color: black !important;
+  background-color: #000000 !important;
 }
 
 html {
@@ -604,6 +604,17 @@ blockquote:after {
   margin: 2.2em 2em !important;
 }
 
+.item-entertainment {
+  min-width: 280px !important;
+}
+
+.item-entertainment img {
+  max-height: 355px !important;
+  padding: 3.5rem 0rem 4.5rem 0rem !important;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
 .item-post img {
   position: absolute !important;
   top: 0; 
@@ -782,7 +793,7 @@ blockquote:after {
 
 .introcard-description {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   width: 100%;
   height: 100px;
@@ -810,7 +821,7 @@ blockquote:after {
 }
 
 .text-subheading {
-  color: rgb(211, 211, 211);
+  color: rgb(196, 196, 196);  
 }
 
 .lh-0 {

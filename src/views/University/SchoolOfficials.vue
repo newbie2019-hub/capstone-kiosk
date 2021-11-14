@@ -11,23 +11,28 @@
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4">{{currentNumber(i)}}</p>
             </div>
-            <img id="introcard" v-if="official.image" :src="official.image ? official.image : ''" alt="">
-            <img id="introcard" v-else src="@/assets/images/logo.png" alt="">
+            <div class="d-flex justify-content-center mt-4">
+              <b-avatar v-if="official.image" size="130" :src="official.image ? official.image : ''" variant="primary"/>
+              <b-avatar v-else variant="primary" size="130"/>   
+            </div>
             <div class="introcard-description">
               <h6 class="text-uppercase text-center">{{official.title}} {{official.first_name}} {{official.last_name}}</h6>
-              <h6 class="fw-light text-muted text-center"><small>{{official.role}}</small></h6>
-              <h6 class="fw-light text-muted text-center"><small>{{official.email}}</small></h6>
+              <h6 class="fw-light text-subheading text-center"><small>{{official.role}}</small></h6>
+              <h6 class="fw-light text-subheading text-center"><small>{{official.email}}</small></h6>
             </div>
           </div>
         </div>
       </main>
    </div>
+   <return-gesture/>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
   data() {
     return {
      

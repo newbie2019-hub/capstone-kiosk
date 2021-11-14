@@ -9,6 +9,7 @@ const TelDirectory = () => import('../views/University/TelDirectory.vue')
 const Announcement = () => import('../views/Announcement/Announcement.vue')
 
 const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
+const Draw = () => import('../views/Entertainment/DrawingCanvas.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
 
@@ -74,6 +75,11 @@ const routes = [
     path: '/entertainment',
     name: 'Entertainment',
     component: Entertainment
+  },
+  {
+    path: '/entertainment/draw',
+    name: 'Draw',
+    component: Draw
   },
 ]
 

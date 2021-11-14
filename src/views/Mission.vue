@@ -14,6 +14,7 @@
                 <h2 class="font-title text-uppercase">Mission</h2>
                 <h2 class="mt-5">{{missionvision[0].lnu_mission}}</h2>
               </blockquote>
+                <p class="text-white mt-4">1 - 2</p>
             </div>
           </div>
           <div id="introcard" class="item-corevalues">
@@ -22,6 +23,7 @@
                 <h2 class="font-title">Vision</h2>
                 <h2 class="mt-5">{{missionvision[0].lnu_vision}}</h2>
               </blockquote>
+              <p class="text-white mt-4">2 - 2</p>
             </div>
           </div>
         </div>
