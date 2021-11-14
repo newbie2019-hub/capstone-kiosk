@@ -177,16 +177,6 @@ export default {
 }
 </script>
 <style>
-.popup-announcement {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 100;
-  background: rgba(0, 0, 0, 0.863);
-}
-
 .post-selected {
   position: fixed;
   top: 0;

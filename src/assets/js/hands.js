@@ -270,7 +270,7 @@ window.onload = function () {
 
     const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (distance < 0.045) {
+    if (distance < 0.065) {
       holdCounter++
     }
     else {

@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="programs-overlay" v-if="cardClicked">
+    <div class="programs-overlay" v-if="cardClicked"  @click="detectClick">
       <div class="grid-container" v-if="cardClicked">
         <div class="title">
           <h2 class="text-center ">SELECT A CARD</h2>
           <p class="text-muted">Pinch on a card to view details</p>
-          <a href="" @click.prevent="cardClicked = false" class="text-decoration-none text-info fw-bold mt-2">CLOSE</a>
         </div>
         <main class="grid-item main">
           <div class="items" ref="horizontalpopup" @mousedown="onMouseDownPopup" @mousemove="onMouseMovePopup" @mouseup="onMouseUpPopup">
@@ -30,7 +29,7 @@
           </div>
         </main>
       </div>
-      <p class="close-text">COLLEGES, PROGRAMS, OBJECTIVES</p>
+      <p class="close-text">DOUBLE CLICK ANYWHERE TO CLOSE</p>
     </div>
 
     <div class="programs-content" v-if="isProgram" @click="isProgram = false">
@@ -101,6 +100,7 @@ export default {
       isProgram: false,
       isObjective: false,
       isGoal: false,
+      numClicks: 0
     }
   },
   mounted(){
@@ -116,6 +116,21 @@ export default {
     }
   },
   methods: {
+    detectClick: function() {
+      this.numClicks++;
+      if (this.numClicks === 1) {   
+          var self = this;
+          setTimeout(function() {
+              switch(self.numClicks) {  
+                    case 1:
+                      break;
+                    default:
+                      self.cardClicked = false
+              }
+              self.numClicks = 0;       
+          }, 1450);                         
+      } 
+    },
     currentNumber(i){
       return i + 1 < 10 ? `0${i + 1}` : i + 1
     },
