@@ -186,8 +186,9 @@ nav a:hover {
 
 .border-hover {
   border: 1px solid #6FDBFB !important;
-  box-shadow: 0px 0px 5px 3px #6FDBFB;
+  box-shadow: 0px 0px 4px 2px #6FDBFB !important;
   transform: scale(1.03);
+  transition: all 500ms;
 }
 
 .card img {
@@ -674,15 +675,16 @@ blockquote:after {
 .item-popup {
   display: inline-block;
   background: rgba(17, 17, 17, 0.959);
-  min-height: 355px;
-  max-height: 355px;
-  min-width: 320px;
-  max-width: 320px;
+  min-height: 335px;
+  max-height: 335px;
+  min-width: 290px;
+  max-width: 290px;
   margin: 2em 3.5em;
-  box-shadow: 0px 0px 4px 1px rgba(36, 226, 240, 0.671);
+  box-shadow: 0px 0px 4px 1px rgba(156, 156, 156, 0.671);
   /* border: 1.5px solid grey;   */
   border-radius: 3px;
   position: relative;
+  transition: all 500ms;
 }
 
 .item-popup-text-only {
@@ -723,8 +725,8 @@ blockquote:after {
 
 .program-img {
   width: 100%;
-  padding: 3rem 1rem 3rem 1rem!important;
-  filter: brightness(70%);
+  padding: 3rem 0rem 3rem 0rem!important;
+  filter: brightness(60%);
 }
 
 .items {

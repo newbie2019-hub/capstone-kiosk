@@ -5,41 +5,31 @@
         <div class="title">
           <h2 class="text-center ">SELECT A CARD</h2>
           <p class="text-muted">Pinch on a card to view details</p>
-          <a href="" class="text-decoration-none fw-bold mt-2" @click.prevent="cardClicked = false;">CLOSE</a>
+          <a href="" @click.prevent="cardClicked = false" class="text-decoration-none text-info fw-bold mt-2">CLOSE</a>
         </div>
         <main class="grid-item main">
           <div class="items" ref="horizontalpopup" @mousedown="onMouseDownPopup" @mousemove="onMouseMovePopup" @mouseup="onMouseUpPopup">
-            <div id="introcard" class="item-popup" @click="isProgram = true">
+            <div id="introcard" class="item-popup popupcard" @click="isProgram = true">
               <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
               <div class="introcard-description">
-                <h5 class="text-uppercase text-center mt-3">PROGRAMS</h5>
+                <h6 class="text-uppercase text-center mt-5">PROGRAMS</h6>
               </div>
             </div>
-            <div id="introcard" class="item-popup" @click="isObjective = true">
+            <div id="introcard" class="item-popup popupcard" @click="isObjective = true">
               <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
               <div class="introcard-description">
-                <h5 class="text-uppercase text-center mt-3">OBJECTIVES</h5>
+                <h6 class="text-uppercase text-center mt-5">OBJECTIVES</h6>
               </div>
             </div>
-            <div id="introcard" class="item-popup" @click="isProgram = false; isObjective = false; isGoal = true">
+            <div id="introcard" class="item-popup popupcard" @click="isProgram = false; isObjective = false; isGoal = true">
               <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
               <div class="introcard-description">
-                <h5 class="text-uppercase text-center mt-3">GOALS</h5>
+                <h6 class="text-uppercase text-center mt-5">GOALS</h6>
               </div>
             </div>
           </div>
         </main>
       </div>
-      <!-- <div class="programs-container">
-        <h2 class="text-center mt-5 pt-5 text-white text-uppercase font-weight-400">Goals</h2>
-        <div class="mt-4">
-          <h4 class="text-center text-white font-weight-400" v-for="goal in selectedCollege.goals" :key="goal.id">{{goal.goal}}</h4>
-        </div>
-        <h2 class="text-center mt-5 pt-5 text-white text-uppercase font-weight-400">Objectives</h2>
-        <div class="mt-4">
-          <h4 class="text-white text-center font-weight-400 mt-3" v-for="(objective, i) in selectedCollege.objectives" :key="i">{{objective.objective}}</h4>
-        </div>
-      </div> -->
       <p class="close-text">COLLEGES, PROGRAMS, OBJECTIVES</p>
     </div>
 
@@ -76,28 +66,34 @@
     <div class="grid-container">
       <div class="title">
         <h2 class="text-center ">BASIC EDUCATION AND COLLEGES</h2>
-        <p class="text-muted">Pinch on a card to view programs offered</p>
+        <p class="text-subheading">Pinch on a card to view more details</p>
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item" v-for="(college, i) in colleges" :key="i" v-on:click.prevent="selectedCollege = {...college}; cardClicked = true">
+          <div id="introcard" class="item itemcard" v-for="(college, i) in colleges" :key="i" v-on:click.prevent="selectedCollege = {...college}; cardClicked = true">
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
             </div>
-            <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
+            <img v-if="i == 0" id="introcard" class="program-img" src="@/assets/images/programs/0.jpg" alt="">
+            <img v-if="i == 1" id="introcard" class="program-img" src="@/assets/images/programs/1.jpg" alt="">
+            <img v-if="i == 2" id="introcard" class="program-img" src="@/assets/images/programs/2.jpg" alt="">
+            <img v-if="i == 3" id="introcard" class="program-img" src="@/assets/images/programs/0.jpg" alt="">
             <div class="introcard-description">
-              <h6 class="text-uppercase mt-3">{{college.name}}</h6>
+              <h6 class="text-uppercase mt-4 text-center">{{college.name}}</h6>
             </div>
           </div>
         </div>
       </main>
    </div>
+   <return-gesture />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import ReturnGesture from '../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
   data() {
     return {
       selectedCollege: '',
@@ -183,7 +179,7 @@ export default {
   position: fixed;
   bottom: 2rem;
   left: 3rem;
-  font-size: .8rem;
+  font-size: .9rem;
   color: rgb(187, 187, 187);
   text-transform: uppercase;
   letter-spacing: 1px;

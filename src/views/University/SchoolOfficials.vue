@@ -3,11 +3,11 @@
     <div class="grid-container">
       <div class="title">
         <h2 class="text-center ">SCHOOL OFFICIALS</h2>
-        <p class="text-muted">Pinch and drag to scroll left or right</p>
+        <p class="text-subheading">Pinch and drag to scroll left or right</p>
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item" v-for="(official, i) in schoolofficials" :key="i">
+          <div id="introcard" class="item officialcard" v-for="(official, i) in schoolofficials" :key="i">
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4">{{currentNumber(i)}}</p>
             </div>

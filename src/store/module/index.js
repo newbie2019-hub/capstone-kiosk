@@ -15,7 +15,7 @@ export default {
    colleges: [],
    faqs: [],
    posts: [],
-   isTutorial: false,
+   isTutorial: true,
   },
   getters: {
     GET_TUTORIAL(state){

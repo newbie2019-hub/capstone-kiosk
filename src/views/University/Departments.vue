@@ -3,11 +3,11 @@
     <div class="grid-container">
       <div class="title">
         <h2 class="text-center fw-light">DEPARTMENTS</h2>
-        <p class="text-muted">Pinch and drag to scroll left or right</p>
+        <p class="text-subheading">Pinch and drag to scroll left or right</p>
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item" v-for="(dep, i) in departments" :key="i">
+          <div id="introcard" class="item depcard" v-for="(dep, i) in departments" :key="i">
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
             </div>
@@ -20,12 +20,15 @@
         </div>
       </main>
    </div>
+   <return-gesture />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
   data() {
     return {
      

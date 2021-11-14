@@ -2,7 +2,7 @@
  <div>
    <section class="container mb-5 pt-5">
      <h2 class="text-white mt-5">UNIVERSITY</h2>
-     <p class="text-muted">Pinch your finger on any of the cards</p>
+     <p class="text-subheading">Pinch your finger on any of the cards</p>
      <hr v-once class="mb-5 mt-2 bg-white zindex-999"/>
      <div class="row justify-content-center">
        <div class="col-md-6 col-lg-6">
@@ -96,24 +96,25 @@
       <h2 class="text-white mt-5">FAQS</h2>
       <p class="text-muted">Pinch on any of the question to expand</p>
       <hr v-once class="mb-5 mt-2 bg-white zindex-999"/>
-      <div class="row">
-      <div class="col-lg-12">
-        <div v-for="(faq, i) in faqs" :key="i">
-          <button class="accordion">{{faq.question}}</button>
-          <div class="panel">
-            <p>{{faq.answer}}</p>
+      <div class="row pb-4">
+        <div class="col-lg-12 mb-5">
+          <div v-for="(faq, i) in faqs" :key="i">
+            <button class="accordion">{{faq.question}}</button>
+            <div class="panel">
+              <p>{{faq.answer}}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
    </section>
+   <return-gesture/>
  </div>
 </template>
-
 <script>
-
 import { mapState } from 'vuex'
+import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
   mounted() {
     document.title = 'Touchless Information Kiosk - FAQs'
     var acc = document.getElementsByClassName("accordion");

@@ -8,7 +8,7 @@
    <main class="grid-item main">
     <div class="items" ref="horizontalentertainment" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" >
      <router-link to='/entertainment/draw' class="text-decoration-none text-white">
-      <div id="introcard" class="item item-entertainment">
+      <div id="introcard" class="item item-entertainment ecard">
         <div class="d-flex justify-content-end">
           <p class="mt-3 me-4 fw-light">01</p>
         </div>

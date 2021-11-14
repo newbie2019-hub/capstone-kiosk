@@ -1,9 +1,6 @@
 <template>
  <div class="">
-  <div class="post-selected" v-if="viewPost">
-    <div class="close-section" @click.prevent="viewPost = false">
-      <p>X</p>
-    </div>
+  <div class="post-selected" v-if="viewPost" @click.prevent="viewPost = false">
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="d-flex align-items-center">
@@ -21,11 +18,12 @@
         <div class="text-white mt-5" v-html="selectedPost.postcontent.content"></div>
       </div>
     </div>
+    <p class="close-text">Click anywhere to close</p>
   </div>
   <div class="grid-container">
     <div class="title">
       <h2 class="text-center fw-light">ANNOUNCEMENTS</h2>
-      <p class="text-muted">Pinch and drag to scroll left or right</p>
+      <p class="text-subheading">Pinch and drag to scroll left or right</p>
     </div>
       <main class="grid-item main">
       <div class="items" ref="horizontalpost" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
@@ -44,12 +42,14 @@
       </div>
     </main>
   </div>
+  <return-gesture />
  </div>
 </template>
 <script>
 import {mapState} from 'vuex'
-
+import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
+ components: {ReturnGesture},
   data(){
     return {
       selectedPost: {
@@ -106,6 +106,18 @@ export default {
 }
 </script>
 <style>
+
+.close-text{
+  position: fixed;
+  bottom: 2rem;
+  left: 3rem;
+  font-size: .9rem;
+  color: rgb(190, 190, 190);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
 .overflow-y-scroll {
   height: 100% !important;
   max-height: 65vh !important;

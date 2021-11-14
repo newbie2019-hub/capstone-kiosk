@@ -22,7 +22,7 @@
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item" v-for="(em, i) in emoji" :key="i">
+          <div id="introcard" class="item feedbackcard" v-for="(em, i) in emoji" :key="i">
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
             </div>
@@ -30,20 +30,22 @@
               <i :class="em.class"></i>
             </div>
             <div class="introcard-description">
-              <h6 class="mt-4 text-uppercase text-center">{{em.name}}</h6>
+              <h6 class="mt-5 text-uppercase text-center">{{em.name}}</h6>
             </div>
           </div>
         </div>
       </main>
    </div>
+   <return-gesture />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import {gsap} from 'gsap';
-
+import ReturnGesture from '../components/ReturnGesture.vue';
 export default {
+ components: {ReturnGesture},
   data() {
     return {
       isFeedBack: false,

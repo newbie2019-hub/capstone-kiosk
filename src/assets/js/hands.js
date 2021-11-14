@@ -186,17 +186,21 @@ window.onload = function () {
   let return_timer = null;
   let countdown = 3;
   let flagReturn = false;
+  let frameCounter = 0
 
   function returnGestureRecog(res){
     if (window.location.pathname == '/') {
       clearReturn()
       return
     }
-
+    
     const { multiHandLandmarks, multiHandedness } = res
+
     for (let index = 0; index < multiHandLandmarks.length; index++) {
       const classification = multiHandedness[index];
       const isRight = classification.label === 'Right';
+
+      //FRAMES OF RIGHT HAND BEFORE EMITING RETURN
       if(isRight){
         if(multiHandLandmarks[index][4].x > multiHandLandmarks[index][17].x){
           returnPrevRoute()
@@ -207,14 +211,19 @@ window.onload = function () {
         }
       }
       else {
-        if(multiHandLandmarks[index][4].x < multiHandLandmarks[index][17].x){
-          returnPrevRoute()
-          flagReturn = true
-        }
-        else {
-          clearReturn()
+        frameCounter++
+
+        if(frameCounter > 5){
+          if(multiHandLandmarks[index][4].x < multiHandLandmarks[index][17].x){
+            returnPrevRoute()
+            flagReturn = true
+          }
+          else {
+            clearReturn()
+          }
         }
       }
+
     }
 
   }
@@ -230,7 +239,7 @@ window.onload = function () {
         clearReturn()
       }
       //Threshold or Interval to emit the return gesture again
-      sleep(3000)
+      sleep(4000)
     }, 1000)
   
     return_timer = window.setTimeout(()=>{
@@ -241,6 +250,7 @@ window.onload = function () {
   function clearReturn(){
     if(countdown == 3 && flagReturn == false) return
     clearInterval(iv)
+    frameCounter = 0
     countdown = 3
     countdown_timer.innerHTML = '•'
     clearTimeout(return_timer)
