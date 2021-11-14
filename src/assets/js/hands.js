@@ -91,8 +91,8 @@ window.onload = function () {
             x *= window.outerWidth - 30
             y *= window.outerHeight - 100
 
-            pointer.style.left = `${ x }px`
-            pointer.style.top = `${ y }px`
+            pointer.style.left = `${ x + 22 }px`
+            pointer.style.top = `${ y + 22 }px`
 
             hoverElement(x, y)
 
@@ -722,8 +722,6 @@ window.onload = function () {
 
 
   const memory = navigator.deviceMemory
-  const proc = navigator.hardwareConcurrency
-  // console.log(proc)
   if(memory < 8){
     confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
   }

@@ -16,13 +16,13 @@
               </div>
             </div>
             <div id="introcard" class="item-popup popupcard" @click="isObjective = true">
-              <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
+              <img id="introcard" class="program-img" src="@/assets/images/objective.jpg" alt="">
               <div class="introcard-description">
                 <h6 class="text-uppercase text-center mt-5">OBJECTIVES</h6>
               </div>
             </div>
             <div id="introcard" class="item-popup popupcard" @click="isProgram = false; isObjective = false; isGoal = true">
-              <img id="introcard" class="program-img" src="@/assets/images/university.jpg" alt="">
+              <img id="introcard" class="program-img" src="@/assets/images/goals.jpg" alt="">
               <div class="introcard-description">
                 <h6 class="text-uppercase text-center mt-5">GOALS</h6>
               </div>
@@ -158,7 +158,7 @@ export default {
 </script>
 <style>
 .programs-overlay {
-  background: rgba(0, 0, 0, 0.884);
+  background: rgba(0, 0, 0, 0.856);
   position: fixed;
   height: 100vh;
   width: 100%;
@@ -168,7 +168,6 @@ export default {
   top: 0;
   left: 0;
   overflow: auto;
-
 }
 
 .programs-container {

@@ -7,7 +7,10 @@
           <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
           <div class="d-flex flex-column ms-4 lh-0 mx-auto text-white" style="line-height: 1.2rem">
             <h5>{{selectedPost.useraccount.userinfo.first_name}} {{selectedPost.useraccount.userinfo.last_name}}</h5>
-            <h6>{{selectedPost.useraccount.userinfo.organization.abbreviation ? selectedPost.useraccount.userinfo.organization.abbreviation : selectedPost.useraccount.userinfo.organization.name}} 
+            <h6 v-if="selectedPost.useraccount.userinfo.organization">{{selectedPost.useraccount.userinfo.organization.abbreviation ? selectedPost.useraccount.userinfo.organization.abbreviation : selectedPost.useraccount.userinfo.organization.name}} 
+             - {{selectedPost.useraccount.userinfo.role.role}}
+            </h6>
+            <h6 v-else>{{selectedPost.useraccount.userinfo.department.abbreviation ? selectedPost.useraccount.userinfo.department.abbreviation : selectedPost.useraccount.userinfo.department.name}} 
              - {{selectedPost.useraccount.userinfo.role.role}}
             </h6>
           </div>
@@ -118,12 +121,6 @@ export default {
   font-weight: 400;
 }
 
-.overflow-y-scroll {
-  height: 100% !important;
-  max-height: 65vh !important;
-  overflow-y: auto!important;
-}
-
 .post-selected {
   position: fixed;
   top: 0;
@@ -151,36 +148,4 @@ export default {
   text-justify: inter-word;
 }
 
-.close-section {
-  position: fixed;
-  top: 52%;
-  left: 14%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgb(31, 31, 31);
-  box-shadow: 0px 0px 5px 2px white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 500;
-  font-size: 1.5rem;
-  cursor: pointer;
-  animation: float 4s ease-in-out infinite;
-}
-
-
-@keyframes float {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-15px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
-}
 </style>

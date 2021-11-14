@@ -15,7 +15,9 @@ export default {
    colleges: [],
    faqs: [],
    posts: [],
-   isTutorial: true,
+   selectedOrgPost: [],
+   selectedDepPost: [],
+   isTutorial: false,
   },
   getters: {
     GET_TUTORIAL(state){
@@ -23,6 +25,12 @@ export default {
     }
   },
   mutations: {
+   SET_SELECTED_ORG_POST(state, data){
+    state.selectedOrgPost = data
+   },
+   SET_SELECTED_DEP_POST(state, data){
+    state.selectedDepPost = data
+   },
    SET_TUTORIAL_STATE(state, data){
     state.isTutorial = data
    },
@@ -56,6 +64,26 @@ export default {
   
   },
   actions: {
+    async getSelectedDepPost({commit}, data){
+      const res = await API.post(`requestDepPost`, data).then(res => {
+        commit('SET_SELECTED_DEP_POST', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
+    async getSelectedOrgPost({commit}, data){
+      const res = await API.post(`requestOrgPost`, data).then(res => {
+        commit('SET_SELECTED_ORG_POST', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
     async getPosts({commit}){
       const res = await API.get(`/posts`).then(res => {
         commit('SET_POSTS', res.data)

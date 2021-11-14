@@ -722,11 +722,27 @@ blockquote:after {
   position: relative;
 }
 
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.close-text{
+  position: fixed;
+  bottom: 2rem;
+  left: 3rem;
+  font-size: .9rem;
+  color: rgb(190, 190, 190);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
 
 .program-img {
   width: 100%;
   padding: 3rem 0rem 3rem 0rem!important;
-  filter: brightness(60%);
+  filter: brightness(70%);
 }
 
 .items {

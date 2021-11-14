@@ -1,5 +1,58 @@
 <template>
-  <div >
+  <div>
+    <div class="post-selected" v-if="viewPost" @click.prevent="viewPost = false">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="d-flex align-items-center">
+            <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
+            <div class="d-flex flex-column ms-4 lh-0 mx-auto text-white" style="line-height: 1.2rem">
+              <h5>{{selectedPost.useraccount.userinfo.first_name}} {{selectedPost.useraccount.userinfo.last_name}}</h5>
+              <h6>{{selectedPost.useraccount.userinfo.department.abbreviation ? selectedPost.useraccount.userinfo.department.abbreviation : selectedPost.useraccount.userinfo.department.name}} 
+              - {{selectedPost.useraccount.userinfo.role.role}}
+              </h6>
+            </div>
+            <div class="me-4">
+              <p class="mb-4 text-white">September 23, 2021</p>
+            </div>
+          </div>
+          <div class="text-white mt-5" v-html="selectedPost.postcontent.content"></div>
+        </div>
+      </div>
+      <p class="close-text">Click anywhere to close</p>
+    </div>
+
+    <div class="popup-announcement" v-if="viewAnnouncement" @click="detectClick">
+      <div class="loading" v-if="isLoading">
+        <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="grid-container" v-else>
+        <div class="title">
+          <h2 class="text-center fw-light">ANNOUNCEMENTS</h2>
+          <p class="text-subheading">Pinch and drag to scroll left or right</p>
+        </div>
+          <main class="grid-item main">
+          <div class="items" ref="popuppost" @mousedown="onMouseDownAnnouncement" @mousemove="onMouseMoveAnnouncement" @mouseup="onMouseUpAnnouncement">
+            <div @click.prevent="setViewPost(post)" id="introcard" class="item item-post" v-for="(post, i) in selectedDepPost" :key="i">
+              <img v-if="post.postcontent.image" :src="`http://127.0.0.1:8000/uploads/${post.postcontent.image}`" class="card-img" alt="...">
+              <img v-else :src="`http://127.0.0.1:8000/defaults/university-logo.png`" class="card-img" alt="...">
+              <div class="card-img-overlay text-wrap p-4">
+                <h5 class="card-title">{{post.postcontent.title }}</h5>
+                <p class="card-text fw-light mt-3 ql-align-justify">{{post.postcontent.post_excerpt}}</p>
+              </div>
+              <div class="added-by">
+                <p>{{post.useraccount.userinfo.first_name}} {{post.useraccount.userinfo.last_name}}</p>
+                <p>{{post.useraccount.userinfo.role.role}}</p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <p class="close-text">Double click anywhere to close</p>
+    </div>
+
+    <!--- DEPARTMENT GRID ----->
     <div class="grid-container">
       <div class="title">
         <h2 class="text-center fw-light">DEPARTMENTS</h2>
@@ -7,7 +60,7 @@
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-          <div id="introcard" class="item depcard" v-for="(dep, i) in departments" :key="i">
+          <div @click="requestDepPost(dep.name)" id="introcard" class="item depcard" v-for="(dep, i) in departments" :key="i">
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
             </div>
@@ -29,12 +82,57 @@ import { mapState } from 'vuex';
 import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
  components: {ReturnGesture},
-  data() {
+  data(){
     return {
-     
+      selectedPost: {
+        postcontent: {
+          content: ''
+        },
+        useraccount: {
+          userinfo: {
+            department: {
+              abbreviation: '',
+              name: '',
+            }
+          }
+        }
+      },
+      viewAnnouncement: false,
+      viewPost: false,
+      numClicks: 0,
+      isLoading: false
     }
   },
-   methods: {
+  methods: {
+    detectClick: function() {
+      this.numClicks++;
+      if (this.numClicks === 1) {   
+          var self = this;
+          setTimeout(function() {
+              switch(self.numClicks) {  
+                    case 1:
+                      break;
+                    default:
+                      self.viewAnnouncement = false
+              }
+              self.numClicks = 0;       
+          }, 1450);                         
+      } 
+    },
+    setViewPost(data){
+      this.selectedPost = data
+      this.viewPost = true
+      this.numClicks = 0
+    },
+    async requestDepPost(data){
+      this.isLoading = true
+      this.viewAnnouncement = true
+      const orgdata = {
+        name: data
+      }
+      await this.$store.dispatch('info/getSelectedDepPost', orgdata)
+      this.isLoading = false
+    },
     currentNumber(i){
       return i + 1 < 10 ? `0${i + 1}` : i + 1
     },
@@ -50,13 +148,29 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontal.offsetLeft;
-      const walk = (x - this.startX) * 1.1; //scroll-fast
+      const walk = (x - this.startX) * 1.2; //scroll-fast
       this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
     },
+    onMouseDownAnnouncement(e) {
+      this.isDown = true
+      this.startX = e.pageX - this.$refs.popuppost.offsetLeft;
+      this.scrollLeft = this.$refs.popuppost.scrollLeft;
+    },
+    onMouseUpAnnouncement() {
+      this.isDown = false
+    },
+    onMouseMoveAnnouncement(e) {
+      if(!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.popuppost.offsetLeft;
+      const walk = (x - this.startX) * 1.2; //scroll-fast
+      this.$refs.popuppost.scrollLeft = this.scrollLeft - walk;
+    },
+    
     
   },
   computed: {
-  ...mapState('info', ['departments'])
+  ...mapState('info', ['departments', 'selectedDepPost'])
   }
 }
 </script>
