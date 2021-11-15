@@ -174,4 +174,37 @@ export default {
   }
 }
 </script>
+<style>
+.post-selected {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.836);
+  padding-top: 7rem;
+  overflow: auto;
+  padding-bottom: 6rem;
+}
+
+.popup-announcement {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.863);
+}
+
+.added-by {
+  position: absolute;
+  bottom: 1rem;
+  color: rgb(223, 223, 223);
+  font-weight: 400;
+  left: 1.5rem;
+  font-size: .9rem;
+}
+</style>
 
