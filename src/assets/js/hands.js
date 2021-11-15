@@ -272,18 +272,17 @@ window.onload = function () {
 
     if (distance < 0.065) {
       holdCounter++
-      dragErrorFrame = 0
-
+      // dragErrorFrame = 0
     }
     else {
       holdCounter = 0
       if (dragStatus == 'held') { 
-        dragErrorFrame++
+        // dragErrorFrame++
 
-        if(dragErrorFrame > 2){
+        // if(dragErrorFrame > 2){
           dragStatus = 'released'
-          dragErrorFrame = 0
-        }
+          // dragErrorFrame = 0
+        // }
       }
     }
 
