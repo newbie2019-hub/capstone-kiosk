@@ -35,8 +35,8 @@
           <main class="grid-item main">
           <div class="items" ref="popuppost" @mousedown="onMouseDownAnnouncement" @mousemove="onMouseMoveAnnouncement" @mouseup="onMouseUpAnnouncement">
             <div @click.prevent="setViewPost(post)" id="introcard" class="item item-post" v-for="(post, i) in selectedDepPost" :key="i">
-              <img v-if="post.postcontent.image" :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`" class="card-img" alt="...">
-              <img v-else :src="`https://be.lnukiosk.live/defaults/university-logo.png`" class="card-img" alt="...">
+              <img v-if="post.postcontent.image" :src="`http://127.0.0.1:8000/uploads/${post.postcontent.image}`" class="card-img" alt="...">
+              <img v-else :src="`http://127.0.0.1:8000/defaults/university-logo.png`" class="card-img" alt="...">
               <div class="card-img-overlay text-wrap p-4">
                 <h5 class="card-title">{{post.postcontent.title }}</h5>
                 <p class="card-text fw-light mt-3 ql-align-justify">{{post.postcontent.post_excerpt}}</p>
