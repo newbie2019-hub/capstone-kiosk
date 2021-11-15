@@ -263,7 +263,7 @@ window.onload = function () {
    * Check if distance between landmark[4] and landmark[8]
    * 
    */
-  let holdCounter = 0, prevCounter = 0;
+  let holdCounter = 0, dragErrorFrame = 0
   let dragStatus = 'none'
   let targetWindow = null
   async function isDrag(distance, x, y) {
@@ -272,14 +272,18 @@ window.onload = function () {
 
     if (distance < 0.065) {
       holdCounter++
+      dragErrorFrame = 0
+
     }
     else {
-      if(holdCounter != 0){
-        prevCounter = holdCounter
-      }
       holdCounter = 0
       if (dragStatus == 'held') { 
-        dragStatus = 'released'
+        dragErrorFrame++
+
+        if(dragErrorFrame > 2){
+          dragStatus = 'released'
+          dragErrorFrame = 0
+        }
       }
     }
 
@@ -308,7 +312,7 @@ window.onload = function () {
    * CHECK IF data == [0, 1, 1, 0, 0] - PEACE SIGN
    * 
    */
-  let clickCounter = 0, prevClickCounter = 0, clicked = false
+  let clickCounter = 0, clicked = false
   let click_status = 'none'
   function isClicking(data, x, y){
     const $el = document.elementFromPoint(x + 22, y + 22)
@@ -317,9 +321,6 @@ window.onload = function () {
       clickCounter++
     }
     else {
-      if(clickCounter != 0){
-        prevClickCounter = clickCounter
-      }
       clickCounter = 0
       if (click_status == 'held') { 
         click_status = 'released'
@@ -511,7 +512,7 @@ window.onload = function () {
         duration: 1,
         overwrite: true,
         immediateRender: true,
-        ease: 'expo.easeInOut',
+        ease: 'linear.easeNone',
       })
 
       targetWindow.scrollTo(0, tweenScroll.y)
