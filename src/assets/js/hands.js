@@ -56,12 +56,7 @@ window.onload = function () {
 
     notifNoHandsDetected(results.multiHandedness)
     updatePointerVisibility(results)
-    
-    //SLIDE NAVIGATION - 
-    //IF NO FINGERS ARE UP EMIT SCROLL 
-    //(e.g. left or right hand - left or right scroll)
-    // slideNavigation()
-   
+
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
@@ -705,6 +700,7 @@ window.onload = function () {
       width: window.Width,
       height: window.Height
     });
+
     camera.start();
   }
 
@@ -719,7 +715,6 @@ window.onload = function () {
     await store.dispatch('info/getFAQs')
     await store.dispatch('info/getPosts')
   }
-
 
   const memory = navigator.deviceMemory
   if(memory < 8){

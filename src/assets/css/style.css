@@ -542,6 +542,15 @@ blockquote:after {
   overflow: hidden;
 }
 
+
+.control-panel {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  z-index: 999;
+}
+
+
 /** INPUT SUGGESTION */
 .form-suggestion {
   width: 100%;

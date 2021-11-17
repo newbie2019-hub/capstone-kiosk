@@ -54,7 +54,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontal.offsetLeft;
-      const walk = (x - this.startX) * 1.1; //scroll-fast
+      const walk = (x - this.startX) * 1.4; //scroll-fast
       this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
     },
     

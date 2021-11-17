@@ -55,7 +55,7 @@
     <!--- DEPARTMENT GRID ----->
     <div class="grid-container">
       <div class="title">
-        <h2 class="text-center fw-light">DEPARTMENTS</h2>
+        <h2 class="text-center fw-light">UNIT</h2>
         <p class="text-subheading">Pinch and drag to scroll left or right</p>
       </div>
        <main class="grid-item main">
@@ -148,7 +148,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontal.offsetLeft;
-      const walk = (x - this.startX) * 1.2; //scroll-fast
+      const walk = (x - this.startX) * 1.4; //scroll-fast
       this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
     },
     onMouseDownAnnouncement(e) {
@@ -163,7 +163,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.popuppost.offsetLeft;
-      const walk = (x - this.startX) * 1.2; //scroll-fast
+      const walk = (x - this.startX) * 1.4; //scroll-fast
       this.$refs.popuppost.scrollLeft = this.scrollLeft - walk;
     },
     
