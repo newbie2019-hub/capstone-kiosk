@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
-import '@mediapipe/control_utils/control_utils.css'
+
 Vue.config.productionTip = false
 Vue.use(AvatarPlugin)
 

@@ -639,10 +639,11 @@ blockquote:after {
 
 .item-tutorial {
   display: inline-block;
+  height: 100%;
   min-height: 380px;
   min-width: 100%;
   scroll-behavior: smooth;
-  margin: 1em 0em;
+  /* margin: 1em 0em; */
   border-radius: 10px;
   position: relative;
 }
@@ -653,6 +654,7 @@ blockquote:after {
   transform: translateX(-50%);
   background: rgb(0, 0, 0);
   border: 1px solid rgba(228, 228, 228, 0.527);
+  height: 100%;
   min-height: 380px;
   min-width: 280px;
   border-radius: 10px;
