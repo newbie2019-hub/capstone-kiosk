@@ -1,10 +1,10 @@
 <template>
  <div>
-  <div class="return-container">
+  <div class="click-container">
    <div class="d-flex">
-    <img src="@/assets/images/return-transparent.gif" alt="" class="img-fluid">
+    <img src="@/assets/images/click-transparent.gif" alt="" class="img-fluid">
     <div class="d-flex align-items-center">
-     <span class="return-text">Return to <br/> previous route</span>
+     <span class="click-text">Make peace gesture <br/> to emit click</span>
     </div>
    </div>
   </div>
@@ -16,19 +16,19 @@ export default {
 }
 </script>
 <style>
-.return-container {
+.click-container {
  position: fixed;
  bottom: 1rem;
  left: 1.5rem;
 }
 
-.return-container img{
+.click-container img{
  object-fit: cover;
  width: 110px;
  height: 90px;
 }
 
-.return-text {
+.click-text {
  font-size: .9rem;
  color: white;
  text-transform: uppercase;

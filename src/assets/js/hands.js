@@ -50,17 +50,29 @@ window.onload = function () {
          console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
-      }, 1500)
+      }, 1250)
       loaded = true
     }
-
+    
     notifNoHandsDetected(results.multiHandedness)
     updatePointerVisibility(results)
+
+    /**
+     * 
+     *  CLINCH HANDS SCROLL
+     *  EMIT SCROLL IF NO FINGERS ARE UP
+     *  
+     *  IF LEFT EMIT SCROLL UP 
+     *  IF RIGHT EMIT SCROLL DOWN
+     * 
+     *  THIS WAS A REPLACEMENT FOR THE SWIPE
+     *  UP GESTURE NAVIGATION
+     * 
+     */
 
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
-
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
         
@@ -72,12 +84,18 @@ window.onload = function () {
         }
       }
 
+     
       returnGestureRecog(results)
+      
 
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
 
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
+
+            if(window.location.pathname == '/' || window.location.pathname == '/university'){
+              SwipeNavigation(results)
+            }  
 
             //Check distance of the tip index and thumb
             //https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
@@ -223,6 +241,55 @@ window.onload = function () {
 
   }
 
+  //CHECK NAVIGATION IF LEFT OR RIGHT
+  let navigate = false
+  let emitNavigation = false, isRight = false
+  let prevCounter = 0
+  function SwipeNavigation(results){
+    for (let index = 0; index < results.multiHandLandmarks.length; index++) {
+      const classification = results.multiHandedness[index];
+      isRight = classification.label === 'Right';
+
+      let counter = 0
+      //RIGHT HAND SCROLL
+      fingersUp(results.multiHandLandmarks[index]).forEach(value => {
+        if(value == 0) {
+          counter++
+        }
+      });
+
+      if(counter == 5){
+        navigate = true
+        if(prevCounter == 0){
+          prevCounter = counter
+        }
+      }
+      else {
+        navigate = false
+      }
+
+      if(prevCounter != 0 && counter == 0){
+        if(!emitNavigation){
+          emitNavigation = true
+        }
+      }
+ 
+    }
+
+    if(emitNavigation) {
+      if(isRight){
+        const event = new CustomEvent('scroll-down')
+        document.dispatchEvent(event)
+      }
+      else {
+        const event = new CustomEvent('scroll-up')
+        document.dispatchEvent(event)
+      }
+      emitNavigation = false
+      prevCounter = 0
+    }
+  }
+
   function returnPrevRoute(){
     if(flagReturn) return
     countdown = 3;
@@ -258,31 +325,24 @@ window.onload = function () {
    * Check if distance between landmark[4] and landmark[8]
    * 
    */
-  let holdCounter = 0, dragErrorFrame = 0
+  let holdCounter = 0
   let dragStatus = 'none'
   let targetWindow = null
   async function isDrag(distance, x, y) {
-
     const $el = document.elementFromPoint(x + 22, y + 22)
 
     if (distance < 0.065) {
       holdCounter++
-      // dragErrorFrame = 0
     }
     else {
       holdCounter = 0
       if (dragStatus == 'held') { 
-        // dragErrorFrame++
-
-        // if(dragErrorFrame > 2){
-          dragStatus = 'released'
-          // dragErrorFrame = 0
-        // }
+        dragStatus = 'released'
       }
     }
 
-    mousePointerUpdate(dragStatus, x, y)
     targetWindow = getTarget($el)
+    mousePointerUpdate(dragStatus, x, y)
 
     if (dragStatus == 'released' && holdCounter == 0) {
       dragStatus = 'none'
@@ -354,82 +414,6 @@ window.onload = function () {
   }
 
 
-  /**
-   * 
-   * THIS WAS THE PREVIOUS IMPLEMENTATION
-   * OF CLICK GESTURE - TO CLICK
-   * PINCH YOUR THUMB AND INDEX FINGER
-   *
-   *  ---- REPLACED BY PEACE SIGN ----
-   * 
-   *
-   */
-  // async function isClicked(distance, x, y) {
-
-  //   const $el = document.elementFromPoint(x + 22, y + 22)
-
-  //   if (distance < 0.045) {
-  //     click_counter++
-  //   }
-  //   else {
-  //     if(click_counter != 0){
-  //       prevCounter = click_counter
-  //     }
-  //     click_counter = 0
-  //     if (click_status == 'held') { 
-  //       click_status = 'released'
-  //       clicked = true
-  //     }
-  //   }
-
-  //   mousePointerUpdate(click_status, x, y)
-  //   targetWindow = getTarget($el)
-
-  //   if (click_status == 'released' && click_counter == 0) {
-  //     click_status = 'none'
-  //   }
-  //   else if (click_counter > 0 && click_counter <= 1) {
-  //     click_status = 'start'
-  //   }
-  //   else if (click_counter > 2) {
-  //     click_status = 'held'
-  //   }
-
-  //   if(prevCounter > 10) return
-  //   if (clicked && click_counter == 0) {
-  //     drawRipple()
-  //     if ($el) {
-  //       $el.dispatchEvent(
-  //         new MouseEvent('click', {
-  //           bubbles: true,
-  //           cancelable: true,
-  //           clientX: x,
-  //           clientY: y,
-  //           pageX: x,
-  //           pageY: y,
-  //         })
-  //       )
-  //       $el.dispatchEvent(
-  //         new MouseEvent('mouseup', {
-  //           bubbles: true,
-  //           view: window,
-  //           cancelable: true,
-  //           clientX: x + 22 ,
-  //           clientY: y + 22,
-  //           pageX: x + 22,
-  //           pageY: y + 22,
-  //         })
-  //       )
-
-  //       // Focus
-  //       if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
-  //         $el.focus()
-  //     }
-  //     clicked = false
-  //   }
-
-  // }
-
   //Native Sleep
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -500,7 +484,7 @@ window.onload = function () {
         mousePointerStatus = 'held'
         mouse_pointer.classList.add('pointer-interaction')
       }
-
+      
       gsap.to(tweenScroll, {
         y: tweenScroll.y + (initialY - y) * 1.5,
         duration: 1,
@@ -574,42 +558,7 @@ window.onload = function () {
     }
   }
 
-  /**
-   * 
-   * SCROLL COUNT IF > 0 START POSITION
-   * 
-   * TWO HANDS SCROLL - DISABLED
-   * TO BE REMOVED 
-   * REPLACED WITH PINCH AND DRAG 
-   * FOR VERTICAL SCROLLING
-   * 
-   */
-  // let scroll_count = 0;
-  // function scrollingFunctionality(result) {
-  //   if (result.length != 2) {
-  //     scroll_count = 0
-  //     initPosY = 0
-  //     return
-  //   }
-  //   if ((result[0].label == 'Right' && result[1].label == 'Left') || (result[0].label == 'Left' && result[1].label == 'Right')) {
-  //     scroll_count++
-  //   }
-  // }
-
-  /**
-   * NOTIFICATION FOR TWO HANDS SCROLLING
-   * DISABLED - TO BE REMOVED
-   */
-  //Notif message - Scrolling Enabled
-  // function notifScrolling() {
-  //   if (scroll_count > 3) {
-  //     if (scroll_count && notif.style.display == 'block') return
-  //     notif.style.display = 'block';
-  //     notiftitle.innerText = 'Scrolling Enabled'
-  //     notifmessage.innerText = 'Slide your right hand from top to bottom or vice-versa'
-  //   }
-  // }
-
+  
   //Notif message - No Hands Detected
   let nohands = true
   function notifNoHandsDetected(multiHandLandmarks) {
@@ -629,46 +578,63 @@ window.onload = function () {
 
   /**
    * 
-   * CHECKING FOR THE INITIAL VALUE OF
-   * THE PALM LANDMARK 
-   * COMPARING IT TO CHECK IF THE SCROLL WILL
-   * MOVE UP OR MOVE DOWN
+   *  SCROLL UP OR DOWN GESTURE
+   *  CHECK FOR THE DISTANCE WITHIN A 450ms TIME
+   *  IF DISTANCE IS GREATER THAN initialY + 230 
+   *  EMIT DOWN
+   *  IF DISTANCE IS LESS THAN initialY - 200
+   *  EMIT UP
+   *  
+   *  ------------------------------------------
    * 
-   * ---- DISABLED AND WAS REPLACED WITH
-   * ---- PINCH AND DRAG THE SAME GOES FOR
-   * ---- HORIZONTAL SCROLLING
+   *  NOT STABLE - WILL BE REPLACED BY HAND CLINCH
    * 
    */
-  // let initPosY = 0
-  // let currentPosY = 0
-  // function scrollingDetection(result) {
-  //   mouse_pointer.style.display = 'none'
+  // let initialScrollValueY = 0, hasScrolled = false
+  // function scrolling(y){
 
-  //   if (initPosY == 0) {
-  //     initPosY = result[0].y
-  //   }
-  //   else {
-  //     currentPosY = result[0].y
+  //   if(initialScrollValueY == 0){
+  //     initialScrollValueY = y
   //   }
 
-  //   // console.log('Initial Pos: ');
-  //   // console.log(initPosY + '\n');
-  //   // console.log('Current Pos: ');
-  //   // console.log(currentPosY + '\n');
+  //   setTimeout(function() {
+  //     if(initialScrollValueY != 0){
 
-  //   if ((initPosY - 0.04) > currentPosY) {
-  //     console.log('Scrolling Up')
-  //     window.scrollTo(0, window.scrollY + 25)
+  //       if(!hasScrolled){
+  //         if(y >= initialScrollValueY + 230){
+  //           console.log(`Initial Scrolling: ${initialScrollValueY + 200}\nCurrent Y: ${y}`)
+  //           const event = new CustomEvent('scroll-down')
+  //           document.dispatchEvent(event)
+  //           hasScrolled = true
+  //         }
+          
+  //         if(y <= initialScrollValueY - 230){
+  //           console.log(`Initial Scrolling: ${initialScrollValueY - 200}\nCurrent Y: ${y}`)
+  //           const event = new CustomEvent('scroll-up')
+  //           document.dispatchEvent(event)
+  //           hasScrolled = true
+  //         }
+  //       }
+
+  //     }
+
+  //     initialScrollValueY = 0;       
+  //   }, 450);  
+    
+  //   if(hasScrolled){
+  //     setTimeout(() => {
+  //       hasScrolled = false
+  //     }, 250)
   //   }
-
-  //   if ((initPosY + 0.04) < currentPosY) {
-  //     console.log('Scrolling Down')
-  //     window.scrollTo(0, window.scrollY - 25)
-  //   }
-
+  
   // }
 
-  //Ripple Event Handler
+  /**
+   *  RIPPLE EFFECT 
+   *  DISPLAY IF CLICK IS
+   *  EMITTED
+   * 
+   */
   function drawRipple() {
     const node = document.querySelector(".ripple");
     const newNode = node.cloneNode(true);

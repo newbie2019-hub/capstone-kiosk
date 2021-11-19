@@ -1,10 +1,10 @@
 <template>
  <div>
      <div class="grid-container-home">
-      <div class="title-home">
-        <h2 class="">MISSION AND VISION</h2>
-        <p class="">Pinch and drag to scroll left or right</p>
-        <hr v-once class="mt-2 bg-white zindex-999"/>
+      <div class="title-home mt-5">
+        <!-- <h2 class="">MISSION AND VISION</h2> -->
+        <!-- <p class="text-center">Pinch and drag to scroll left or right</p> -->
+        <!-- <hr v-once class="mt-2 bg-white zindex-999"/> -->
       </div>
        <main class="grid-item main">
         <div class="items" ref="horizontalmv" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
@@ -20,7 +20,7 @@
           <div id="introcard" class="item-corevalues">
             <div class="text-wrap">
               <blockquote>
-                <h2 class="font-title">Vision</h2>
+                <h2 class="font-title text-uppercase">Vision</h2>
                 <h2 class="mt-5">{{missionvision[0].lnu_vision}}</h2>
               </blockquote>
               <p class="text-white mt-4">2 - 2</p>

@@ -1,12 +1,11 @@
 <template>
  <div>
    <div class="grid-container-home">
-      <div class="title-home">
+      <div class="title-home text-center mt-5">
         <h2 class="">CORE VALUES</h2>
         <p class="">Pinch and drag to scroll left or right</p>
-        <hr v-once class="mt-2 bg-white zindex-999"/>
       </div>
-       <main class="grid-item main">
+      <main class="grid-item main">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
           <div id="introcard" class="item-corevalues" v-for="(core, i) in core_values" :key="i">
             <div class="text-wrap">

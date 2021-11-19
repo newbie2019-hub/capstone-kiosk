@@ -14,7 +14,7 @@
         </div>
         <img id="introcard" class="program-img" src="@/assets/images/draw.jpg" alt="">
         <div class="position-absolute bottom-0 mb-4 ms-4">
-          <h6 class="text-uppercase">DRAW CANVAS</h6>
+          <h4 class="text-uppercase">DRAW CANVAS</h4>
           <p class="fw-light text-wrap lh-0 mt-3">Draw something in the air with your hands.</p>
         </div>
       </div>
@@ -22,10 +22,15 @@
     </div>
    </main>
   </div>
+  <return-gesture/>
  </div>
 </template>
 <script>
+import ReturnGesture from '../../components/ReturnGesture.vue'
+
  export default {
+ components: {ReturnGesture},
+
    methods: {
     onMouseDown(e) {
      this.isDown = true;
@@ -39,7 +44,7 @@
      if (!this.isDown) return;
      e.preventDefault();
      const x = e.pageX - this.$refs.horizontalentertainment.offsetLeft;
-     const walk = (x - this.startX) * 1.2; //scroll-fast
+     const walk = (x - this.startX) * 1.4; //scroll-fast
      this.$refs.horizontalentertainment.scrollLeft = this.scrollLeft - walk;
     },
    },
