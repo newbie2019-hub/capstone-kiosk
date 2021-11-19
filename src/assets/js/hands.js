@@ -47,7 +47,7 @@ window.onload = function () {
      if (!loaded) {
        setTimeout(() => {
          document.getElementsByClassName('loader')[0].remove()
-         console.clear()
+        //  console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
       }, 1250)
@@ -73,6 +73,7 @@ window.onload = function () {
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
         
@@ -84,10 +85,8 @@ window.onload = function () {
         }
       }
 
-     
       returnGestureRecog(results)
-      
-
+    
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
 
         if (results.multiHandLandmarks) {
@@ -484,7 +483,7 @@ window.onload = function () {
         mousePointerStatus = 'held'
         mouse_pointer.classList.add('pointer-interaction')
       }
-      
+
       gsap.to(tweenScroll, {
         y: tweenScroll.y + (initialY - y) * 1.5,
         duration: 1,
@@ -587,7 +586,7 @@ window.onload = function () {
    *  
    *  ------------------------------------------
    * 
-   *  NOT STABLE - WILL BE REPLACED BY HAND CLINCH
+   *  NOT STABLE - WILL BE REPLACED BY HAND CLENCH
    * 
    */
   // let initialScrollValueY = 0, hasScrolled = false
@@ -687,7 +686,7 @@ window.onload = function () {
     confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
   }
 
+  alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
   loadData()
   mediaPipeHandsSetup();
-
 }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { AvatarPlugin } from 'bootstrap-vue'
+import { CarouselPlugin, AvatarPlugin } from 'bootstrap-vue'
 
 import './assets/js/elements'
 import './assets/js/hands'
@@ -16,6 +16,7 @@ import VueFullPage from 'vue-fullpage.js'
 Vue.use(VueFullPage);
 Vue.config.productionTip = false
 Vue.use(AvatarPlugin)
+Vue.use(CarouselPlugin)
 
 window.addEventListener('load', () => {
   setTimeout(() => {

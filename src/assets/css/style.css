@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .output_canvas {
   z-index: -1;
-  filter: brightness(20%);
+  filter: brightness(28%);
 }
 
 
@@ -660,12 +660,13 @@ blockquote:after {
 }
 
 .item-tutorial img {
-  position: absolute !important;
+  /* position: absolute !important; */
   top: 0; 
   left: 0;
   object-fit: contain !important;
-  height: 380px;
-  width: 100% !important;
+  /* height: 380px; */
+  max-height: 420px;
+  /* width: 100% !important; */
   padding: 0rem !important;
 }
 

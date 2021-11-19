@@ -86,6 +86,7 @@
             </div>
           </div>
         </div>
+        <down-arrow/>
       </div>
       <div class="section">
         <div class="container-fluid h-100 p-5">
@@ -93,6 +94,7 @@
             <core-value/>
           </div>
         </div>
+        <down-arrow/>
       </div>
       <div class="section">
         <div class="container-fluid h-100 p-5">
@@ -109,6 +111,7 @@
 import CoreValue from './CoreValues.vue'
 import MissionVision from './Mission.vue'
 import ClickGesture from '../components/ClickGesture.vue'
+import DownArrow from '../components/DownArrow.vue'
 export default {
   name: 'Home',
   data() {
@@ -131,7 +134,7 @@ export default {
       this.$refs.fullpage.api.moveSectionDown()
     })
   },
-  components: {CoreValue,MissionVision, ClickGesture},
+  components: {CoreValue,MissionVision, ClickGesture, DownArrow},
   methods: {
     enableTutorial(){
       this.$store.commit('info/SET_TUTORIAL_STATE', true)

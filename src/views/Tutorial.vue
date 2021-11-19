@@ -3,80 +3,90 @@
   <div class="container mt-5">
    <div class="grid-container-home">
       <div class="title-home">
-        <h2 class="text-center">WELCOME, USER!</h2>
-        <p class="text-center text-subheading">Please read and follow the instructions carefully</p>
+        <h2 class="text-center">NAVIGATION GESTURES</h2>
+        <p class="text-center text-subheading">We'll walk you through the gestures on our system</p>
       </div>
        <main class="grid-item main mt-1">
         <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
           <div class="item-tutorial">
-           <div id="tutorialcard" class="item-tutorial-card">
-            <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 01</p>
-              <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">SHOW YOUR HANDS</p>
-              </div>
-            </div>
-            <img src="@/assets/images/move.gif" class="" width="" alt="">
-             <div class="position-absolute ms-4 mb-3 bottom-0 text-wrap lh-0 fw-light ">
-               Show your hands to the camera. Please use slow hand movements as possible
+           <div id="tutorialcard" class="position-absolute w-100 h-100">
+             <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/move-transparent.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 01 - SHOW YOUR HANDS</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">Show your hands to the camera and please make sure that your whole hand is visible. </h4><br/>
+                 <span class="fw-light text-subheading">Note: Please use slow hand movements as possible.</span>
+               </div>
+               <p class="text-center fw-light">1 - 5</p>
              </div>
            </div>
           </div>
           <div ref="scrollgesture" class="item-tutorial">
-           <div id="tutorialcard" class="item-tutorial-card">
-            <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 02</p>
-              <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">SCROLL GESTURE</p>
-              </div>
-            </div>
-            <img src="@/assets/images/horizontal.gif" class="" width="" alt="">
-             <div class="position-absolute ms-4 mb-3 bottom-0 text-wrap lh-0 fw-light ">
-               To scroll, simply pinch your fingers and drag from left to right or vice-versa to scroll horizontally. 
+            <div id="tutorialcard" class="position-absolute w-100 h-100">
+             <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/horizontal-transparent.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 02 - HORIZONTAL SCROLL</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">To scroll horizontally, simply pinch your fingers and drag from left to right or vice-versa to scroll horizontally. </h4><br/>
+                 <span class="fw-light text-subheading">Note: Scroll to the right to continue.</span>
+               </div>
+              <p class="text-center fw-light">2 - 5</p>
              </div>
-           </div>
+            </div>
           </div>
           <div class="item-tutorial">
-           <div id="tutorialcard" class="item-tutorial-card">
-            <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 03</p>
-              <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">VERTICAL SCROLL</p>
-              </div>
-            </div>
-            <img src="@/assets/images/vertical.gif" class="" width="" alt="">
-             <div class="position-absolute ms-4 mb-3 pe-3 bottom-0 text-wrap lh-0 fw-light ">
-              To scroll vertically, simply pinch your fingers and drag from top to bottom or vice-versa to scroll.
+            <div id="tutorialcard" class="position-absolute w-100 h-100">
+             <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/vertical-transparent.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 03 - VERTICAL SCROLL</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">To scroll vertically, simply pinch your fingers and drag from top to bottom or vice-versa to scroll. </h4><br/>
+                 <span class="fw-light text-subheading">Note: This gesture will work if the scrollbar is visible.</span>
+               </div>
+              <p class="text-center fw-light">3 - 5</p>
              </div>
-           </div>
+            </div>
           </div>
           <div class="item-tutorial">
-           <div id="tutorialcard" class="item-tutorial-card">
-            <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 04</p>
-              <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">RETURN GESTURE</p>
-              </div>
-            </div>
-            <img src="@/assets/images/return.gif" class="" width="" alt="">
-             <div class="position-absolute ms-4 mb-3 pe-3 bottom-0 text-wrap lh-0 fw-light ">
-               To return, simply turn your hands to face your palm towards your face and wait for the countdown to reach zero
+            <div id="tutorialcard" class="position-absolute w-100 h-100">
+             <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/return-transparent-tutorial.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 04 - RETURN GESTURE</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">To return to previous page, simply turn your hands to face your palm towards your face and wait for the countdown to reach zero </h4><br/>
+                 <span class="fw-light text-subheading">Note: This gesture will not work on the home or tutorial section.</span>
+               </div>
+               <p class="text-center fw-light">4 - 5</p>
              </div>
-           </div>
+            </div>
           </div>
           <div class="item-tutorial">
-           <div id="tutorialcard" class="item-tutorial-card" @click="setTutorialState">
-            <div class="d-flex w-100">
-              <p class="mt-4 ms-4 fw-light">• 05</p>
-              <div class="d-flex w-100 justify-content-end">
-               <p class="mt-4 me-4 fw-light">CLICK THIS CARD</p>
+            <div id="tutorialcard" class="position-absolute w-100 h-100" @click="setTutorialState">
+              <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/click-transparent.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 05 - CLICK GESTURE</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">To click, simply hover to an element and make a peace gesture and release after then </h4><br/>
+                 <span class="fw-light text-subheading"> {{clickCount == 0 ? 'To click an element, simply hover to an element and make a peace gesture and release' : clickCount >= 2 ? `Click ${3 - clickCount} more time to proceed to main menu` : `Click ${3 - clickCount} more times to proceed to main menu`}}</span>
+               </div>
+              <p class="text-center fw-light">5 - 5</p>
               </div>
             </div>
-            <img src="@/assets/images/peaceclick.gif" class="" width="" alt="">
-             <div :class="clickCount > 0 ? 'mb-4' : ''" class="position-absolute ms-4 mb-3 pe-3 bottom-0 text-wrap lh-0 fw-light ">
-               {{clickCount == 0 ? 'To click an element, simply hover to an element and make a peace gesture and release' : clickCount >= 2 ? `Click this card ${3 - clickCount} more time to proceed to main menu` : `Click this card ${3 - clickCount} more times to proceed to main menu`}} 
-             </div>
-           </div>
           </div>
         </div>
       </main>
@@ -141,6 +151,6 @@ export default {
   left: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: .85rem;
+  font-size: .9rem;
 }
 </style>
