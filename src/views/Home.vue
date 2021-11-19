@@ -72,17 +72,19 @@
                 </div>
               </router-link>
             </div>
-            <div v-once class="col-md-6 col-lg-3">
-              <div class="card cursor-pointer" @click.prevent="enableTutorial">
-                <div class="card-small">
-                  <img v-once src="@/assets/images/tutorial.jpg" alt="">
-                  <div class="card-content">
-                    <h5>Gesture Tutorial</h5>
-                    <p>Learn how to navigate the system by using the hand gestures</p>
+            <div class="col-md-6 col-lg-3">
+              <router-link to="/tutorial" class="text-decoration-none">
+                <div class="card cursor-pointer">
+                  <div class="card-small">
+                    <img v-once src="@/assets/images/tutorial.jpg" alt="">
+                    <div class="card-content">
+                      <h5>Gesture Tutorial</h5>
+                      <p>Learn how to navigate the system by using the hand gestures</p>
+                    </div>
                   </div>
+                  <div class="card-border card-border-feedback"></div>
                 </div>
-                <div v-once class="card-border card-border-feedback"></div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -104,13 +106,11 @@
         </div>
       </div>
     </full-page>
-    <click-gesture/>
  </div>
 </template>
 <script>
 import CoreValue from './CoreValues.vue'
 import MissionVision from './Mission.vue'
-import ClickGesture from '../components/ClickGesture.vue'
 import DownArrow from '../components/DownArrow.vue'
 export default {
   name: 'Home',
@@ -121,7 +121,6 @@ export default {
         anchors: ['page1', 'page2', 'page3'],
         sectionsColor: ['#00000000', '#00000000', '#00000000'],
         recordHistory: false,
-        controlArrows: true,
       },
     }
   },
@@ -134,11 +133,6 @@ export default {
       this.$refs.fullpage.api.moveSectionDown()
     })
   },
-  components: {CoreValue,MissionVision, ClickGesture, DownArrow},
-  methods: {
-    enableTutorial(){
-      this.$store.commit('info/SET_TUTORIAL_STATE', true)
-    },
-  }
+  components: {CoreValue, MissionVision,  DownArrow},
 }
 </script>

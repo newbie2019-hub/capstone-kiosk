@@ -15,8 +15,17 @@ export default {
       return this.$store.getters['info/GET_TUTORIAL']
     }
   },
-  mounted() {
+  async mounted() {
     document.title = 'Touchless Information Kiosk - Leyte Normal University'
+    await this.$store.dispatch('info/getMissionVision')
+    await this.$store.dispatch('info/getCoreValues')
+    await this.$store.dispatch('info/getOrganizations')
+    await this.$store.dispatch('info/getSchoolOfficials')
+    await this.$store.dispatch('info/getDepartments')
+    await this.$store.dispatch('info/getTelDirectories')
+    await this.$store.dispatch('info/getCourses')
+    await this.$store.dispatch('info/getFAQs')
+    await this.$store.dispatch('info/getPosts')
   }
 }
 </script>

@@ -58,10 +58,25 @@
           </div>
           <div class="item-tutorial">
             <div id="tutorialcard" class="position-absolute w-100 h-100">
+              <div class="row w-100 h-100 justify-content-center align-items-center">
+               <div class="col-4">
+                <img src="@/assets/images/click-transparent.gif" class="" width="" alt="">
+                <h5 class="me-4 fw-light">• 04 - CLICK GESTURE</h5>
+               </div>
+               <div class="col-5 text-wrap">
+                 <h3 class="fw-light">INSTRUCTION </h3><br/>
+                 <h4 class="fw-light">To click, simply hover to an element and make a peace gesture and release after then </h4><br/>
+               </div>
+              <p class="text-center fw-light">4 - 5</p>
+              </div>
+            </div>
+          </div>
+           <div class="item-tutorial">
+            <div id="tutorialcard" class="position-absolute w-100 h-100">
              <div class="row w-100 h-100 justify-content-center align-items-center">
                <div class="col-4">
                 <img src="@/assets/images/return-transparent-tutorial.gif" class="" width="" alt="">
-                <h5 class="me-4 fw-light">• 04 - RETURN GESTURE</h5>
+                <h5 class="me-4 fw-light">• 05 - RETURN GESTURE</h5>
                </div>
                <div class="col-5 text-wrap">
                  <h3 class="fw-light">INSTRUCTION </h3><br/>
@@ -70,22 +85,6 @@
                </div>
                <p class="text-center fw-light">4 - 5</p>
              </div>
-            </div>
-          </div>
-          <div class="item-tutorial">
-            <div id="tutorialcard" class="position-absolute w-100 h-100" @click="setTutorialState">
-              <div class="row w-100 h-100 justify-content-center align-items-center">
-               <div class="col-4">
-                <img src="@/assets/images/click-transparent.gif" class="" width="" alt="">
-                <h5 class="me-4 fw-light">• 05 - CLICK GESTURE</h5>
-               </div>
-               <div class="col-5 text-wrap">
-                 <h3 class="fw-light">INSTRUCTION </h3><br/>
-                 <h4 class="fw-light">To click, simply hover to an element and make a peace gesture and release after then </h4><br/>
-                 <span class="fw-light text-subheading"> {{clickCount == 0 ? 'To click an element, simply hover to an element and make a peace gesture and release' : clickCount >= 2 ? `Click ${3 - clickCount} more time to proceed to main menu` : `Click ${3 - clickCount} more times to proceed to main menu`}}</span>
-               </div>
-              <p class="text-center fw-light">5 - 5</p>
-              </div>
             </div>
           </div>
         </div>
@@ -114,14 +113,6 @@ export default {
   methods: {
     handsShown(){
       this.$refs.horizontal.scrollLeft = this.$refs.scrollgesture.offsetLeft
-    },
-    setTutorialState(){
-     if(this.clickCount >= 2){
-      this.$store.commit('info/SET_TUTORIAL_STATE', false)
-     }
-     else {
-      this.clickCount++
-     }
     },
     onMouseDown(e) {
       this.isDown = true

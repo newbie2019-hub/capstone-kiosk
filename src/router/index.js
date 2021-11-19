@@ -12,6 +12,7 @@ const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
 const Draw = () => import('../views/Entertainment/DrawingCanvas.vue')
 
 const Hymn = () => import('../views/Hymn.vue')
+const Tutorial = () => import('../views/Tutorial.vue')
 
 const Organization = () => import('../views/University/Organization.vue')
 const Departments = () => import('../views/University/Departments.vue')
@@ -35,6 +36,11 @@ const routes = [
     path: '/university',
     name: 'University',
     component: University
+  },
+  {
+    path: '/tutorial',
+    name: 'Tutorial',
+    component: Tutorial
   },
   {
     path: '/university/teldirectory',

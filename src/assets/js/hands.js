@@ -88,12 +88,15 @@ window.onload = function () {
       returnGestureRecog(results)
     
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
+        
+        const classification = results.multiHandedness[index];
+        isRight = classification.label === 'Right';
 
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
 
             if(window.location.pathname == '/' || window.location.pathname == '/university'){
-              SwipeNavigation(results)
+              swipeNavigation(landmarks, isRight)
             }  
 
             //Check distance of the tip index and thumb
@@ -241,51 +244,28 @@ window.onload = function () {
   }
 
   //CHECK NAVIGATION IF LEFT OR RIGHT
-  let navigate = false
-  let emitNavigation = false, isRight = false
-  let prevCounter = 0
-  function SwipeNavigation(results){
-    for (let index = 0; index < results.multiHandLandmarks.length; index++) {
-      const classification = results.multiHandedness[index];
-      isRight = classification.label === 'Right';
-
-      let counter = 0
-      //RIGHT HAND SCROLL
-      fingersUp(results.multiHandLandmarks[index]).forEach(value => {
-        if(value == 0) {
-          counter++
-        }
-      });
-
-      if(counter == 5){
-        navigate = true
-        if(prevCounter == 0){
-          prevCounter = counter
-        }
+  let isRight = false
+  let navigateSection = false
+  function swipeNavigation(data, isright){
+    
+    const nofingers = fingersUp(data)
+    if (JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,0]) || JSON.stringify(nofingers) == JSON.stringify([1,0,0,0,0]) || JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,1])) {
+      if(!navigateSection){
+        navigateSection = true
       }
-      else {
-        navigate = false
-      }
-
-      if(prevCounter != 0 && counter == 0){
-        if(!emitNavigation){
-          emitNavigation = true
-        }
-      }
- 
     }
-
-    if(emitNavigation) {
-      if(isRight){
-        const event = new CustomEvent('scroll-down')
-        document.dispatchEvent(event)
+    else {
+      if(navigateSection){
+        if(isright){
+          const event = new CustomEvent('scroll-down')
+          document.dispatchEvent(event)
+        }
+        else {
+          const event = new CustomEvent('scroll-up')
+          document.dispatchEvent(event)
+        }
+        navigateSection = false
       }
-      else {
-        const event = new CustomEvent('scroll-up')
-        document.dispatchEvent(event)
-      }
-      emitNavigation = false
-      prevCounter = 0
     }
   }
 
@@ -340,8 +320,10 @@ window.onload = function () {
       }
     }
 
-    targetWindow = getTarget($el)
-    mousePointerUpdate(dragStatus, x, y)
+    if(window.location.pathname != '/' || window.location.pathname != '/university'){
+      targetWindow = getTarget($el)
+      mousePointerUpdate(dragStatus, x, y)
+    }
 
     if (dragStatus == 'released' && holdCounter == 0) {
       dragStatus = 'none'
@@ -652,7 +634,7 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.8,
+      minDetectionConfidence: 0.75,
       minTrackingConfidence: 0.65,
       selfieMode: true,
     });
@@ -669,24 +651,11 @@ window.onload = function () {
     camera.start();
   }
 
-  async function loadData(){
-    await store.dispatch('info/getMissionVision')
-    await store.dispatch('info/getCoreValues')
-    await store.dispatch('info/getOrganizations')
-    await store.dispatch('info/getSchoolOfficials')
-    await store.dispatch('info/getDepartments')
-    await store.dispatch('info/getTelDirectories')
-    await store.dispatch('info/getCourses')
-    await store.dispatch('info/getFAQs')
-    await store.dispatch('info/getPosts')
-  }
-
   const memory = navigator.deviceMemory
   if(memory < 8){
     confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
   }
 
   alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
-  loadData()
   mediaPipeHandsSetup();
 }
