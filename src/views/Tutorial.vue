@@ -83,7 +83,7 @@
                  <h4 class="fw-light">To return to previous page, simply turn your hands to face your palm towards your face and wait for the countdown to reach zero </h4><br/>
                  <span class="fw-light text-subheading">Note: This gesture will not work on the home or tutorial section.</span>
                </div>
-               <p class="text-center fw-light">4 - 5</p>
+               <p class="text-center fw-light">5 - 5</p>
              </div>
             </div>
           </div>
