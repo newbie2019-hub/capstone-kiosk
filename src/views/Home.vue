@@ -3,7 +3,7 @@
     <full-page ref="fullpage" :options="options">
       <div class="section">
         <div class="container-fluid pt-5 pe-5 ps-5 pb-5">
-          <div v-once class="row justify-content-center">
+          <div v-once class="row gx-2 justify-content-center">
             <div class="col-md-6 col-lg-6">
               <router-link v-once to="/university" class="text-decoration-none">
                 <div v-once class="card">
@@ -32,19 +32,19 @@
             </div>
             <div v-once class="col-md-6 col-lg-3">
               <router-link v-once to="/programs" class="text-decoration-none">
-                <div v-once class="card">
-                    <img v-once src="@/assets/images/university-logo.png" alt="">
-                    <div v-once class="card-content">
+                <div class="card">
+                    <img src="@/assets/images/university-logo.png" alt="">
+                    <div class="card-content">
                       <h5 v-once>COLLEGES</h5>
                       <p v-once>See what programs are offered by the university.</p>
                     </div>
-                  <div v-once class="card-border card-border-university "></div>
+                  <div class="card-border card-border-university "></div>
                 </div>
               </router-link>
             </div>
           </div>
-          <div v-once class="row justify-content-center mt-2">
-            <div v-once class="col-md-6 col-lg-6">
+          <div class="row gx-2 justify-content-center mt-2">
+            <div class="col-md-6 col-lg-6">
               <router-link v-once to="/announcement" class="text-decoration-none">
                 <div class="card">
                   <div class="card-small">

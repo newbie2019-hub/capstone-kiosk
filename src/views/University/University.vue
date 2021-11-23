@@ -3,7 +3,7 @@
     <full-page ref="fullpageuniversity" :options="options">
       <div class="section">
         <div class="container-fluid p-5">
-          <div class="row justify-content-center">
+          <div class="row gx-2 justify-content-center">
             <div class="col-md-6 col-lg-6">
               <router-link to="/university/departments" class="text-decoration-none">
                 <div v-once class="card">
@@ -43,7 +43,7 @@
               </router-link>
             </div>
           </div>
-          <div class="row justify-content-center mt-2">
+          <div class="row gx-2 justify-content-center mt-2">
             <div class="col-md-6 col-lg-3">
               <router-link to="/hymn" class="text-decoration-none">
                 <div v-once class="card">
@@ -88,6 +88,7 @@
             </div>
           </div>
         </div>
+        <down-arrow/>
       </div>
       <div class="section">
         <div class="container-fluid p-5">
@@ -112,9 +113,11 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import DownArrow from '../../components/DownArrow.vue'
 import ReturnGesture from '../../components/ReturnGesture.vue'
+
 export default {
- components: {ReturnGesture},
+ components: {ReturnGesture, DownArrow},
   data() {
     return {
       options: {
@@ -122,11 +125,10 @@ export default {
         anchors: ['page1', 'page2', 'page3'],
         sectionsColor: ['#00000000', '#00000000', '#00000000'],
         recordHistory: false,
-        controlArrows: true,
       },
     }
   },
-  mounted() {
+  mounted() {DownArrow
     document.title = 'Touchless Information Kiosk - FAQs'
     
     document.addEventListener('scroll-up', () => {

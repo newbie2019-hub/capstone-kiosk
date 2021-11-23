@@ -17,7 +17,6 @@ export default {
    posts: [],
    selectedOrgPost: [],
    selectedDepPost: [],
-   isTutorial: false,
   },
   getters: {
     GET_TUTORIAL(state){

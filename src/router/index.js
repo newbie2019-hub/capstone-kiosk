@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-const Feedback = () => import('../views/Feedback.vue')
+const Feedback = () => import(/* webpackChunkName: "feedback" */'../views/Feedback.vue')
 
-const University = () => import('../views/University/University.vue')
-const TelDirectory = () => import('../views/University/TelDirectory.vue')
+const University = () => import(/* webpackChunkName: "university" */'../views/University/University.vue')
+const TelDirectory = () => import(/* webpackChunkName: "teldirectory" */'../views/University/TelDirectory.vue')
 
-const Announcement = () => import('../views/Announcement/Announcement.vue')
+const Announcement = () => import(/* webpackChunkName: "announcement" */'../views/Announcement/Announcement.vue')
 
-const Entertainment = () => import('../views/Entertainment/Entertainment.vue')
-const Draw = () => import('../views/Entertainment/DrawingCanvas.vue')
+const Entertainment = () => import(/* webpackChunkName: "entertainment" */'../views/Entertainment/Entertainment.vue')
+const Draw = () => import(/* webpackChunkName: "draw" */'../views/Entertainment/DrawingCanvas.vue')
 
-const Hymn = () => import('../views/Hymn.vue')
-const Tutorial = () => import('../views/Tutorial.vue')
+const Hymn = () => import(/* webpackChunkName: "hymn" */'../views/Hymn.vue')
+const Tutorial = () => import(/* webpackChunkName: "tutorial" */'../views/Tutorial.vue')
 
-const Organization = () => import('../views/University/Organization.vue')
-const Departments = () => import('../views/University/Departments.vue')
-const SchoolOfficials = () => import('../views/University/SchoolOfficials.vue')
+const Organization = () => import(/* webpackChunkName: "organization" */'../views/University/Organization.vue')
+const Departments = () => import(/* webpackChunkName: "departments" */'../views/University/Departments.vue')
+const SchoolOfficials = () => import(/* webpackChunkName: "schoolofficials" */'../views/University/SchoolOfficials.vue')
 
-const Programs = () => import('../views/Programs.vue')
+const Programs = () => import(/* webpackChunkName: "programs" */'../views/Programs.vue')
 Vue.use(VueRouter)
 
 const routes = [

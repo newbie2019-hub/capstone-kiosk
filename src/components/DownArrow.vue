@@ -5,7 +5,7 @@
 
 .arrows {
   position: relative;
-  bottom: 8%;
+  bottom: 12%;
   left: 50%;
   width: 30px;
   height: 30px;

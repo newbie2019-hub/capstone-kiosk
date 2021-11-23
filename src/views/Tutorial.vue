@@ -81,7 +81,7 @@
                <div class="col-5 text-wrap">
                  <h3 class="fw-light">INSTRUCTION </h3><br/>
                  <h4 class="fw-light">To return to previous page, simply turn your hands to face your palm towards your face and wait for the countdown to reach zero </h4><br/>
-                 <span class="fw-light text-subheading">Note: This gesture will not work on the home or tutorial section.</span>
+                 <span class="fw-light text-subheading">Note: This gesture will not work on the main menu section.</span>
                </div>
                <p class="text-center fw-light">5 - 5</p>
              </div>
@@ -126,7 +126,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontal.offsetLeft;
-      const walk = (x - this.startX) * 1.4; //scroll-fast
+      const walk = (x - this.startX) * 1.5; //scroll-fast
       this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
     },
   }

@@ -2,11 +2,11 @@
  <div class="">
   <div class="post-selected" v-if="viewPost" @click.prevent="viewPost = false">
     <div class="row justify-content-center">
-      <div class="col-6">
+      <div class="col-8 col-lg-8">
         <div class="d-flex align-items-center">
           <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
           <div class="d-flex flex-column ms-4 lh-0 mx-auto text-white" style="line-height: 1.2rem">
-            <h5>{{selectedPost.useraccount.userinfo.first_name}} {{selectedPost.useraccount.userinfo.last_name}}</h5>
+            <h4>{{selectedPost.useraccount.userinfo.first_name}} {{selectedPost.useraccount.userinfo.last_name}}</h4>
             <h6 v-if="selectedPost.useraccount.userinfo.organization">{{selectedPost.useraccount.userinfo.organization.abbreviation ? selectedPost.useraccount.userinfo.organization.abbreviation : selectedPost.useraccount.userinfo.organization.name}} 
              - {{selectedPost.useraccount.userinfo.role.role}}
             </h6>
@@ -15,10 +15,10 @@
             </h6>
           </div>
           <div class="me-4">
-            <p class="mb-4 text-white">September 23, 2021</p>
+            <p class="mb-4 text-white">{{formatDate(selectedPost.created_at)}}</p>
           </div>
         </div>
-        <div class="text-white mt-5" v-html="selectedPost.postcontent.content"></div>
+        <div class="text-white mt-5 announcement-text" v-html="selectedPost.postcontent.content"></div>
       </div>
     </div>
     <p class="close-text">Click anywhere to close</p>
@@ -30,7 +30,7 @@
     </div>
       <main class="grid-item main">
       <div class="items" ref="horizontalpost" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-        <div @click.prevent="setViewPost(post)" id="introcard" class="item item-post" v-for="(post, i) in posts" :key="i">
+        <div @click.prevent="setViewPost(post)" id="introcard" class="item item-post anncard" v-for="(post, i) in posts" :key="i">
           <img v-if="post.postcontent.image" :src="`http://127.0.0.1:8000/uploads/${post.postcontent.image}`" class="card-img" alt="...">
           <img v-else src="@/assets/images/lnubldg1.jpg" class="card-img" alt="...">
           <div class="card-img-overlay text-wrap p-4">
@@ -82,6 +82,11 @@ export default {
     document.title = "Post Section - Touchless Information Kiosk"
   },
    methods: {
+    formatDate(date){
+      //  return date
+      const d = new Date(date)
+      return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    },
     currentNumber(i){
       return i + 1 < 10 ? `0${i + 1}` : i + 1
     },
@@ -97,7 +102,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontalpost.offsetLeft;
-      const walk = (x - this.startX) * 1.1; //scroll-fast
+      const walk = (x - this.startX) * 1.3; //scroll-fast
       this.$refs.horizontalpost.scrollLeft = this.scrollLeft - walk;
     },
     setViewPost(data){
@@ -109,6 +114,10 @@ export default {
 }
 </script>
 <style>
+
+.announcement-text {
+  font-size: 1.5rem;
+}
 
 .close-text{
   position: fixed;

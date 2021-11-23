@@ -59,7 +59,7 @@ window.onload = function () {
 
     /**
      * 
-     *  CLINCH HANDS SCROLL
+     *  CLENCH HANDS SCROLL
      *  EMIT SCROLL IF NO FINGERS ARE UP
      *  
      *  IF LEFT EMIT SCROLL UP 
@@ -111,8 +111,14 @@ window.onload = function () {
 
             hoverElement(x, y)
 
+            let canvasX = landmarks[4].x, canvasY = landmarks[4].y
+
+            canvasX *= window.outerWidth - 30
+            canvasY *= window.outerHeight - 100 
+
             const click = [landmarks[4], landmarks[8]]
-            isDrag(lineDistance(click[0], click[1]), x, y)
+
+            isDrag(lineDistance(click[0], click[1]), x, y, canvasX, canvasY)
             isClicking(fingersUp(landmarks), x, y)
 
             //DRAW LANDMARKS - SKELETON
@@ -208,6 +214,8 @@ window.onload = function () {
       clearReturn()
       return
     }
+    
+    if(res == null) return
     
     const { multiHandLandmarks, multiHandedness } = res
 
@@ -307,7 +315,7 @@ window.onload = function () {
   let holdCounter = 0
   let dragStatus = 'none'
   let targetWindow = null
-  async function isDrag(distance, x, y) {
+  async function isDrag(distance, x, y, drawX, drawY) {
     const $el = document.elementFromPoint(x + 22, y + 22)
 
     if (distance < 0.065) {
@@ -322,7 +330,12 @@ window.onload = function () {
 
     if(window.location.pathname != '/' || window.location.pathname != '/university'){
       targetWindow = getTarget($el)
-      mousePointerUpdate(dragStatus, x, y)
+      if(window.location.pathname == '/entertainment/draw'){
+        console.log(drawX, drawY)
+        mousePointerUpdate(dragStatus, drawX, drawY)
+      }else {
+        mousePointerUpdate(dragStatus, x, y)
+      }
     }
 
     if (dragStatus == 'released' && holdCounter == 0) {
@@ -412,8 +425,8 @@ window.onload = function () {
             scale: 0,
           }
         });
+        flag_pointer = true
       }
-      flag_pointer = true
     }
     else {
       if (flag_pointer) {
@@ -423,8 +436,8 @@ window.onload = function () {
             opacity: 1,
           }
         });
+        flag_pointer = false
       }
-      flag_pointer = false
     }
   }
 
@@ -433,7 +446,7 @@ window.onload = function () {
   let initialY = 0
   var tweenScroll = {y: 0}
   function mousePointerUpdate(status, x, y){
-    const $el = document.elementFromPoint(x + 22, y + 22)
+    const $el = document.elementFromPoint(x, y)
     if(status == 'start'){
       //MOUSE EVENT START
       if(mousePointerStatus != 'start'){
@@ -474,6 +487,7 @@ window.onload = function () {
         ease: 'linear.easeNone',
       })
 
+      console.log(tweenScroll.y)
       targetWindow.scrollTo(0, tweenScroll.y)
 
       //MOUSE MOVE EVENT
@@ -656,6 +670,6 @@ window.onload = function () {
     confirm(`It appears that you only have ${memory}GB RAM. Unfortunately, to run this system smoothly you need atleast 8GB RAM, i7 8th Gen processor and a ( NVIDIA Graphics Card - Optional). `)
   }
 
-  alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
+  // alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
   mediaPipeHandsSetup();
 }

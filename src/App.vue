@@ -1,20 +1,12 @@
 <template>
   <div id="app">
-    <tutorial v-if="isTutorial"/>
-    <transition name="fade" mode="out-in" v-else>
+    <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
   </div>
 </template>
 <script>
-import Tutorial from './views/Tutorial.vue'
 export default {
-  components: {Tutorial},
-  computed: {
-    isTutorial () {
-      return this.$store.getters['info/GET_TUTORIAL']
-    }
-  },
   async mounted() {
     document.title = 'Touchless Information Kiosk - Leyte Normal University'
     await this.$store.dispatch('info/getMissionVision')
