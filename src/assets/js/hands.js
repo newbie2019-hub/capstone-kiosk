@@ -18,9 +18,6 @@ import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
 
-import store from '../../store'
-
-
 window.onload = function () {
   
   const mouse_pointer = document.getElementsByClassName('pointer')[0]
@@ -40,7 +37,6 @@ window.onload = function () {
 
   let flag_pointer = false
   let loaded = false
-  let handsshown = 0
   function onResults(results) {
 
      // LOADING INDICATOR - REMOVE
@@ -77,12 +73,9 @@ window.onload = function () {
     if (results.multiHandLandmarks.length != 0 && results.multiHandedness) {
 
         
-      if (window.location.pathname == '/') {
-        if(handsshown == 0){
+      if (window.location.pathname == '/tutorial') {
           const event = new CustomEvent('hands-shown')
           document.dispatchEvent(event)
-          handsshown++
-        }
       }
 
       returnGestureRecog(results)
@@ -95,7 +88,7 @@ window.onload = function () {
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
 
-            if(window.location.pathname == '/' || window.location.pathname == '/university'){
+            if(window.location.pathname == '/menu' || window.location.pathname == '/university'){
               swipeNavigation(landmarks, isRight)
             }  
 
@@ -109,14 +102,21 @@ window.onload = function () {
             pointer.style.left = `${ x + 22 }px`
             pointer.style.top = `${ y + 22 }px`
 
-            hoverElement(x, y)
+            if(window.location.pathname != '/entertainment/draw' || window.location.pathname != '/entertainment/squidgame') {
+              hoverElement(x, y)
+            }
 
+            //TIP OF THUMB FINGER
             let canvasX = landmarks[4].x, canvasY = landmarks[4].y
 
             canvasX *= window.outerWidth - 30
             canvasY *= window.outerHeight - 100 
 
             const click = [landmarks[4], landmarks[8]]
+
+            // if(window.location.pathname == '/entertainment/squidgame'){
+            //   squidGame(canvasX, canvasY)
+            // }
 
             isDrag(lineDistance(click[0], click[1]), x, y, canvasX, canvasY)
             isClicking(fingersUp(landmarks), x, y)
@@ -167,11 +167,29 @@ window.onload = function () {
     return fingersUp
   }
 
+  /**
+   * 
+   *   FOR SQUID GAME
+   *   - CHECK IF HOVERED CSS STYLE ELEMENT IS 
+   *   gameover
+   * 
+   */
+  function squidGame(x,y){
+    elem = document.elementFromPoint(x, y);
+    if (elem) {
+      if(elem.classList.value === 'gameover'){
+        const event = new CustomEvent('game-over')
+        document.dispatchEvent(event)
+      }
+    }
+  }
+
   //ELEMENT FROM POINT
   let elem, prevEl = ''
   function hoverElement(x, y) {
 
     elem = document.elementFromPoint(x, y);
+
     if (elem) {
       const parentEl = elem.parentElement
       if (!parentEl) return

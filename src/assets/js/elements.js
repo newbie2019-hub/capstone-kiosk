@@ -37,12 +37,26 @@ function createElements(){
   span_dots.appendChild(span)
  }
 
- const loading_text = document.createElement('p')
- loading_text.innerText = '\nLoading resources . .\n\n Setting up the model and data \n Loading the model for the first time might take a while \n but it will be cached by your browser after then.'
- loading_text.classList.add('mt-1')
+ const loading_text = document.createElement('h3')
+ loading_text.innerText = 'Loading Resources . .'
+ loading_text.classList.add('mt-3')
+ loading_text.classList.add('fw-bold')
  parent_div.appendChild(loading_text)
+ 
+ const textinfo = document.createElement('h5')
+ textinfo.innerText = 'Loading the machine learning model for the first time might take \n a while but it will be cached by your browser after then.'
+ textinfo.classList.add('mt-4')
+ textinfo.classList.add('fw-light')
+ parent_div.appendChild(textinfo)
+ 
+ const notetext = document.createElement('p')
+ notetext.innerText = 'NOTE: Please make sure your area is well lit and \n use slow hand movements as possible'
+ notetext.classList.add('mt-4')
+ notetext.classList.add('fw-light')
+ parent_div.appendChild(notetext)
 
  document.body.appendChild(parent_div)
+
 
  //CANVAS
  const body_canvas = document.createElement('canvas');

@@ -5,11 +5,13 @@ const Feedback = () => import(/* webpackChunkName: "feedback" */'../views/Feedba
 
 const University = () => import(/* webpackChunkName: "university" */'../views/University/University.vue')
 const TelDirectory = () => import(/* webpackChunkName: "teldirectory" */'../views/University/TelDirectory.vue')
+const Menu = () => import(/* webpackChunkName: "menu" */'../views/MainMenu.vue')
 
 const Announcement = () => import(/* webpackChunkName: "announcement" */'../views/Announcement/Announcement.vue')
 
 const Entertainment = () => import(/* webpackChunkName: "entertainment" */'../views/Entertainment/Entertainment.vue')
 const Draw = () => import(/* webpackChunkName: "draw" */'../views/Entertainment/DrawingCanvas.vue')
+const SquidGame = () => import(/* webpackChunkName: "squidgame" */'../views/Entertainment/SquidGame.vue')
 
 const Hymn = () => import(/* webpackChunkName: "hymn" */'../views/Hymn.vue')
 const Tutorial = () => import(/* webpackChunkName: "tutorial" */'../views/Tutorial.vue')
@@ -31,6 +33,11 @@ const routes = [
     path: '/feedback',
     name: 'Feedback',
     component: Feedback
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: Menu
   },
   {
     path: '/university',
@@ -86,6 +93,11 @@ const routes = [
     path: '/entertainment/draw',
     name: 'Draw',
     component: Draw
+  },
+  {
+    path: '/entertainment/squidgame',
+    name: 'SquidGame',
+    component: SquidGame
   },
 ]
 

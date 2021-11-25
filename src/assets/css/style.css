@@ -290,8 +290,8 @@ nav a:hover {
 }
 
 .loader .dot {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   background: rgb(255, 255, 255);
   border-radius: 50%;
   animation: dot 2.8s infinite;
@@ -300,12 +300,12 @@ nav a:hover {
 .loader .dots {
   transform: translateX(0);
   animation: dots 2.8s infinite;
-  margin-top: -1rem;
+  margin-top: -1.4rem;
 }
 .loader .dots span {
   float: left;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   margin-left: 5px;
   background: rgb(255, 255, 255);
   border-radius: 50%
@@ -321,13 +321,13 @@ nav a:hover {
       
 @keyframes dot {
   0% {
-    transform: translateX(-40px);
+    transform: translateX(-55px);
   }
   50% {
-    transform: translateX(20px)
+    transform: scale(1.1) translateX(25px)
   }
   100% {
-    transform: translateX(-40px);
+    transform: translateX(-55px);
   }
 }
 
@@ -876,4 +876,12 @@ blockquote:after {
 .badge-primary {
   color: #fff;
   background-color: #007bff;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.bg-primary {
+  background: rgb(27, 122, 199) !important;
 }

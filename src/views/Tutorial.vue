@@ -102,17 +102,24 @@ export default {
     return {
       clickCount: 0,
       currentTxt: 0,
+      showHands: false,
     }
   },
   mounted(){
+    this.showHands = false
     document.addEventListener('hands-shown', (event) => {
-      this.handsShown()
+      if(!this.showHands){
+        this.handsShown()
+        this.showHands = true
+      }
     })
 
   },  
   methods: {
     handsShown(){
-      this.$refs.horizontal.scrollLeft = this.$refs.scrollgesture.offsetLeft
+      setTimeout(() => {
+        this.$refs.horizontal.scrollLeft = this.$refs.scrollgesture.offsetLeft
+      }, 1000)
     },
     onMouseDown(e) {
       this.isDown = true

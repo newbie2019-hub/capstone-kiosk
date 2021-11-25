@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
       router, store,
       render: h => h(App)
     }).$mount('#app')
-  }, 2500)
+  }, 2000)
 });
   
 
