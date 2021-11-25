@@ -53,18 +53,11 @@ window.onload = function () {
     notifNoHandsDetected(results.multiHandedness)
     updatePointerVisibility(results)
 
-    /**
-     * 
-     *  CLENCH HANDS SCROLL
-     *  EMIT SCROLL IF NO FINGERS ARE UP
-     *  
-     *  IF LEFT EMIT SCROLL UP 
-     *  IF RIGHT EMIT SCROLL DOWN
-     * 
-     *  THIS WAS A REPLACEMENT FOR THE SWIPE
-     *  UP GESTURE NAVIGATION
-     * 
-     */
+    if(results.multiHandLandmarks.length == 0){
+      if(flagReturn) {
+        clearReturn()
+      }
+    }
 
     canvasCtx.save(); 
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height); 
@@ -77,8 +70,6 @@ window.onload = function () {
           const event = new CustomEvent('hands-shown')
           document.dispatchEvent(event)
       }
-
-      returnGestureRecog(results)
     
       for (let index = 0; index < results.multiHandLandmarks.length; index++) {
         
@@ -88,9 +79,25 @@ window.onload = function () {
         if (results.multiHandLandmarks) {
           for (const landmarks of results.multiHandLandmarks) {
 
+            /**
+             * 
+             *  CLENCH HANDS SCROLL
+             *  EMIT SCROLL IF NO FINGERS ARE UP
+             *  
+             *  IF LEFT EMIT SCROLL UP 
+             *  IF RIGHT EMIT SCROLL DOWN
+             * 
+             *  THIS WAS A REPLACEMENT FOR THE SWIPE
+             *  UP GESTURE NAVIGATION
+             * 
+             */
             if(window.location.pathname == '/menu' || window.location.pathname == '/university'){
               swipeNavigation(landmarks, isRight)
             }  
+
+            if(window.location.pathname != '/'){
+              returnGestureRecog(landmarks, isRight)
+            }
 
             //Check distance of the tip index and thumb
             //https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
@@ -167,23 +174,6 @@ window.onload = function () {
     return fingersUp
   }
 
-  /**
-   * 
-   *   FOR SQUID GAME
-   *   - CHECK IF HOVERED CSS STYLE ELEMENT IS 
-   *   gameover
-   * 
-   */
-  function squidGame(x,y){
-    elem = document.elementFromPoint(x, y);
-    if (elem) {
-      if(elem.classList.value === 'gameover'){
-        const event = new CustomEvent('game-over')
-        document.dispatchEvent(event)
-      }
-    }
-  }
-
   //ELEMENT FROM POINT
   let elem, prevEl = ''
   function hoverElement(x, y) {
@@ -225,46 +215,26 @@ window.onload = function () {
   let return_timer = null;
   let countdown = 3;
   let flagReturn = false;
-  let frameCounter = 0
 
-  function returnGestureRecog(res){
-    if (window.location.pathname == '/') {
-      clearReturn()
-      return
-    }
-    
-    if(res == null) return
-    
-    const { multiHandLandmarks, multiHandedness } = res
+  function returnGestureRecog(landmarks, isRight){
 
-    for (let index = 0; index < multiHandLandmarks.length; index++) {
-      const classification = multiHandedness[index];
-      const isRight = classification.label === 'Right';
-
-      //FRAMES OF RIGHT HAND BEFORE EMITING RETURN
-      if(isRight){
-        if(multiHandLandmarks[index][4].x > multiHandLandmarks[index][17].x){
-          returnPrevRoute()
-          flagReturn = true
-        }
-        else {
-          clearReturn()
-        }
+    if(isRight){
+      if(landmarks[4].x > landmarks[17].x){
+        returnPrevRoute()
+        flagReturn = true
       }
       else {
-        frameCounter++
-
-        if(frameCounter > 5){
-          if(multiHandLandmarks[index][4].x < multiHandLandmarks[index][17].x){
-            returnPrevRoute()
-            flagReturn = true
-          }
-          else {
-            clearReturn()
-          }
-        }
+        clearReturn()
       }
-
+    }
+    else {
+      if(landmarks[4].x < landmarks[17].x){
+        returnPrevRoute()
+        flagReturn = true
+      }
+      else {
+        clearReturn()
+      }
     }
 
   }
@@ -307,17 +277,16 @@ window.onload = function () {
       }
       //Threshold or Interval to emit the return gesture again
       sleep(4000)
-    }, 1000)
+    }, 800)
   
     return_timer = window.setTimeout(()=>{
       history.back()
-    }, 3400)
+    }, 3100)
   }
 
   function clearReturn(){
     if(countdown == 3 && flagReturn == false) return
     clearInterval(iv)
-    frameCounter = 0
     countdown = 3
     countdown_timer.innerHTML = '•'
     clearTimeout(return_timer)
@@ -346,10 +315,9 @@ window.onload = function () {
       }
     }
 
-    if(window.location.pathname != '/' || window.location.pathname != '/university'){
+    if(window.location.pathname != '/' || window.location.pathname != '/menu' || window.location.pathname != '/university'){
       targetWindow = getTarget($el)
       if(window.location.pathname == '/entertainment/draw'){
-        console.log(drawX, drawY)
         mousePointerUpdate(dragStatus, drawX, drawY)
       }else {
         mousePointerUpdate(dragStatus, x, y)

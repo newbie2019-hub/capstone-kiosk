@@ -102,7 +102,7 @@ export default {
       if(!this.isDown) return;
       e.preventDefault();
       const x = e.pageX - this.$refs.horizontalpost.offsetLeft;
-      const walk = (x - this.startX) * 1.3; //scroll-fast
+      const walk = (x - this.startX) * 1.6; //scroll-fast
       this.$refs.horizontalpost.scrollLeft = this.scrollLeft - walk;
     },
     setViewPost(data){
