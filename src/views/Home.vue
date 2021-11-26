@@ -1,14 +1,14 @@
 <template>
  <div>
   <div class="container vh-100">
-    <div class="d-flex flex-column h-100 g-0 align-items-center justify-content-center text-white">
+    <div class="d-flex flex-column h-100 g-0 justify-content-center text-white">
       <div class="col-12">
         <div class="row">
           <h1>Hello, User!</h1>
           <h5>Welcome, please select a card to start.</h5>
         </div>
       </div>
-      <div class="col-12 mt-5 mb-5">
+      <div class="col-12 mt-3">
         <div class="row gx-4">
           <div class="col-4">
             <router-link to="/menu" class="text-decoration-none">
@@ -52,6 +52,7 @@
               </div>
             </router-link>
           </div>
+
         </div>
       </div>
     </div>
@@ -71,17 +72,5 @@ export default {
 }
 </script>
 <style>
-.feedback-container {
-  display: flex;
-  width: 100%;
-  padding: 4rem 1rem 4rem 1rem!important;
-  margin-top: .6rem;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 
-.feedback-emoji {
-  font-size: 8.5rem !important;
-}
 </style>

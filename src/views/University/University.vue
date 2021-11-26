@@ -133,10 +133,12 @@ export default {
     
     document.addEventListener('scroll-up', () => {
       this.$refs.fullpageuniversity.api.moveSectionUp()
+      console.clear()
     })
 
     document.addEventListener('scroll-down', () => {
       this.$refs.fullpageuniversity.api.moveSectionDown()
+      console.clear()
     })
     var acc = document.getElementsByClassName("accordion");
     var i;

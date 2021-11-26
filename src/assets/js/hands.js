@@ -154,7 +154,7 @@ window.onload = function () {
     for (let i = 0; i < indexes.length; i += 2) {
       if (i == 0) {
 
-        if (lineDistance(landmarks[indexes[i]], landmarks[5]) < 0.05) {
+        if (lineDistance(landmarks[indexes[i]], landmarks[5]) < 0.05 || lineDistance(landmarks[indexes[i]], landmarks[9]) < 0.05 || lineDistance(landmarks[indexes[i]], landmarks[6]) < 0.05) {
           fingersUp.push(0)
         }
         else {
@@ -245,7 +245,8 @@ window.onload = function () {
   function swipeNavigation(data, isright){
     
     const nofingers = fingersUp(data)
-    if (JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,0]) || JSON.stringify(nofingers) == JSON.stringify([1,0,0,0,0]) || JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,1])) {
+
+    if (JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,0])) {
       if(!navigateSection){
         navigateSection = true
       }
@@ -275,13 +276,11 @@ window.onload = function () {
       if(countdown < 0){
         clearReturn()
       }
-      //Threshold or Interval to emit the return gesture again
-      sleep(4000)
-    }, 800)
+    }, 700)
   
     return_timer = window.setTimeout(()=>{
       history.back()
-    }, 3100)
+    }, 2600)
   }
 
   function clearReturn(){
@@ -351,7 +350,7 @@ window.onload = function () {
   function isClicking(data, x, y){
     const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0]) || JSON.stringify(data) == JSON.stringify([1,1,1,0,0])) {
+    if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0]) || JSON.stringify(data) == JSON.stringify([0,1,1,0,1])) {
       clickCounter++
     }
     else {
@@ -393,12 +392,6 @@ window.onload = function () {
     }
   }
 
-
-  //Native Sleep
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
   //REMOVE POINTER IF NO HANDS IS VISIBLE
   function updatePointerVisibility(results) {
     mouse_pointer.style.display = 'flex'
@@ -407,8 +400,8 @@ window.onload = function () {
       if (!flag_pointer) {
         gsap.to('.pointer', 0.5, {
           css: {
-            opacity: 0,
             scale: 0,
+            opacity: 0,
           }
         });
         flag_pointer = true
@@ -473,7 +466,6 @@ window.onload = function () {
         ease: 'linear.easeNone',
       })
 
-      console.log(tweenScroll.y)
       targetWindow.scrollTo(0, tweenScroll.y)
 
       //MOUSE MOVE EVENT
@@ -634,8 +626,8 @@ window.onload = function () {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.65,
+      minDetectionConfidence: 0.85,
+      minTrackingConfidence: 0.70,
       selfieMode: true,
     });
 
