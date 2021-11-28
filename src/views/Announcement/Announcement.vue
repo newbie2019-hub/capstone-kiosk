@@ -10,8 +10,10 @@
             <h6 v-if="selectedPost.useraccount.userinfo.organization">{{selectedPost.useraccount.userinfo.organization.abbreviation ? selectedPost.useraccount.userinfo.organization.abbreviation : selectedPost.useraccount.userinfo.organization.name}} 
              - {{selectedPost.useraccount.userinfo.role.role}}
             </h6>
-            <h6 v-else>{{selectedPost.useraccount.userinfo.department.abbreviation ? selectedPost.useraccount.userinfo.department.abbreviation : selectedPost.useraccount.userinfo.department.name}} 
+            <h6 v-else-if="selectedPost.useraccount.userinfo.department">{{selectedPost.useraccount.userinfo.department.abbreviation ? selectedPost.useraccount.userinfo.department.abbreviation : selectedPost.useraccount.userinfo.department.name}} 
              - {{selectedPost.useraccount.userinfo.role.role}}
+            </h6>
+            <h6 v-else>OSA
             </h6>
           </div>
           <div class="me-4">

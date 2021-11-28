@@ -9,8 +9,8 @@
                 <div v-once class="card">
                   <img v-once src="@/assets/images/departments.jpg" alt="" loading=lazy>
                   <div class="card-content">
-                    <h5>DEPARTMENTS</h5>
-                    <p>Learn more about the deparments of the university.</p>
+                    <h5>UNITS</h5>
+                    <p>Stay updated with the latest events on the units of the university.</p>
                   </div>
                   <div class="card-border card-border-department"></div>
                 </div>
@@ -23,7 +23,7 @@
                     <img v-once src="@/assets/images/university-logo.png" alt="" loading=lazy>
                     <div class="card-content">
                       <h5>ORGANIZATIONS</h5>
-                      <p>Learn more about the organizations of the university.</p>
+                      <p>Stay updated with the latest events on the organizations.</p>
                     </div>
                   </div>
                   <div class="card-border card-border-feedback "></div>
