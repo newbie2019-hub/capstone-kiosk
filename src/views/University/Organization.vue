@@ -63,7 +63,7 @@
             <div class="d-flex justify-content-end">
               <p class="mt-3 me-4 fw-light">{{currentNumber(i)}}</p>
             </div>
-            <img id="introcard" v-if="org.image" :src="org.image ? org.image : ''" alt="">
+            <img id="introcard" v-if="org.image" :src="`https://be.lnukiosk.live/uploads/${org.image}`" alt="">
             <img id="introcard" v-else src="@/assets/images/logo.png" alt="">
             <div class="introcard-description">
               <h6 class="mt-2 text-uppercase text-center">{{org.name}}</h6>
