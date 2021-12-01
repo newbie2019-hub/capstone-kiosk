@@ -136,6 +136,11 @@ export default {
     currentNumber(i){
       return i + 1 < 10 ? `0${i + 1}` : i + 1
     },
+     formatDate(date){
+      //  return date
+      const d = new Date(date)
+      return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    },
     onMouseDown(e) {
       this.isDown = true
       this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
