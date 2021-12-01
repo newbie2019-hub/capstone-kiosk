@@ -12,10 +12,10 @@
               </h6>
             </div>
             <div class="me-4">
-              <p class="mb-4 text-white">September 23, 2021</p>
+              <p class="mb-4 text-white">{{formatDate(selectedPost.created_at)}}</p>
             </div>
           </div>
-          <div class="text-white mt-5" v-html="selectedPost.postcontent.content"></div>
+          <div class="text-white mt-5 announcement-text" v-html="selectedPost.postcontent.content"></div>
         </div>
       </div>
       <p class="close-text">Click anywhere to close</p>

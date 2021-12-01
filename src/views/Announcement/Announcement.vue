@@ -2,7 +2,7 @@
  <div class="">
   <div class="post-selected" v-if="viewPost" @click.prevent="viewPost = false">
     <div class="row justify-content-center">
-      <div class="col-8 col-lg-8">
+      <div class="col-8 col-lg-7">
         <div class="d-flex align-items-center">
           <img v-once src="@/assets/images/logo.png" alt="" height="70" width="70" class="rounded-pill" loading="lazy">
           <div class="d-flex flex-column ms-4 lh-0 mx-auto text-white" style="line-height: 1.2rem">
