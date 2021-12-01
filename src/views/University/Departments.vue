@@ -175,6 +175,10 @@ export default {
 }
 </script>
 <style>
+.announcement-text {
+  font-size: 1.5rem;
+}
+
 .post-selected {
   position: fixed;
   top: 0;
