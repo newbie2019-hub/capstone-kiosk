@@ -1,17 +1,39 @@
 <template>
  <div>
-  <h3 class="text-center text-white mt-5 pt-5">TELEPHONE DIRECTORY</h3>
-  <p class="text-center mb-5 text-white">Scroll down to see more list</p>
-  <div class="row justify-content-center">
-     <div class="col-10 col-xl-5 col-lg-6">
-          <div class="telephone mb-3" v-once v-for="(tel, i) in teldirectories" :key="i">
-            <div class="d-flex flex-column ms-4 justify-content-center text-white">
-              <p class="">{{tel.name}}</p>
-              <p class=""><i class="fas fa-phone-alt"></i> {{tel.tel_num}}</p>
-            </div>
+   <div class="container vh-100">
+   <!-- <div class="currentTime">
+        <h4 class="text-white">{{ time }}</h4>
+      </div> -->
+   <div class="d-flex flex-column h-100 g-0 justify-content-center text-white">
+    <div class="col-12">
+     <h1 class="text-uppercase fw-bold">TEL - DIRECTORY</h1>
+     <h5 class="fw-light mt-2 mb-4">Scroll to the left by pinch and drag to see more options</h5>
+     <!-- <h5 class="fw-light mt-5 mb-3">Select an option to view its contact number.</h5> -->
+    </div>
+    <div class="grid-container">
+     <main class="grid-item main">
+      <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+       <div
+        id="introcard"
+        class="item item-post"
+        v-for="(tel, i) in teldirectories"
+        :key="i"
+       >
+        <div class="d-flex justify-content-end">
+         <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
+        </div>
+        <i class="fas fa-phone card--icon"></i>
+        <div class="card-h100-content text-wrap text-uppercase">
+          <div class="d-flex flex-column">
+            <h5>{{tel.name}}</h5>
+            <h5 class="mt-3">{{tel.tel_num}}</h5>
           </div>
+        </div>   
+       </div>
       </div>
-      <p class="text-white text-center mt-4 mb-4">End of the telephone list</p>
+     </main>
+    </div>
+   </div>
   </div>
   <return-gesture />
  </div>
@@ -21,6 +43,26 @@ import {mapState} from 'vuex'
 import ReturnGesture from '../../components/ReturnGesture.vue'
 export default {
  components: {ReturnGesture},
+ methods: {
+   currentNumber(i) {
+    return i + 1 < 10 ? `0${i + 1}` : i + 1;
+   },
+  onMouseDown(e) {
+    this.isDown = true;
+    this.startX = e.pageX - this.$refs.horizontal.offsetLeft;
+    this.scrollLeft = this.$refs.horizontal.scrollLeft;
+   },
+   onMouseUp() {
+    this.isDown = false;
+   },
+   onMouseMove(e) {
+    if (!this.isDown) return;
+    e.preventDefault();
+    const x = e.pageX - this.$refs.horizontal.offsetLeft;
+    const walk = (x - this.startX) * 1.4; //scroll-fast
+    this.$refs.horizontal.scrollLeft = this.scrollLeft - walk;
+   },
+ },
  computed: {
   ...mapState('info', ['teldirectories'])
  }

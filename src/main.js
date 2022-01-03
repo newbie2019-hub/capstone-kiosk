@@ -11,9 +11,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
-import VueFullPage from 'vue-fullpage.js'
+// import VueFullPage from 'vue-fullpage.js'
 
-Vue.use(VueFullPage);
+// Vue.use(VueFullPage);
+// import time from './assets/js/time-mixins'
+// Vue.mixin(time)
 Vue.config.productionTip = false
 Vue.use(AvatarPlugin)
 // Vue.use(CarouselPlugin)

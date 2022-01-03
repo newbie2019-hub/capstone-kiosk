@@ -1,9 +1,10 @@
 /**
  * ----------------------------------------------------------------
  * 
- *             DEVELOPMENT OF TOUCHLESS INTERACTIVE
+ *              DEVELOPMENT OF TOUCHLESS INTERACTIVE
  *         INFORMATION KIOSK FOR LEYTE NORMAL UNIVERSITY
- * 
+ *                        2020-2021
+ *         
  *         GROUP MEMBERS:
  *         1. YVAN SABAY
  *         2. EZIKIEL TULAWAN
@@ -37,16 +38,21 @@ window.onload = function () {
 
   let flag_pointer = false
   let loaded = false
+  let isRight = false
   function onResults(results) {
 
-     // LOADING INDICATOR - REMOVE
+     /**
+      *  REMOVES LOADING INDICATOR 
+      *  AFTER 1250ms 
+      * 
+      */
      if (!loaded) {
        setTimeout(() => {
          document.getElementsByClassName('loader')[0].remove()
-        //  console.clear()
+         console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
-      }, 1250)
+      }, 1200)
       loaded = true
     }
     
@@ -91,16 +97,19 @@ window.onload = function () {
              *  UP GESTURE NAVIGATION
              * 
              */
-            if(window.location.pathname == '/menu' || window.location.pathname == '/university'){
-              swipeNavigation(landmarks, isRight)
-            }  
+            // if(window.location.pathname == '/menu' || window.location.pathname == '/university'){
+            //   swipeNavigation(landmarks, isRight)
+            // }  
 
             if(window.location.pathname != '/'){
               returnGestureRecog(landmarks, isRight)
             }
 
-            //Check distance of the tip index and thumb
-            //https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
+            /**
+             *  Check distance of the tip index and thumb
+             *  https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
+             * 
+             */
             let x = landmarks[9].x, y = landmarks[9].y;
 
             x *= window.outerWidth - 30
@@ -113,7 +122,13 @@ window.onload = function () {
               hoverElement(x, y)
             }
 
-            //TIP OF THUMB FINGER
+            /**
+             * 
+             *  TIP OF THE THUMB FINGER
+             *  PASSED FOR THE HANDS-FREE
+             *  PAINTING
+             * 
+             */
             let canvasX = landmarks[4].x, canvasY = landmarks[4].y
 
             canvasX *= window.outerWidth - 30
@@ -121,14 +136,17 @@ window.onload = function () {
 
             const click = [landmarks[4], landmarks[8]]
 
-            // if(window.location.pathname == '/entertainment/squidgame'){
-            //   squidGame(canvasX, canvasY)
-            // }
-
             isDrag(lineDistance(click[0], click[1]), x, y, canvasX, canvasY)
             isClicking(fingersUp(landmarks), x, y)
 
-            //DRAW LANDMARKS - SKELETON
+            /**
+             * 
+             *  DRAW SKELETON HAND LANDMARKS
+             *  THIS WAS BASED ON THE DOCUMENTATION
+             *  OF THE MEDIAPIPE HANDS MODEL 
+             *  SOLUTION
+             * 
+             */
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
               {color: '#2d90a8', lineWidth: 5});
             drawLandmarks(canvasCtx, landmarks, {color: '#48f1f7', lineWidth: 3});
@@ -140,13 +158,30 @@ window.onload = function () {
     canvasCtx.restore();
   }
 
-  //Distance Computation between two points
+  /**
+   *  DISTANCE CALCULATION BETWEEN
+   *  TWO POINTS (x, y)
+   * 
+   *  d = √(x2−x1)2+(y2−y1)2
+   * 
+   *  Math.hypot does the same
+   * 
+   */
   function lineDistance(point1, point2) {
     var distance = Math.hypot(point2.x - point1.x, point2.y - point1.y);
     return distance;
   }
 
-  //Detect for fingers up
+  /**
+   *  
+   *  DETECTION FOR FINGERS UP
+   *  THIS CHECKS THE DISTANCE BETWEEN POINTS OF A 
+   *  FINGER TO DETERMINE WETHER IT IS CURLED 
+   *  OR NOT
+   * 
+   *  CHECK THE MEDIAPIPE HAND LANDMARK FOR REFERENCE
+   *  
+   */
   function fingersUp(landmarks) {
     const indexes = [4, 2, 8, 6, 12, 10, 16, 14, 20, 18];
     let fingersUp = [];
@@ -199,13 +234,26 @@ window.onload = function () {
 
   }
 
-  // Check if hover element has a card
+  /**
+   * 
+   *  FUNCTION FOR CHECKING THE HOVERED ELEMENT
+   *  OF THE POINTER
+   * 
+   */
   function checkHover(input) {
-    // Check if input is typeof String
-    // Return true if input includes className of card and card-small 
-    // false if input includes card-content
+    /**
+     *  SINCE WE'RE NOT USING TYPESCRIPT
+     *  FOR TYPE ANNOTATIONS, WE NEED TO CHECK
+     *  THE input IF IT IS A TYPE OF STRING
+     *  TO PREVENT ANY RUNTIME ERRORS
+     * 
+     *  IF typeof String THEN CHECK IF IT
+     *  INCLUDES THE SPECIFIED CLASSNAME 
+     *  AND RETURN A TRUE VALUE
+     * 
+     */
     if(typeof input == 'string'){
-      return (input.includes('card') || input.includes('card-small')) && !input.includes('card-content')
+      return (input.includes('card') || input.includes('card-small') || input.includes('cardhover')) && !input.includes('card-content')
     }
   }
 
@@ -239,33 +287,6 @@ window.onload = function () {
 
   }
 
-  //CHECK NAVIGATION IF LEFT OR RIGHT
-  let isRight = false
-  let navigateSection = false
-  function swipeNavigation(data, isright){
-    
-    const nofingers = fingersUp(data)
-
-    if (JSON.stringify(nofingers) == JSON.stringify([0,0,0,0,0])) {
-      if(!navigateSection){
-        navigateSection = true
-      }
-    }
-    else {
-      if(navigateSection){
-        if(isright){
-          const event = new CustomEvent('scroll-down')
-          document.dispatchEvent(event)
-        }
-        else {
-          const event = new CustomEvent('scroll-up')
-          document.dispatchEvent(event)
-        }
-        navigateSection = false
-      }
-    }
-  }
-
   function returnPrevRoute(){
     if(flagReturn) return
     countdown = 3;
@@ -294,8 +315,11 @@ window.onload = function () {
 
   /**
    * 
-   * VERTICAL SCROLL GESTURE
-   * Check if distance between landmark[4] and landmark[8]
+   *  VERTICAL SCROLL GESTURE
+   *  Check if distance between landmark[4] and landmark[8]
+   *  
+   *  CHECK MEDIAPIPE HANDS MODEL FOR REFERENCE 
+   *  OF THE HAND LANDMARK
    * 
    */
   let holdCounter = 0
@@ -338,11 +362,13 @@ window.onload = function () {
   /**
    * 
    * NEW IMPLEMENTATION OF CLICK GESTURE
-   * - PINCH YOUR MIDDLE AND INDEX 
-   * - FINGER TO EMIT THE CLICK
-   * - EVENT
    * 
    * CHECK IF data == [0, 1, 1, 0, 0] - PEACE SIGN
+   * 0 - THUMB
+   * 1 - INDEX
+   * 2 - MIDDLE
+   * 3 - RING
+   * 4 - PINKY
    * 
    */
   let clickCounter = 0, clicked = false
@@ -392,7 +418,12 @@ window.onload = function () {
     }
   }
 
-  //REMOVE POINTER IF NO HANDS IS VISIBLE
+  /**
+   * 
+   *  REMOVES POINTER VISIBILITY
+   *  WHEN NO HANDS IS SHOWN 
+   * 
+   */
   function updatePointerVisibility(results) {
     mouse_pointer.style.display = 'flex'
     if (results.multiHandLandmarks.length == 0) {
@@ -532,7 +563,13 @@ window.onload = function () {
   }
 
   
-  //Notif message - No Hands Detected
+  /**
+   * 
+   *  SHOWS NOTIFICATION TOAST 
+   *  ON THE TOP RIGHT IF 
+   *  NO HANDS ARE DETECTED
+   * 
+   */
   let nohands = true
   function notifNoHandsDetected(multiHandLandmarks) {
     nohands = multiHandLandmarks.length == 0 ? true : false
@@ -550,6 +587,7 @@ window.onload = function () {
   }
 
   /**
+   *  -- NOT USED --
    * 
    *  SCROLL UP OR DOWN GESTURE
    *  CHECK FOR THE DISTANCE WITHIN A 450ms TIME
@@ -627,7 +665,7 @@ window.onload = function () {
     hands.setOptions({
       maxNumHands: 1,
       minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.65,
+      minTrackingConfidence: 0.60,
       selfieMode: true,
     });
 
@@ -649,5 +687,5 @@ window.onload = function () {
   }
 
   // alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
-  mediaPipeHandsSetup();
+  // mediaPipeHandsSetup();
 }

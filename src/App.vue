@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in">
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </transition>
   </div>
 </template>
 <script>
 export default {
-  async mounted() {
+  async created() {
     document.title = 'Touchless Information Kiosk - Leyte Normal University'
     await this.$store.dispatch('info/getMissionVision')
     await this.$store.dispatch('info/getCoreValues')

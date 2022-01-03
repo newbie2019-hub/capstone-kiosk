@@ -1,4 +1,4 @@
-<template>
+<template functional>
  <div>
   <div class="return-container">
    <div class="d-flex">

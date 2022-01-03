@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 const Feedback = () => import(/* webpackChunkName: "feedback" */'../views/Feedback.vue')
+const MissionVision = () => import(/* webpackChunkName: "mivision" */'../views/Mission.vue')
 
 const University = () => import(/* webpackChunkName: "university" */'../views/University/University.vue')
 const TelDirectory = () => import(/* webpackChunkName: "teldirectory" */'../views/University/TelDirectory.vue')
@@ -17,6 +18,7 @@ const Hymn = () => import(/* webpackChunkName: "hymn" */'../views/Hymn.vue')
 const Tutorial = () => import(/* webpackChunkName: "tutorial" */'../views/Tutorial.vue')
 
 const Organization = () => import(/* webpackChunkName: "organization" */'../views/University/Organization.vue')
+const FAQs = () => import(/* webpackChunkName: "faqs" */'../views/University/FAQs.vue')
 const Departments = () => import(/* webpackChunkName: "departments" */'../views/University/Departments.vue')
 const SchoolOfficials = () => import(/* webpackChunkName: "schoolofficials" */'../views/University/SchoolOfficials.vue')
 
@@ -53,6 +55,16 @@ const routes = [
     path: '/university/teldirectory',
     name: 'TelDirectory',
     component: TelDirectory
+  },
+  {
+    path: '/university/mission-vision',
+    name: 'MissionVision',
+    component: MissionVision
+  },
+  {
+    path: '/university/faqs',
+    name: 'FAQs',
+    component: FAQs
   },
   {
     path: '/university/organization',

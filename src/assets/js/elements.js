@@ -21,41 +21,41 @@ function createElements(){
  createNotif()
  
  //CREATE LOADING ELEMENT
- let parent_div = document.createElement('div');
- parent_div.classList.add('loader')
+ // let parent_div = document.createElement('div');
+ // parent_div.classList.add('loader')
  
- let span_dot = document.createElement('span')
- span_dot.classList.add('dot')
- parent_div.appendChild(span_dot)
+ // let span_dot = document.createElement('span')
+ // span_dot.classList.add('dot')
+ // parent_div.appendChild(span_dot)
 
- let span_dots = document.createElement('div')
- span_dots.classList.add('dots')
- parent_div.appendChild(span_dots)
+ // let span_dots = document.createElement('div')
+ // span_dots.classList.add('dots')
+ // parent_div.appendChild(span_dots)
 
- for(let i = 1; i <= 3; i++){
-  let span = document.createElement('span')
-  span_dots.appendChild(span)
- }
+ // for(let i = 1; i <= 3; i++){
+ //  let span = document.createElement('span')
+ //  span_dots.appendChild(span)
+ // }
 
- const loading_text = document.createElement('h3')
- loading_text.innerText = 'Loading Resources . .'
- loading_text.classList.add('mt-3')
- loading_text.classList.add('fw-bold')
- parent_div.appendChild(loading_text)
+ // const loading_text = document.createElement('h3')
+ // loading_text.innerText = 'Loading Resources . .'
+ // loading_text.classList.add('mt-3')
+ // loading_text.classList.add('fw-bold')
+ // parent_div.appendChild(loading_text)
  
- const textinfo = document.createElement('h5')
- textinfo.innerText = 'Loading the machine learning model for the first time might take \n a while but it will be cached by your browser after then.'
- textinfo.classList.add('mt-4')
- textinfo.classList.add('fw-light')
- parent_div.appendChild(textinfo)
+ // const textinfo = document.createElement('h5')
+ // textinfo.innerText = 'Loading the machine learning model for the first time might take \n a while but it will be cached by your browser after then.'
+ // textinfo.classList.add('mt-4')
+ // textinfo.classList.add('fw-light')
+ // parent_div.appendChild(textinfo)
  
- const notetext = document.createElement('p')
- notetext.innerText = 'NOTE: Please make sure your area is well lit and \n use slow hand movements as possible'
- notetext.classList.add('mt-4')
- notetext.classList.add('fw-light')
- parent_div.appendChild(notetext)
+ // const notetext = document.createElement('p')
+ // notetext.innerText = 'NOTE: Please make sure your area is well lit and \n use slow hand movements as possible'
+ // notetext.classList.add('mt-4')
+ // notetext.classList.add('fw-light')
+ // parent_div.appendChild(notetext)
 
- document.body.appendChild(parent_div)
+ // document.body.appendChild(parent_div)
 
 
  //CANVAS

@@ -1,4 +1,4 @@
-<template>
+<template functional>
  <div>
   <div class="click-container">
    <div class="d-flex">
