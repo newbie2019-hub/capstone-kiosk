@@ -35,9 +35,9 @@
    <p class="close-text">Click anywhere to close</p>
   </div>
   <div class="container vh-100">
-   <div class="currentTime">
+   <!-- <div class="currentTime">
     <h4 class="text-white">{{ time }}</h4>
-   </div>
+   </div> -->
    <div class="d-flex flex-column h-100 g-0 justify-content-center text-white">
     <div class="col-12">
      <h1 class="text-uppercase fw-bold">Announcements</h1>

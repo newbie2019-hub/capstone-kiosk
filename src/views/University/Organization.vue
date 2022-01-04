@@ -26,70 +26,68 @@
    <p class="close-text">Click anywhere to close</p>
   </div>
 
-  <div class="popup-announcement" v-if="viewAnnouncement" @click="detectClick">
-   <div class="loading" v-if="isLoading">
-    <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
-     <span class="visually-hidden">Loading...</span>
+  <div class="container vh-100" :class="viewAnnouncement ? '':'hidden'">
+   <div class="d-flex flex-column h-100 g-0 justify-content-center text-white">
+    <div class="col-12">
+     <h1 class="text-uppercase fw-bold">{{orgSelected.abbreviation ? orgSelected.abbreviation : orgSelected.name}} Announcements</h1>
+     <h5 class="fw-light mt-4 mb-3">Select a card to view its content</h5>
+     <button @click.prevent="viewAnnouncement = false" class="btn btn-primary btn-lg text-uppercase mb-3">Return</button>
+     <h5 v-show="selectedOrgPost.length == 0" class="fw-light mt-5">No Announcements available. Please try again later</h5>
     </div>
-   </div>
-   <div class="grid-container" v-else>
-    <div class="title">
-     <h2 class="text-center fw-light">ANNOUNCEMENTS</h2>
-     <p class="text-subheading">Pinch and drag to scroll left or right</p>
+    <div class="loading" v-if="isLoading">
+     <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+     </div>
     </div>
-    <main class="grid-item main">
-     <div
-      class="items"
-      ref="popuppost"
-      @mousedown="onMouseDownAnnouncement"
-      @mousemove="onMouseMoveAnnouncement"
-      @mouseup="onMouseUpAnnouncement"
-     >
+    <div class="grid-container" v-else>
+     <main class="grid-item main">
       <div
-       @click.prevent="setViewPost(post)"
-       id="introcard"
-       class="item item-post"
-       v-for="(post, i) in selectedOrgPost"
-       :key="i"
-      >
-       <img
-        v-if="post.postcontent.image"
-        :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`"
-        class="card-img"
-        alt="..."
-       />
-       <img v-else :src="`https://be.lnukiosk.live/defaults/university-logo.png`" class="card-img" alt="..." />
-       <div class="card-img-overlay text-wrap p-4">
-        <h5 class="card-title">{{ post.postcontent.title }}</h5>
-        <p class="card-text fw-light mt-3 ql-align-justify">{{ post.postcontent.post_excerpt }}</p>
-       </div>
-       <div class="added-by">
-        <p>{{ post.useraccount.userinfo.first_name }} {{ post.useraccount.userinfo.last_name }}</p>
-        <p>{{ post.useraccount.userinfo.role.role }}</p>
+       class="items"
+       ref="popuppost"
+       @mousedown="onMouseDownAnnouncement"
+       @mousemove="onMouseMoveAnnouncement"
+       @mouseup="onMouseUpAnnouncement">
+       <div
+        @click.prevent="setViewPost(post)"
+        id="introcard"
+        class="item item-post"
+        v-for="(post, i) in selectedOrgPost"
+        :key="i">
+        <img
+         v-if="post.postcontent.image"
+         :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`"
+         class="card-img"
+         alt="..."
+        />
+        <img v-else :src="`https://be.lnukiosk.live/defaults/university-logo.png`" class="card-img" alt="..." />
+        <div class="card-img-overlay text-wrap p-4">
+         <h5 class="card-title">{{ post.postcontent.title }}</h5>
+         <p class="card-text fw-light mt-3 ql-align-justify">{{ post.postcontent.post_excerpt }}</p>
+        </div>
+        <div class="added-by">
+         <p>{{ post.useraccount.userinfo.first_name }} {{ post.useraccount.userinfo.last_name }}</p>
+         <p>{{ post.useraccount.userinfo.role.role }}</p>
+        </div>
        </div>
       </div>
-     </div>
-    </main>
+     </main>
+    </div>
    </div>
-   <p class="close-text">Double click anywhere to close</p>
   </div>
 
   <!--- ORGANIZATION CARD CONTAINER ----->
-  <div class="container vh-100">
-   <!-- <div class="currentTime">
-        <h4 class="text-white">{{ time }}</h4>
-      </div> -->
+  <div class="container vh-100" :class="viewAnnouncement ? 'hidden':''">
    <div class="d-flex flex-column h-100 g-0 justify-content-center text-white">
     <div class="col-12">
      <h1 class="text-uppercase fw-bold">Organizations</h1>
      <h5 class="fw-light">Scroll to the left by pinch and drag to see more options</h5>
-     <h5 class="fw-light mt-5 mb-3">Select an option to proceed.</h5>
+     <h5 class="fw-light mt-5 mb-3">Select an organization to view its announcements</h5>
     </div>
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
        <div
-        @click="requestOrgPost(org.name)"
+        @click="orgSelected = org; requestOrgPost(org.name)"
         id="introcard"
         class="item item-post"
         v-for="(org, i) in organizations"
@@ -101,8 +99,8 @@
         <img id="introcard" v-if="org.image" :src="`https://be.lnukiosk.live/uploads/${org.image}`" alt="" />
         <img id="introcard" v-else src="@/assets/images/logo.png" alt="" />
         <div class="card-h100-content text-wrap text-uppercase">
-          <h5>{{org.name}}</h5>
-        </div>   
+         <h5>{{ org.name }}</h5>
+        </div>
        </div>
       </div>
      </main>
@@ -120,6 +118,7 @@
   components: { ReturnGesture },
   data() {
    return {
+    orgSelected: '',
     selectedPost: {
      postcontent: {
       content: '',
@@ -236,7 +235,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   z-index: 200;
   background: rgba(0, 0, 0, 0.836);
@@ -245,13 +244,18 @@
   padding-bottom: 6rem;
  }
 
+ div.post-selected span{
+   color: white !important;
+ }
+
  .added-by {
   position: absolute;
   bottom: 1rem;
   color: rgb(223, 223, 223);
   font-weight: 400;
   left: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
  }
 
  .popup-announcement {

@@ -75,14 +75,14 @@
         <div id="tutorialcard" class="position-absolute w-100 h-100">
          <div class="row w-100 h-100 justify-content-center align-items-center">
           <div class="col-4">
-           <img src="@/assets/images/click-transparent.gif" class="" width="" alt="" />
+           <img src="@/assets/images/click-selected.gif" class="" width="" alt="" />
            <h5 class="me-4 fw-light">• 04 - CLICK GESTURE</h5>
           </div>
           <div class="col-5 text-wrap">
            <h3 class="fw-light">INSTRUCTION</h3>
            <br />
            <h4 class="fw-light">
-            To click, simply hover to an element and make a peace gesture and release after then
+            To click, simply hover to an element - pinch your fingers and release after then
            </h4>
            <br />
           </div>

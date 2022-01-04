@@ -16,8 +16,8 @@
  */
 import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands'
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
-import { Camera } from '@mediapipe/camera_utils'
 import { gsap } from "gsap"
+import { Camera } from '@mediapipe/camera_utils'
 
 window.onload = function () {
   
@@ -97,9 +97,6 @@ window.onload = function () {
              *  UP GESTURE NAVIGATION
              * 
              */
-            // if(window.location.pathname == '/menu' || window.location.pathname == '/university'){
-            //   swipeNavigation(landmarks, isRight)
-            // }  
 
             if(window.location.pathname != '/'){
               returnGestureRecog(landmarks, isRight)
@@ -110,15 +107,15 @@ window.onload = function () {
              *  https://google.github.io/mediapipe/images/mobile/hand_landmarks.png
              * 
              */
-            let x = landmarks[9].x, y = landmarks[9].y;
+            let x = landmarks[4].x, y = landmarks[4].y;
 
             x *= window.outerWidth - 30
-            y *= window.outerHeight - 100
+            y *= window.innerHeight - 20
 
-            pointer.style.left = `${ x + 22 }px`
-            pointer.style.top = `${ y + 22 }px`
+            pointer.style.left = `${ x }px`
+            pointer.style.top = `${ y }px`
 
-            if(window.location.pathname != '/entertainment/draw' || window.location.pathname != '/entertainment/squidgame') {
+            if(window.location.pathname != '/entertainment/draw') {
               hoverElement(x, y)
             }
 
@@ -129,15 +126,19 @@ window.onload = function () {
              *  PAINTING
              * 
              */
-            let canvasX = landmarks[4].x, canvasY = landmarks[4].y
-
-            canvasX *= window.outerWidth - 30
-            canvasY *= window.outerHeight - 100 
 
             const click = [landmarks[4], landmarks[8]]
 
-            isDrag(lineDistance(click[0], click[1]), x, y, canvasX, canvasY)
-            isClicking(fingersUp(landmarks), x, y)
+            isDragorClick(lineDistance(click[0], click[1]), x, y)
+
+            /**
+             *  PEACE GESTURE CLICK 
+             *  DISABLED TEMPORARILY
+             * 
+             *  RESTORED PINCH CLICK
+             *  
+             */
+            // isClicking(fingersUp(landmarks), x, y)
 
             /**
              * 
@@ -292,7 +293,7 @@ window.onload = function () {
     countdown = 3;
 
     iv = window.setInterval(() => {
-      countdown_timer.innerHTML = `${countdown}`
+      countdown_timer.innerText = `${countdown}`
       countdown--
       if(countdown < 0){
         clearReturn()
@@ -308,7 +309,7 @@ window.onload = function () {
     if(countdown == 3 && flagReturn == false) return
     clearInterval(iv)
     countdown = 3
-    countdown_timer.innerHTML = '•'
+    countdown_timer.innerText = '•'
     clearTimeout(return_timer)
     flagReturn = false
   }
@@ -322,29 +323,46 @@ window.onload = function () {
    *  OF THE HAND LANDMARK
    * 
    */
-  let holdCounter = 0
+  let holdCounter = 0, prevHoldCount = 0
   let dragStatus = 'none'
   let targetWindow = null
-  async function isDrag(distance, x, y, drawX, drawY) {
+  async function isDragorClick(distance, x, y) {
     const $el = document.elementFromPoint(x + 22, y + 22)
 
     if (distance < 0.065) {
       holdCounter++
     }
     else {
-      holdCounter = 0
       if (dragStatus == 'held') { 
         dragStatus = 'released'
       }
+ 
+       if(holdCounter > 2 && holdCounter < 7){
+        drawRipple()
+        if ($el) {
+          $el.dispatchEvent(
+            new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+              clientX: x + 50,
+              clientY: y,
+              pageX: x + 50,
+              pageY: y,
+            })
+          )
+          // Focus
+          if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
+            $el.focus()
+        }
+      }
+
+      holdCounter = 0
+     
     }
 
     if(window.location.pathname != '/' || window.location.pathname != '/menu' || window.location.pathname != '/university'){
       targetWindow = getTarget($el)
-      if(window.location.pathname == '/entertainment/draw'){
-        mousePointerUpdate(dragStatus, drawX, drawY)
-      }else {
-        mousePointerUpdate(dragStatus, x, y)
-      }
+      mousePointerUpdate(dragStatus, x, y)
     }
 
     if (dragStatus == 'released' && holdCounter == 0) {
@@ -371,52 +389,53 @@ window.onload = function () {
    * 4 - PINKY
    * 
    */
-  let clickCounter = 0, clicked = false
-  let click_status = 'none'
-  function isClicking(data, x, y){
-    const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0]) || JSON.stringify(data) == JSON.stringify([0,1,1,0,1])) {
-      clickCounter++
-    }
-    else {
-      clickCounter = 0
-      if (click_status == 'held') { 
-        click_status = 'released'
-        clicked = true
-      }
-    }
+  // let clickCounter = 0, clicked = false
+  // let click_status = 'none'
+  // function isClicking(data, x, y){
+  //   const $el = document.elementFromPoint(x + 22, y + 22)
 
-    if (click_status == 'released' && clickCounter == 0) {
-      click_status = 'none'
-    }
-    else if (clickCounter > 0 && clickCounter <= 1) {
-      click_status = 'start'
-    }
-    else if (clickCounter > 2) {
-      click_status = 'held'
-    }
+  //   if (JSON.stringify(data) == JSON.stringify([0,1,1,0,0]) || JSON.stringify(data) == JSON.stringify([0,1,1,0,1])) {
+  //     clickCounter++
+  //   }
+  //   else {
+  //     clickCounter = 0
+  //     if (click_status == 'held') { 
+  //       click_status = 'released'
+  //       clicked = true
+  //     }
+  //   }
 
-    if (clicked && clickCounter == 0) {
-      drawRipple()
-      if ($el) {
-        $el.dispatchEvent(
-          new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true,
-            clientX: x - 50,
-            clientY: y,
-            pageX: x - 50,
-            pageY: y,
-          })
-        )
-        // Focus
-        if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
-          $el.focus()
-      }
-      clicked = false
-    }
-  }
+  //   if (click_status == 'released' && clickCounter == 0) {
+  //     click_status = 'none'
+  //   }
+  //   else if (clickCounter > 0 && clickCounter <= 1) {
+  //     click_status = 'start'
+  //   }
+  //   else if (clickCounter > 2) {
+  //     click_status = 'held'
+  //   }
+
+  //   if (clicked && clickCounter == 0) {
+  //     drawRipple()
+  //     if ($el) {
+  //       $el.dispatchEvent(
+  //         new MouseEvent('click', {
+  //           bubbles: true,
+  //           cancelable: true,
+  //           clientX: x - 50,
+  //           clientY: y,
+  //           pageX: x - 50,
+  //           pageY: y,
+  //         })
+  //       )
+  //       // Focus
+  //       if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
+  //         $el.focus()
+  //     }
+  //     clicked = false
+  //   }
+  // }
 
   /**
    * 
@@ -477,27 +496,39 @@ window.onload = function () {
           })
         )
 
-        tweenScroll.y = targetWindow.scrollY || targetWindow.scrollTop || 0
-        gsap.killTweensOf(tweenScroll)
+        if(window.location.pathname == '/hymn' || window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
+          tweenScroll.y = targetWindow.scrollY || targetWindow.scrollTop || 0
+          gsap.killTweensOf(tweenScroll)
+        }
 
       }
     }
     if(status == 'held'){
-      
-      if(mousePointerStatus != 'held'){
-        mousePointerStatus = 'held'
-        mouse_pointer.classList.add('pointer-interaction')
+      if(holdCounter > 6){
+        if(mousePointerStatus != 'held'){
+          mousePointerStatus = 'held'
+          if(window.location.pathname == '/entertainment/draw') {
+            mouse_pointer.classList.add('pointer-interaction-draw')
+          }
+          else {
+            mouse_pointer.classList.add('pointer-interaction')
+          }
+        }
       }
 
-      gsap.to(tweenScroll, {
-        y: tweenScroll.y + (initialY - y) * 1.5,
-        duration: 1,
-        overwrite: true,
-        immediateRender: true,
-        ease: 'linear.easeNone',
-      })
+      if(window.location.pathname == '/hymn' ||window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
+        gsap.to(tweenScroll, {
+          y: tweenScroll.y + (initialY - y) * 1.2,
+          duration: 1,
+          overwrite: true,
+          immediateRender: true,
+          ease: 'linear.easeNone',
+        })
 
-      targetWindow.scrollTo(0, tweenScroll.y)
+        targetWindow.scrollTo(0, tweenScroll.y)
+        console.log(targetWindow)
+      }
+
 
       //MOUSE MOVE EVENT
       $el.dispatchEvent(
@@ -515,7 +546,12 @@ window.onload = function () {
     if(status == 'released'){
       if(mousePointerStatus != 'released'){
         mousePointerStatus = 'released'
-        mouse_pointer.classList.remove('pointer-interaction')
+        if(window.location.pathname == '/entertainment/draw') {
+          mouse_pointer.classList.remove('pointer-interaction-draw')
+        }
+        else {
+          mouse_pointer.classList.remove('pointer-interaction')
+        }
         
         //MOUSE MOVE EVENT
         $el.dispatchEvent(
@@ -653,32 +689,40 @@ window.onload = function () {
     node.parentNode.replaceChild(newNode, node);
   }
 
+  const VIDEO_WIDTH_CROP = Math.round(640 / 1.3)
+  const VIDEO_HEIGHT = 480
 
   function mediaPipeHandsSetup() {
 
     const hands = new Hands({
       locateFile: (file) => {
         return `${ window.location.origin }/mediapipe/${ file }`;
+        // return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
       }
     });
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.75,
-      minTrackingConfidence: 0.60,
+      minDetectionConfidence: 0.8,
+      minTrackingConfidence: 0.5,
       selfieMode: true,
     });
 
     hands.onResults(onResults);
+
     const camera = new Camera(videoElement, {
       onFrame: async () => {
         await hands.send({ image: videoElement });
       },
-      width: window.Width,
-      height: window.Height
-    });
+      width: VIDEO_WIDTH_CROP,
+      height: VIDEO_HEIGHT
+     });
+     
+     camera.start();
 
-    camera.start();
+    // const worker = new Worker(worker)
+    // worker.postMessage({hands: hands, videoEl: videoElement})
+    
   }
 
   const memory = navigator.deviceMemory
@@ -687,5 +731,5 @@ window.onload = function () {
   }
 
   // alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
-  // mediaPipeHandsSetup();
+  mediaPipeHandsSetup();
 }

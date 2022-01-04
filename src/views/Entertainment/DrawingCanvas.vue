@@ -31,20 +31,6 @@ export default {
    ctx_i.height = window.innerHeight;
    this.ctx = ctx_i
  
-  //  setTimeout(() => {
-  //    const image = document.getElementById("selected");
-     
-  //    const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-  //    const w = image.width * scale;
-  //    const h = image.height * scale;
-  //    console.log(canvas.width, canvas.height)
-  //    const left = canvas.width / 2 - w / 2;
-  //    const top = canvas.height / 2 - h / 2;
-
-  //    this.ctx.drawImage(image,canvas.width / 2.6,canvas.height / 3.2,250,250);
-  //  },50)
-     
-
   },
   methods: {
     startPosition(e){
@@ -82,11 +68,13 @@ export default {
 </script>
 <style>
 .erase {
-  height: 120px;
-  width: 120px;
+  height: 150px;
+  width: 180px;
   position: fixed;
   top: 35%;
-  right: 6rem;
+  right: 10rem;
+  box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.068);
+
   transform: translateY(-50%);
   margin-left: 2rem;
   color: white;
@@ -98,11 +86,13 @@ export default {
 }
 
 .clear {
-  height: 120px;
-  width: 120px;
+  height: 150px;
+  width: 180px;
   position: fixed;
+  box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.082);
+  /* border: 1px solid #fff; */
   top: 65%;
-  right: 6rem;
+  right: 10rem;
   transform: translateY(-50%);
   margin-left: 2rem;
   color: white;

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 const Feedback = () => import(/* webpackChunkName: "feedback" */'../views/Feedback.vue')
 const MissionVision = () => import(/* webpackChunkName: "mivision" */'../views/Mission.vue')
+const CoreValues = () => import(/* webpackChunkName: "corevalues" */'../views/CoreValues.vue')
 
 const University = () => import(/* webpackChunkName: "university" */'../views/University/University.vue')
 const TelDirectory = () => import(/* webpackChunkName: "teldirectory" */'../views/University/TelDirectory.vue')
@@ -60,6 +61,11 @@ const routes = [
     path: '/university/mission-vision',
     name: 'MissionVision',
     component: MissionVision
+  },
+  {
+    path: '/university/corevalues',
+    name: 'CoreValues',
+    component: CoreValues
   },
   {
     path: '/university/faqs',

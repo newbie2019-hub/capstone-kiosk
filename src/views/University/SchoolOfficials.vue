@@ -1,5 +1,21 @@
 <template>
  <div>
+  <div class="backdrop" :class="cardClicked ? '': 'hidden'" @click.prevent="cardClicked = false">
+    <div class="item-schoolofficial">
+      <h5 class="text-uppercase">University Official</h5>
+      <b-avatar v-if="selectedOfficial.image" size="170" :src="selectedOfficial.image ? selectedOfficial.image : ''" variant="primary" />
+      <b-avatar v-else src="@/assets/images/logo.png" size="170" />
+      <h5 class="text-center">
+        {{ selectedOfficial.title }} {{ selectedOfficial.first_name }} {{ selectedOfficial.last_name }}
+      </h5>
+      <h6 class="fw-light text-center">Role: {{ selectedOfficial.role }}</h6>
+      <h6 class="fw-light mt-3">Email: {{ selectedOfficial.email ? selectedOfficial.email : 'N/A'}}</h6>
+      <h6 class="fw-light mt-1">Tel: {{ selectedOfficial.telephone ? selectedOfficial.telephone : 'N/A' }}</h6>
+      <h5 class="text-center">
+      </h5>
+    </div>
+   <p class="official-close-text">Click anywhere to close</p>
+  </div>
   <div class="container vh-100">
    <!-- <div class="currentTime">
         <h4 class="text-white">{{ time }}</h4>
@@ -13,7 +29,7 @@
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-       <div id="introcard" class="item item-post" v-for="(official, i) in schoolofficials" :key="i">
+       <div @click.prevent="cardClicked = true; selectedOfficial = official" id="introcard" class="item item-post" v-for="(official, i) in schoolofficials" :key="i">
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
@@ -45,10 +61,23 @@
 <script>
  import { mapState } from 'vuex';
  import ReturnGesture from '../../components/ReturnGesture.vue';
+
  export default {
   components: { ReturnGesture },
   data() {
-   return {};
+   return {
+     cardClicked: false,
+     selectedOfficial: {
+       image: null,
+       first_name: 'Yvan',
+       last_name: 'Sabay',
+       gender: 'Male',
+       title: 'Dr',
+       email: 'sampleemail@gmail.com',
+       telephone: '',
+       role: 'University President',
+     }
+   };
   },
   methods: {
    currentNumber(i) {
@@ -75,3 +104,42 @@
   },
  };
 </script>
+<style>
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.61);
+}
+
+.item-schoolofficial {
+  position: relative;
+  width: auto;
+  height: auto;
+  background: #3f6cc0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2.5rem 3.5rem;
+  color: white;
+  max-width: 360px;
+  border-radius: 8px;
+}
+
+.official-close-text {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: translateX(-50%);
+  color: rgb(209, 209, 209);
+}
+</style>

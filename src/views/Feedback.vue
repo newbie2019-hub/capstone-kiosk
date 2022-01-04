@@ -28,7 +28,7 @@
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-       <div id="introcard" class="item item-post" v-for="(em, i) in emoji" :key="i">
+       <div id="introcard" class="item item-post cardhover" v-for="(em, i) in emoji" :key="i">
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
