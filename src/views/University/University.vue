@@ -13,7 +13,7 @@
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horiscroll" @mousedown="onMouseDown" @mousemove="onMouseMove">
-       <router-link to="/university/departments" class="text-decoration-none">
+       <router-link to="/university/history" class="text-decoration-none">
         <div id="introcard" class="item item-post cardhover">
          <i class="fas fa-history card--icon"></i>
          <div class="card-content text-wrap text-uppercase">

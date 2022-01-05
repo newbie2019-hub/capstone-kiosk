@@ -111,16 +111,13 @@
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-       <div
-        id="introcard"
+       <div id="introcard"
         class="item item-post"
         v-for="(college, i) in colleges"
         :key="i"
         v-on:click.prevent="
          selectedCollege = { ...college };
-         cardClicked = true;
-        "
-       >
+         cardClicked = true;">
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>

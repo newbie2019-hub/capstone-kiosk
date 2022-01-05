@@ -3,7 +3,9 @@
   <h1 class="text-center text-white mt-5 pt-5 fw-bold ">UNIVERSITY HYMN</h1>
   <p class="text-center text-white">Music: Dr. Virginio V. Fuentes</p>
   <p class="text-center mb-4 text-white">Lyrics: Mrs Rosario P. Isiderio</p>
-  <div class="text-white text-center font-hymn mt-5 pt-4  pb-3 mb-5" v-html="missionvision[0].lnu_hymn"></div>
+  <div class="text-white text-center font-hymn mt-5 pt-4  pb-3 mb-5">
+   <pre class="font-poppins no-scroll">{{missionvision[0].lnu_hymn}}</pre>
+  </div>
   <return-gesture />
  </div>
 </template>
@@ -19,7 +21,13 @@ export default {
 </script>
 <style>
 .font-hymn {
- font-size: 2.5rem;
+ font-size: 2.8rem;
  line-height: 3.2rem;
 }
+
+.no-scroll {
+ overflow-y: hidden;
+}
+
+
 </style>

@@ -484,20 +484,24 @@ window.onload = function () {
         if(initialY == 0){
           initialY = y
         }
-        //MOUSE DOWN EVENT
-        $el.dispatchEvent(
-          new MouseEvent('mousedown', {
-            bubbles: true,
-            cancelable: true,
-            clientX: x + 22,
-            clientY: y + 22,
-            pageX: x + 22,
-            pageY: y + 22,
-          })
-        )
 
-        if(window.location.pathname == '/hymn' || window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
-          tweenScroll.y = targetWindow.scrollY || targetWindow.scrollTop || 0
+        //MOUSE DOWN EVENT
+        if($el){
+          $el.dispatchEvent(
+            new MouseEvent('mousedown', {
+              bubbles: true,
+              cancelable: true,
+              clientX: x + 22,
+              clientY: y + 22,
+              pageX: x + 22,
+              pageY: y + 22,
+            })
+          )
+        }
+
+        if(window.location.pathname == '/university/history' || window.location.pathname == '/hymn' || window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
+          tweenScroll.y = targetWindow.scrollY || 0
+          console.log('Tween Scroll: ' + tweenScroll.y)
           gsap.killTweensOf(tweenScroll)
         }
 
@@ -516,31 +520,35 @@ window.onload = function () {
         }
       }
 
-      if(window.location.pathname == '/hymn' ||window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
-        gsap.to(tweenScroll, {
-          y: tweenScroll.y + (initialY - y) * 1.2,
-          duration: 1,
-          overwrite: true,
-          immediateRender: true,
-          ease: 'linear.easeNone',
+      if(window.location.pathname == '/university/history' || window.location.pathname == '/hymn' || window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
+        setTimeout(() => {
+          gsap.to(tweenScroll, {
+            y: tweenScroll.y + (initialY - y) * 1.5,
+            duration: 1,
+            overwrite: true,
+            immediateRender: true,
+            ease: 'linear.easeNone',
+          })
+  
+          targetWindow.scrollTo(0, tweenScroll.y)
+          console.log(tweenScroll.y)
         })
-
-        targetWindow.scrollTo(0, tweenScroll.y)
-        console.log(targetWindow)
       }
 
 
       //MOUSE MOVE EVENT
-      $el.dispatchEvent(
-        new MouseEvent('mousemove', {
-          bubbles: true,
-          cancelable: true,
-          clientX: x + 22,
-          clientY: y + 22,
-          pageX: x + 22,
-          pageY: y + 22,
-        })
-      )
+      if($el){
+        $el.dispatchEvent(
+          new MouseEvent('mousemove', {
+            bubbles: true,
+            cancelable: true,
+            clientX: x + 22,
+            clientY: y + 22,
+            pageX: x + 22,
+            pageY: y + 22,
+          })
+        )
+      }
 
     }
     if(status == 'released'){
@@ -554,16 +562,18 @@ window.onload = function () {
         }
         
         //MOUSE MOVE EVENT
-        $el.dispatchEvent(
-          new MouseEvent('mouseup', {
-            bubbles: true,
-            cancelable: true,
-            clientX: x + 22,
-            clientY: y + 22,
-            pageX: x + 22,
-            pageY: y + 22,
-          })
-        )
+        if($el){
+          $el.dispatchEvent(
+            new MouseEvent('mouseup', {
+              bubbles: true,
+              cancelable: true,
+              clientX: x + 22,
+              clientY: y + 22,
+              pageX: x + 22,
+              pageY: y + 22,
+            })
+          )
+        }
 
         initialY = 0
 

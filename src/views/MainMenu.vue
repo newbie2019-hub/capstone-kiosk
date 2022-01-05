@@ -221,7 +221,6 @@ import ReturnGesture from "../components/ReturnGesture.vue";
       const walk = (x - this.startX) * 1.6; //scroll-fast
       this.$refs.horiscroll.scrollLeft = this.scrollLeft - walk;
     },
-
   }
  };
 </script>

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["qualitypolicy"],{"1b8c":function(e,t,n){"use strict";n.r(t);var l=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},c=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("h5",[e._v("Quality Policy goes here")])])}],i={},r=i,u=n("2877"),a=Object(u["a"])(r,l,c,!1,null,null,null);t["default"]=a.exports}}]);
-//# sourceMappingURL=qualitypolicy.d08253ed.js.map
