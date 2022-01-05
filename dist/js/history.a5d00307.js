@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["history"],{b2e6:function(e,t,n){"use strict";n.r(t);var r=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},s=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("h5",[e._v("History goes here")])])}],c={},i=c,l=n("2877"),o=Object(l["a"])(i,r,s,!1,null,null,null);t["default"]=o.exports}}]);
+//# sourceMappingURL=history.a5d00307.js.map

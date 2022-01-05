@@ -19,6 +19,8 @@ const Hymn = () => import(/* webpackChunkName: "hymn" */'../views/Hymn.vue')
 const Tutorial = () => import(/* webpackChunkName: "tutorial" */'../views/Tutorial.vue')
 
 const Organization = () => import(/* webpackChunkName: "organization" */'../views/University/Organization.vue')
+const QualityPolicy = () => import(/* webpackChunkName: "qualitypolicy" */'../views/University/QualityPolicy.vue')
+const History = () => import(/* webpackChunkName: "history" */'../views/University/History.vue')
 const FAQs = () => import(/* webpackChunkName: "faqs" */'../views/University/FAQs.vue')
 const Departments = () => import(/* webpackChunkName: "departments" */'../views/University/Departments.vue')
 const SchoolOfficials = () => import(/* webpackChunkName: "schoolofficials" */'../views/University/SchoolOfficials.vue')
@@ -56,6 +58,16 @@ const routes = [
     path: '/university/teldirectory',
     name: 'TelDirectory',
     component: TelDirectory
+  },
+  {
+    path: '/university/qualitypolicy',
+    name: 'QualityPolicy',
+    component: QualityPolicy
+  },
+  {
+    path: '/university/history',
+    name: 'History',
+    component: History
   },
   {
     path: '/university/mission-vision',

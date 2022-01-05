@@ -71,16 +71,17 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .pointer-interaction .timer {
-  font-size: 6rem !important;
+  font-size: 15rem !important;
+  margin-top: -8px;
 }
 
 .pointer-interaction .timer::after {
   position: absolute;
   content: '';
-  left: -60px;
+  left: -20px;
   width: 35px;
   height: 35px;
-  top: 35%;
+  top: 45%;
   clip-path: polygon(50% 0%, 0 50%, 50% 100%);
   background-color: white;
 }
@@ -88,10 +89,10 @@ h1, h2, h3, h4, h5, h6, p {
 .pointer-interaction .timer::before {
   position: absolute;
   content: '';
-  right: -60px;
+  right: -20px;
   width: 35px;
   height: 35px;
-  top: 35%;
+  top: 45%;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%);
   background-color: white;
 }

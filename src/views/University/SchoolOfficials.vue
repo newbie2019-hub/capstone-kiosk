@@ -29,7 +29,7 @@
     <div class="grid-container">
      <main class="grid-item main">
       <div class="items" ref="horizontal" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
-       <div @click.prevent="cardClicked = true; selectedOfficial = official" id="introcard" class="item item-post" v-for="(official, i) in schoolofficials" :key="i">
+       <div @click.prevent="cardClicked = true; selectedOfficial = official" id="introcard" class="item item-post cardhover" v-for="(official, i) in schoolofficials" :key="i">
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
@@ -130,6 +130,7 @@
   padding: 2.5rem 3.5rem;
   color: white;
   max-width: 360px;
+  box-shadow: 0px 0px 2px 2px #f5f5f5 !important;
   border-radius: 8px;
 }
 
@@ -141,5 +142,6 @@
   letter-spacing: 1px;
   transform: translateX(-50%);
   color: rgb(209, 209, 209);
+
 }
 </style>

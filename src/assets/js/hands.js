@@ -49,7 +49,7 @@ window.onload = function () {
      if (!loaded) {
        setTimeout(() => {
          document.getElementsByClassName('loader')[0].remove()
-         console.clear()
+        //  console.clear()
          console.log("%cThis is still an experimental feature and may not be stable as you think.", "color: orange; font-size: 1.2rem;")
          console.log("%cThis was made possible by MediaPipe Hands Model.", "color: blue; font-size: 1rem;")
       }, 1200)
