@@ -3,7 +3,7 @@
   <div class="backdrop" :class="cardClicked ? '': 'hidden'" @click.prevent="cardClicked = false">
     <div class="item-schoolofficial">
       <h5 class="text-uppercase">University Official</h5>
-      <b-avatar v-if="selectedOfficial.image" size="170" :src="selectedOfficial.image ? selectedOfficial.image : ''" variant="primary" />
+      <b-avatar class="mt-3 mb-3" v-if="selectedOfficial.image" size="150" :src="'https://be.lnukiosk.live/uploads/' + selectedOfficial.image"/>
       <b-avatar v-else src="@/assets/images/logo.png" size="170" />
       <h5 class="text-center">
         {{ selectedOfficial.title }} {{ selectedOfficial.first_name }} {{ selectedOfficial.last_name }}
@@ -34,7 +34,7 @@
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
         <div class="d-flex justify-content-center mt-1">
-         <b-avatar v-if="official.image" size="130" :src="official.image ? official.image : ''" variant="primary" />
+         <b-avatar v-if="official.image" size="137"  :src="'https://be.lnukiosk.live/uploads/' + official.image"  />
          <b-avatar v-else variant="secondary" size="170" />
         </div>
         <div class="card-content">

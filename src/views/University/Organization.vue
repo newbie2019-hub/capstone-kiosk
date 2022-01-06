@@ -32,10 +32,10 @@
      <h1 class="text-uppercase fw-bold">{{orgSelected.abbreviation ? orgSelected.abbreviation : orgSelected.name}} Announcements</h1>
      <h5 class="fw-light mt-4 mb-3">Select a card to view its content</h5>
      <button @click.prevent="viewAnnouncement = false" class="btn btn-primary btn-lg text-uppercase mb-3">Return</button>
-     <h5 v-show="selectedOrgPost.length == 0" class="fw-light mt-5">No Announcements available. Please try again later</h5>
+     <h5 v-show="selectedOrgPost.length == 0 && !isLoading" class="fw-light mt-5">No Announcements available. Please try again later</h5>
     </div>
     <div class="loading" v-if="isLoading">
-     <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+     <div class="spinner-border text-light " style="width: 3rem; height: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
      </div>
     </div>
@@ -56,7 +56,7 @@
         <img
          v-if="post.postcontent.image"
          :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`"
-         class="card-img"
+         class="card-img item-img"
          alt="..."
         />
         <img v-else :src="`https://be.lnukiosk.live/defaults/university-logo.png`" class="card-img" alt="..." />
@@ -96,8 +96,8 @@
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
-        <img id="introcard" v-if="org.image" :src="`https://be.lnukiosk.live/uploads/${org.image}`" alt="" />
-        <img id="introcard" v-else src="@/assets/images/logo.png" alt="" />
+        <img id="introcard" v-if="org.image" :src="`https://be.lnukiosk.live/uploads/${org.image}`" alt="" class="item-img"/>
+        <img id="introcard" v-else src="@/assets/images/logo.png" alt=""  class="item-img"/>
         <div class="card-h100-content text-wrap text-uppercase">
          <h5>{{ org.name }}</h5>
         </div>

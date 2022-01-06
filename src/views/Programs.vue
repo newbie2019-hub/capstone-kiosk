@@ -121,7 +121,7 @@
         <div class="d-flex justify-content-end">
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
-        <img id="introcard" src="@/assets/images/logo.png" alt="" />
+        <img id="introcard" src="@/assets/images/logo.png" class="item-img" alt="" />
         <div class="card-h100-content">
          <h5 class="text-wrap text-uppercase">{{ college.name }}</h5>
         </div>

@@ -837,7 +837,7 @@ blockquote:after {
   position: relative;
 }
 
-.item img {
+.item-img {
   position: absolute;
   top: 0; 
   left: 0;

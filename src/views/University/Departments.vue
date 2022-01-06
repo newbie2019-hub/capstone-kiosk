@@ -64,7 +64,7 @@
         <img
          v-if="post.postcontent.image"
          :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`"
-         class="card-img"
+         class="card-img item-img"
          alt="..."
         />
         <img v-else :src="`https://be.lnukiosk.live/defaults/university-logo.png`" class="card-img" alt="..." />
@@ -112,9 +112,9 @@
          v-if="dep.image"
          :src="`https://be.lnukiosk.live/uploads/${dep.image}`"
          alt=""
-         class="img-fluid"
+         class="img-fluid item-img"
         />
-        <img id="introcard" v-else src="@/assets/images/logo.png" alt="" class="img-fluid" />
+        <img id="introcard" v-else src="@/assets/images/logo.png" alt="" class="img-fluid item-img" />
         <div class="card-h100-content text-wrap text-uppercase">
          <h5>{{ dep.name }}</h5>
         </div>
