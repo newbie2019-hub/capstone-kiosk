@@ -3,13 +3,13 @@
   <div class="backdrop" :class="cardClicked ? '': 'hidden'" @click.prevent="cardClicked = false">
     <div class="item-schoolofficial">
       <h5 class="text-uppercase">University Official</h5>
-      <b-avatar class="mt-3 mb-3" v-if="selectedOfficial.image" size="150" :src="'https://be.lnukiosk.live/uploads/' + selectedOfficial.image"/>
+      <b-avatar class="mt-3 mb-3" v-if="selectedOfficial.image" size="150" :src="'http://127.0.0.1:8000/uploads/' + selectedOfficial.image"/>
       <b-avatar v-else src="@/assets/images/logo.png" size="170" />
       <h5 class="text-center">
         {{ selectedOfficial.title }} {{ selectedOfficial.first_name }} {{ selectedOfficial.last_name }}
       </h5>
       <h6 class="fw-light text-center">Role: {{ selectedOfficial.role }}</h6>
-      <h6 class="fw-light mt-3">Email: {{ selectedOfficial.email ? selectedOfficial.email : 'N/A'}}</h6>
+      <h6 class="fw-light mt-3 text-center">Email: {{ selectedOfficial.email ? selectedOfficial.email : 'N/A'}}</h6>
       <h6 class="fw-light mt-1">Tel: {{ selectedOfficial.telephone ? selectedOfficial.telephone : 'N/A' }}</h6>
       <h5 class="text-center">
       </h5>
@@ -34,7 +34,7 @@
          <p class="mt-3 me-4 fw-light">{{ currentNumber(i) }}</p>
         </div>
         <div class="d-flex justify-content-center mt-1">
-         <b-avatar v-if="official.image" size="137"  :src="'https://be.lnukiosk.live/uploads/' + official.image"  />
+         <b-avatar v-if="official.image" size="137"  :src="'http://127.0.0.1:8000/uploads/' + official.image"  />
          <b-avatar v-else variant="secondary" size="170" />
         </div>
         <div class="card-content">
@@ -69,8 +69,8 @@
      cardClicked: false,
      selectedOfficial: {
        image: null,
-       first_name: 'Yvan',
-       last_name: 'Sabay',
+       first_name: 'John',
+       last_name: 'Doe',
        gender: 'Male',
        title: 'Dr',
        email: 'sampleemail@gmail.com',

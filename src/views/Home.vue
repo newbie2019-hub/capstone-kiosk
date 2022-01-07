@@ -65,6 +65,7 @@
         </div>
       </div>
     </div>
+   <p class="official-lnu-text">LNU Official Website: <a class="text-decoration-none" href="https://lnu.edu.ph" target="_">Click Here</a></p>
   </div>
   <!-- <ClickGesture/> -->
  </div>
@@ -91,4 +92,13 @@ export default {
   top: 5rem;
   right: 9rem;
 }
+.official-lnu-text {
+  position: absolute;
+  bottom: 20px;
+  left: 35px;
+  letter-spacing: 1px;
+  color: rgb(209, 209, 209);
+
+}
+
 </style>

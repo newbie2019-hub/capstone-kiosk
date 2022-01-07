@@ -741,5 +741,5 @@ window.onload = function () {
   }
 
   // alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
-  mediaPipeHandsSetup();
+  // mediaPipeHandsSetup();
 }

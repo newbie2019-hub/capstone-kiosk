@@ -22,16 +22,16 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .pointer {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   /* color: rgb(255, 255, 255);
   border: 2px dotted rgb(255, 255, 255); */
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
   z-index: 999;
-  opacity: 1;
+  /* opacity: 1; */
   transition: all 250ms;
   display: flex;
   /* mix-blend-mode: exclusion; */
@@ -71,17 +71,18 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .pointer-interaction .timer {
-  font-size: 15rem !important;
-  margin-top: -8px;
+  font-size: 7rem !important;
+  /* margin-top: -8px; */
 }
 
 .pointer-interaction .timer::after {
   position: absolute;
   content: '';
-  left: -20px;
+  left: -40px;
   width: 35px;
   height: 35px;
-  top: 45%;
+  top: 50%;
+  transform: translateY(-50%);
   clip-path: polygon(50% 0%, 0 50%, 50% 100%);
   background-color: white;
 }
@@ -89,10 +90,11 @@ h1, h2, h3, h4, h5, h6, p {
 .pointer-interaction .timer::before {
   position: absolute;
   content: '';
-  right: -20px;
+  right: -40px;
   width: 35px;
   height: 35px;
-  top: 45%;
+  top: 50%;
+  transform: translateY(-50%);
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%);
   background-color: white;
 }
@@ -120,6 +122,9 @@ h1, h2, h3, h4, h5, h6, p {
   color: white;
   font-size: 2rem;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transition: all 200ms;
 }
 
