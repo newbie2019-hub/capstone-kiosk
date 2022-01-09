@@ -3,8 +3,8 @@
 body {
   font-family: 'Poppins', sans-serif !important;
   user-select: none;
-  background-image: linear-gradient(rgba(22, 22, 51, 0.719), rgba(2, 8, 29, 0.918));
-  /* background-color: #000000 !important; */
+  background-image: linear-gradient(rgba(22, 22, 51, 0.836), rgba(2, 8, 29, 0.808));
+  /* background-color: #00000000 !important; */
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -141,7 +141,7 @@ h1, h2, h3, h4, h5, h6, p {
   z-index: -1;
   opacity: 0.3;
   filter: brightness(20%) ;
-  background-image: linear-gradient(rgba(52, 83, 223, 0.534), rgba(1, 8, 39, 0.596));
+  /* background-image: linear-gradient( rgba(52, 83, 223, 0.301), rgba(1, 8, 39, 0.336)); */
 }
 
 
@@ -149,7 +149,7 @@ h1, h2, h3, h4, h5, h6, p {
 .notif {
   position: fixed;
   padding: 1rem 2rem;
-  background-color: #4a7bd4;
+  background-color: #4a7ad4c7;
   border-radius: 8px;
   top: 25px;
   right: 25px;
@@ -1048,4 +1048,80 @@ blockquote:after {
   75% {
     clip: rect(0px, 220px, 220px, 218px);
   }
+}
+
+/** CSS SLIDESHOW */
+.agile__nav-button {
+  background: transparent;
+  border: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 3.2rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition-duration: 0.3s;
+  width: 50%;
+}
+
+.prevButton--icon {
+  position: absolute;
+  left: 10%;
+}
+
+.nextButton--icon {
+  position: absolute;
+  right: 10%;
+}
+
+/* .agile__nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+} */
+
+.agile__nav-button--prev {
+  left: 0;
+}
+
+.agile__nav-button--next {
+  right: 0;
+}
+
+.agile__dots {
+  bottom: 10px;
+  right: 5%;
+  position: absolute;
+  flex-direction: column;
+}
+
+.agile__dot {
+  margin: 5px 0px;
+
+}
+
+.agile__dot button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: .3s;
+  width: 10px;
+}
+
+.agile__dot--current button, .agile__dot:hover button {
+  background-color: rgb(38, 198, 247);
+}
+
+.slide {
+  display: block;
+  height: 100vh;
+  -o-object-fit: contain;
+  object-fit: contain;
+  width: 100%;
+  background-color: #2c2c2c42;
 }

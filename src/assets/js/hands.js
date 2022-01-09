@@ -500,8 +500,9 @@ window.onload = function () {
         }
 
         if(window.location.pathname == '/university/history' || window.location.pathname == '/hymn' || window.location.pathname == '/announcement' || window.location.pathname == '/university/organization' || window.location.pathname == '/university/departments'){
+          console.log(targetWindow)
           tweenScroll.y = targetWindow.scrollY || 0
-          console.log('Tween Scroll: ' + tweenScroll.y)
+          console.log('------------------')
           gsap.killTweensOf(tweenScroll)
         }
 
@@ -741,5 +742,5 @@ window.onload = function () {
   }
 
   // alert('To view all the elements clearly we request you to run our system in fullscreen mode. To run in fullscreen mode simply Press F11 on your keyboard. Thank you!')
-  // mediaPipeHandsSetup();
+  mediaPipeHandsSetup();
 }

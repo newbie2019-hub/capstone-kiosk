@@ -10,6 +10,7 @@ const TelDirectory = () => import(/* webpackChunkName: "teldirectory" */'../view
 const Menu = () => import(/* webpackChunkName: "menu" */'../views/MainMenu.vue')
 
 const Announcement = () => import(/* webpackChunkName: "announcement" */'../views/Announcement/Announcement.vue')
+const ImageAnnouncement = () => import(/* webpackChunkName: "imgannouncement" */'../views/Announcement/ImageAnnouncement.vue')
 
 const Entertainment = () => import(/* webpackChunkName: "entertainment" */'../views/Entertainment/Entertainment.vue')
 const Draw = () => import(/* webpackChunkName: "draw" */'../views/Entertainment/DrawingCanvas.vue')
@@ -103,6 +104,11 @@ const routes = [
     path: '/announcement',
     name: 'Announcement',
     component: Announcement
+  },
+  {
+    path: '/announcement/highlights',
+    name: 'ImageAnnouncement',
+    component: ImageAnnouncement
   },
   {
     path: '/hymn',

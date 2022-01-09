@@ -17,6 +17,7 @@ export default {
    posts: [],
    selectedOrgPost: [],
    selectedDepPost: [],
+   imgposts: [],
   },
   getters: {
     GET_TUTORIAL(state){
@@ -41,6 +42,9 @@ export default {
    },
    SET_POSTS(state, data){
     state.posts = data
+   },
+   SET_IMAGE_POSTS(state, data){
+    state.imgposts = data
    },
    SET_TEL_DIRECTORIES(state, data){
     state.teldirectories = data
@@ -76,6 +80,16 @@ export default {
     async getSelectedOrgPost({commit}, data){
       const res = await API.post(`requestOrgPost`, data).then(res => {
         commit('SET_SELECTED_ORG_POST', res.data)
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
+    async getImagePosts({commit}){
+      const res = await API.get(`posts/images`).then(res => {
+        commit('SET_IMAGE_POSTS', res.data)
         return res;
       }).catch(err => {
        return err.response;

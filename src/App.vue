@@ -20,6 +20,7 @@ export default {
     await this.$store.dispatch('info/getCourses')
     await this.$store.dispatch('info/getFAQs')
     await this.$store.dispatch('info/getPosts')
+    await this.$store.dispatch('info/getImagePosts')
   }
 }
 </script>

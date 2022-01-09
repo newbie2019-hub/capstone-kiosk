@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import { AvatarPlugin } from 'bootstrap-vue'
+import { AvatarPlugin, CarouselPlugin } from 'bootstrap-vue'
 
 import './assets/js/elements'
 import './assets/js/hands'
@@ -13,9 +13,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
-
 Vue.config.productionTip = false
 Vue.use(AvatarPlugin)
+Vue.use(CarouselPlugin)
 
 window.addEventListener('load', () => {
   setTimeout(() => {
