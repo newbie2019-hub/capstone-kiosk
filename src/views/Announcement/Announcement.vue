@@ -42,7 +42,7 @@
         <div id="introcard" class="item item-post cardhover">
           <i class="fas fa-images card--icon"></i>
           <div class="position-absolute end-0 top-0">
-            <p class="mt-3 me-4 text-light fw-light"></p>
+            <p class="mt-3 me-4 text-light fw-light"> </p>
           </div>
           <div class="card-content">
             <div class="text-wrap text-uppercase">
@@ -56,7 +56,7 @@
          v-if="post.postcontent.image"
          :src="`https://be.lnukiosk.live/uploads/${post.postcontent.image}`"
          class="card-img"
-         alt="..."/>
+         alt=""/>
         <img v-else src="@/assets/images/lnubldg1.jpg" class="card-img" alt="..." />
         <div class="card-img-overlay text-wrap p-4">
          <h5 class="card-title">{{ post.postcontent.title }}</h5>
