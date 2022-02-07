@@ -7,7 +7,7 @@
   <div class="vh-100">
    <div class="h-100">
       <agile :swipeDistance="300" :autoplaySpeed="12000" :autoplay="true" v-if="imgposts.length > 0">
-        <img class="slide cursor-pointer" v-for="(img, i) in imgposts" :key="i" :src="`https://be.lnukiosk.live/uploads/${img.image}`" />
+        <img class="slide cursor-pointer" v-for="(img, i) in imgposts" :key="i" :src="`http://127.0.0.1:8000/uploads/${img.image}`" />
         <template slot="prevButton"><i class="fas fa-chevron-left prevButton--icon"></i></template>
         <template slot="nextButton"><i class="fas fa-chevron-right nextButton--icon"></i></template>
       </agile>  
